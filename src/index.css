@@ -1,0 +1,120 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  
+  --color-ink: #0A0A0A;
+  --color-paper: #FFFFFF;
+  --color-surface: #F8FAFC;
+  --color-accent: #2563EB;
+  --color-accent-light: #60A5FA;
+  --color-line: rgba(0, 0, 0, 0.06);
+}
+
+@layer base {
+  body {
+    @apply bg-paper text-ink font-sans antialiased selection:bg-accent/20 selection:text-ink overflow-x-hidden;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display tracking-tight;
+  }
+
+  /* Custom Scrollbar for a premium feel */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-ink/20 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-ink/40;
+  }
+}
+
+.glass-panel {
+  @apply bg-white/60 backdrop-blur-xl border border-white/80 shadow-[0_8px_32px_0_rgba(0,0,0,0.04)];
+}
+
+.glass-card {
+  @apply bg-white/80 backdrop-blur-lg border border-line shadow-sm hover:shadow-xl hover:shadow-accent/5 transition-all duration-500 rounded-3xl;
+}
+
+.text-gradient {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-ink via-ink/80 to-ink/60;
+}
+
+.text-gradient-accent {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-accent to-accent-light;
+}
+
+.bg-grid-pattern {
+  background-image: 
+    linear-gradient(to right, rgba(0,0,0,0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0,0,0,0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.noise-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 50;
+  opacity: 0.015;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+.orb-gradient {
+  background: radial-gradient(circle at 30% 30%, rgba(96, 165, 250, 0.4), rgba(37, 99, 235, 0.1) 40%, transparent 70%);
+}
+
+.favicon-wave-stage {
+  transform-style: preserve-3d;
+  will-change: transform;
+  perspective: 1800px;
+  transform-origin: center center;
+  animation: favicon-wave-stage 30s ease-in-out infinite alternate;
+}
+
+.favicon-wave-image {
+  display: block;
+  transform: translate3d(-50%, -50%, 0) translateZ(0);
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+@keyframes favicon-wave-stage {
+  0%,
+  100% {
+    transform: translate3d(-30vw, -8vh, 0) rotateX(12deg) rotateY(-22deg) rotateZ(-15deg) scale(1.02);
+  }
+
+  20% {
+    transform: translate3d(-18vw, -4vh, 120px) rotateX(6deg) rotateY(-10deg) rotateZ(72deg) scale(1.01);
+  }
+
+  50% {
+    transform: translate3d(0vw, -12vh, 0) rotateX(0deg) rotateY(0deg) rotateZ(180deg) scale(1.03);
+  }
+
+  80% {
+    transform: translate3d(18vw, -5vh, 110px) rotateX(-6deg) rotateY(10deg) rotateZ(288deg) scale(1.01);
+  }
+
+  100% {
+    transform: translate3d(30vw, -8vh, 0) rotateX(12deg) rotateY(-22deg) rotateZ(360deg) scale(1.02);
+  }
+}
+

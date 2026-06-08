@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://nextdot.co.in/sitemap.xml
+
+# Disallow crawl of potential dev or internal paths
+Disallow: /node_modules/
+Disallow: /dist/
