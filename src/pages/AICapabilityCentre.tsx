@@ -1,6 +1,7 @@
 import { motion } from "motion/react";
 import whatThisIsVideo from "../../video/WhatThisIs.mp4";
 import SEO from '@/lib/seo';
+import { publicAsset } from "@/lib/utils";
 import { 
   ArrowRight, 
   CheckCircle2, 
@@ -351,7 +352,7 @@ export default function AICapabilityCentre() {
             >
               <div className="absolute inset-0 bg-accent/5 mix-blend-overlay z-10 group-hover:bg-transparent transition-colors duration-500"></div>
               <img 
-                src="/images/Nextdot_AU.png" 
+                src={publicAsset("images/Nextdot_AU.png")} 
                 alt="Tech Hub Environment" 
                 className="w-full h-full object-contain bg-surface grayscale opacity-80 group-hover:opacity-100 transition-all duration-700" 
                 referrerPolicy="no-referrer" 

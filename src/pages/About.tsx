@@ -91,7 +91,7 @@ export default function About() {
                     muted
                     playsInline
                     preload="metadata"
-                    poster={publicAsset("images/office1.png")}
+                    poster={publicAsset("images/Office1.png")}
                     className="w-full h-full object-cover"
                   >
                     <source src={nextdotVideo} type="video/mp4" />
