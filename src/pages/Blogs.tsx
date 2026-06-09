@@ -2,7 +2,6 @@ import React from "react";
 import { motion } from "motion/react";
 import { Link, useParams } from "react-router-dom";
 import { Calendar, Clock } from "lucide-react";
-import { publicAsset } from "@/lib/utils";
 import SEO from '@/lib/seo';
 
 type BlogPost = {
@@ -29,7 +28,7 @@ const BLOG_POSTS: BlogPost[] = [
     label: "Featured Blog",
     date: "Apr 24, 2026",
     readTime: "14 min read",
-    image: publicAsset("images/blogs/voice-agent.png"),
+    image: "/blogs/voice-agent.png",
     featured: true,
     content: [
       "In today's fast-paced business environment, every missed call is a missed opportunity. Whether it's a potential customer looking to book an appointment, an existing client seeking support, or a lead ready to convert, the cost of unavailability is higher than ever. That's where intelligent voice automation changes everything.",
@@ -87,7 +86,7 @@ const BLOG_POSTS: BlogPost[] = [
     label: "Blog",
     date: "Apr 24, 2026",
     readTime: "16 min read",
-    image: publicAsset("images/blogs/avatar.png"),
+    image: "/blogs/avatar.png",
     content: [
       "In healthcare marketing, there's an undeniable truth: patients trust doctors. When a physician speaks, people listen. But there's a problem. Doctors are busy saving lives, not recording videos. Scheduling a single shoot requires coordinating calendars, booking studios, managing equipment, and hoping nothing goes wrong. By the time you need another video, the entire process starts over.",
       "What if you could create unlimited doctor-led content without ever scheduling another video shoot?",
@@ -130,7 +129,7 @@ const BLOG_POSTS: BlogPost[] = [
     label: "Blog",
     date: "Apr 24, 2026",
     readTime: "17 min read",
-    image: publicAsset("images/blogs/comply.png"),
+    image: "/blogs/comply.png",
     content: [
       "In regulated industries, compliance isn't optional. It's the foundation everything else stands on. One missed requirement, one overlooked regulation, one communication that crosses the line, and your business faces penalties, lawsuits, damaged reputation, or worse.",
       "The Broken State of Compliance Management",
@@ -173,6 +172,10 @@ export default function Blogs() {
   const featuredPost = BLOG_POSTS.find((post) => post.featured) ?? BLOG_POSTS[0];
   const recentPosts = BLOG_POSTS.filter((post) => post.id !== featuredPost.id);
   const filterTabs = ["Featured", ...Array.from(new Set(BLOG_POSTS.map((post) => post.category)))];
+
+  const hideOnImageError = (event: React.SyntheticEvent<HTMLImageElement>) => {
+    event.currentTarget.style.display = "none";
+  };
 
   return (
     <div className="min-h-screen bg-paper text-ink selection:bg-blue-500/30">
@@ -253,6 +256,7 @@ export default function Blogs() {
                     className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
                     loading="lazy"
                     decoding="async"
+                    onError={hideOnImageError}
                   />
                 </div>
               </article>
@@ -282,6 +286,7 @@ export default function Blogs() {
                       className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
                       loading="lazy"
                       decoding="async"
+                      onError={hideOnImageError}
                     />
                   </div>
 
@@ -363,6 +368,9 @@ export const BlogPostDetail: React.FC = () => {
             className="w-full h-full object-cover"
             loading="lazy"
             decoding="async"
+            onError={(event) => {
+              event.currentTarget.style.display = "none";
+            }}
           />
         </div>
 
