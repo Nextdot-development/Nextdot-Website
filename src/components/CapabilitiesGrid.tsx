@@ -31,23 +31,23 @@ export const CapabilitiesGrid = () => {
   ];
 
   return (
-    <section className="py-24 bg-paper relative border-t border-line overflow-hidden" id="capabilities">
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
+    <section className="py-20 sm:py-24 bg-paper relative border-t border-line overflow-hidden" id="capabilities">
+      <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Intro Section */}
-        <div className="flex flex-col md:flex-row gap-12 mb-16 items-center">
+        <div className="flex flex-col md:flex-row gap-10 lg:gap-12 mb-14 sm:mb-16 items-center">
           <motion.div 
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.5, ease: "easeOut" }}
-            className="w-full md:w-1/2"
+            className="w-full md:w-1/2 min-w-0"
           >
             <div className="text-sm font-medium text-blue-600 mb-4 tracking-wider uppercase">// What We Build</div>
-            <h2 className="text-4xl md:text-5xl font-display font-medium tracking-tight text-ink mb-6">
+            <h2 className="fluid-display-title font-display font-medium tracking-tight text-ink mb-6">
               AI Engineering & Agentic Systems
             </h2>
-            <p className="text-base md:text-lg text-ink/60 leading-relaxed max-w-lg">
+            <p className="fluid-display-body text-ink/60 max-w-lg">
               Production-grade systems. Built to run inside real enterprises.
             </p>
           </motion.div>
@@ -56,7 +56,7 @@ export const CapabilitiesGrid = () => {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.5, ease: "easeOut", delay: 0.1 }}
-            className="w-full md:w-1/2 h-[240px] md:h-[300px] bg-surface rounded-3xl border border-line flex items-center justify-center relative overflow-hidden"
+            className="w-full md:w-1/2 h-[240px] md:h-[300px] bg-surface rounded-3xl border border-line flex items-center justify-center relative overflow-hidden min-w-0"
           >
             <img 
               src={publicAsset("images/What_we_build2.png")} 
@@ -67,15 +67,31 @@ export const CapabilitiesGrid = () => {
         </div>
       </div>
 
+      {/* Mobile / tablet stacked cards */}
+      <div className="lg:hidden grid grid-cols-1 md:grid-cols-2 gap-6 px-4 sm:px-6 pb-12">
+        {capabilities.map((cap, i) => (
+          <div key={i} className="bg-surface rounded-3xl border border-line overflow-hidden flex flex-col min-w-0">
+            <div className="h-52 sm:h-64 relative overflow-hidden border-b border-line">
+              <img src={cap.img} alt={cap.title} className="absolute inset-0 w-full h-full object-cover grayscale opacity-80" referrerPolicy="no-referrer" />
+            </div>
+            <div className="p-6 sm:p-8 flex flex-col gap-4">
+              <div className="text-xs font-medium text-ink/40 uppercase tracking-widest">0{i + 1}</div>
+              <h3 className="fluid-display-card font-display font-medium text-ink">{cap.title}</h3>
+              <p className="text-sm sm:text-base text-ink/60 leading-relaxed">{cap.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
       {/* Horizontal Scroll Section */}
       <motion.div 
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
         transition={{ duration: 0.5, ease: "easeOut", delay: 0.15 }}
-        className="w-full overflow-x-auto snap-x snap-mandatory pb-12 pt-4 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+        className="hidden lg:block w-full overflow-x-auto snap-x snap-mandatory pb-12 pt-4 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
       >
-        <div className="flex gap-6 px-6 md:px-12 lg:px-24 w-max">
+        <div className="flex gap-6 px-6 md:px-12 lg:px-24 w-max min-w-full">
           {capabilities.map((cap, i) => (
             <div 
               key={i} 
@@ -106,7 +122,7 @@ export const CapabilitiesGrid = () => {
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5, delay: 0.3 }}
-        className="max-w-7xl mx-auto px-6 mt-4 flex justify-end"
+        className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 mt-4 flex justify-end"
       >
         <div className="text-sm font-medium text-ink/40 flex items-center gap-2">
           <span>Scroll to explore</span>

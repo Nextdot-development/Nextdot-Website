@@ -82,9 +82,9 @@ export const CTASection = () => {
   };
 
   return (
-    <section className="py-24 bg-ink relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
-        <div className="flex flex-col lg:flex-row gap-12 lg:gap-16">
+    <section className="py-20 sm:py-24 bg-ink relative overflow-hidden">
+      <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="flex flex-col lg:flex-row gap-10 lg:gap-16">
           
           {/* Left Column - Text */}
           <motion.div 
@@ -92,17 +92,17 @@ export const CTASection = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.5, ease: "easeOut" }}
-            className="w-full lg:w-1/2"
+            className="w-full lg:w-1/2 min-w-0"
           >
             <div className="text-sm font-medium text-blue-400 mb-4 tracking-wider uppercase">READY TO BUILD</div>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-medium tracking-tight text-white leading-[1.1] mb-6">
+            <h2 className="fluid-display-title font-display font-medium tracking-tight text-white mb-6">
               Done experimenting with AI?
             </h2>
-            <p className="text-lg md:text-xl text-white/70 leading-relaxed mb-8 md:mb-12">
+            <p className="fluid-display-body text-white/70 mb-8 md:mb-12">
               Let’s define what production looks like for your organisation.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <button type="button" onClick={scrollToForm} className="bg-white text-ink px-6 md:px-8 py-3 md:py-4 rounded-full font-semibold shadow-[0_10px_30px_rgba(255,255,255,0.08)] hover:bg-white/90 transition-colors text-sm md:text-base">
+              <button type="button" onClick={scrollToForm} className="min-h-11 bg-white text-ink px-6 md:px-8 py-3 md:py-4 rounded-full font-semibold shadow-[0_10px_30px_rgba(255,255,255,0.08)] hover:bg-white/90 transition-colors text-sm md:text-base">
                 Start the Conversation
               </button>
             </div>
@@ -114,7 +114,7 @@ export const CTASection = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.5, ease: "easeOut", delay: 0.1 }}
-            className="w-full lg:w-1/2"
+            className="w-full lg:w-1/2 min-w-0"
           >
             <form ref={formRef} onSubmit={handleSubmit} className="flex flex-col gap-5 md:gap-6">
               <iframe name="formsubmit_iframe" title="formsubmit transport" className="hidden" />
@@ -157,8 +157,8 @@ export const CTASection = () => {
               
               <div>
                 <label className="block text-sm font-medium text-white mb-2">Phone</label>
-                <div className="flex gap-2">
-                  <select aria-label="Country code" title="Country code" value={values.countryCode} onChange={(e) => handleChange('countryCode', e.target.value)} className="bg-white/5 border border-white/20 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-400 transition-colors w-20 md:w-24 appearance-none cursor-pointer">
+                <div className="flex flex-col sm:flex-row gap-2">
+                  <select aria-label="Country code" title="Country code" value={values.countryCode} onChange={(e) => handleChange('countryCode', e.target.value)} className="bg-white/5 border border-white/20 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-400 transition-colors w-full sm:w-24 appearance-none cursor-pointer">
                     <option className="text-ink">+91</option>
                     <option className="text-ink">+1</option>
                     <option className="text-ink">+44</option>
@@ -196,7 +196,7 @@ export const CTASection = () => {
               <button 
                 type="submit"
                 disabled={loading}
-                className="w-full sm:w-32 bg-blue-600 text-white rounded-full py-3 font-semibold hover:bg-blue-500 transition-colors mt-4 sm:self-start disabled:opacity-70 disabled:cursor-not-allowed"
+                className="w-full sm:w-40 min-h-11 bg-blue-600 text-white rounded-full py-3 font-semibold hover:bg-blue-500 transition-colors mt-4 sm:self-start disabled:opacity-70 disabled:cursor-not-allowed"
               >
                 {loading ? "Submitting..." : "Submit"}
               </button>

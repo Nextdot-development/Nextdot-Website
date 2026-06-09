@@ -1,6 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap');
 @import "tailwindcss";
 
+html {
+  scroll-behavior: smooth;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Outfit", ui-sans-serif, system-ui, sans-serif;
@@ -14,12 +22,41 @@
 }
 
 @layer base {
+  html,
+  body,
+  #root {
+    width: 100%;
+    min-height: 100%;
+  }
+
   body {
     @apply bg-paper text-ink font-sans antialiased selection:bg-accent/20 selection:text-ink overflow-x-hidden;
+    overscroll-behavior-x: none;
   }
   
   h1, h2, h3, h4, h5, h6 {
     @apply font-display tracking-tight;
+    text-wrap: balance;
+    overflow-wrap: anywhere;
+  }
+
+  p, li, a, button, input, textarea, select {
+    overflow-wrap: anywhere;
+  }
+
+  img,
+  video,
+  svg,
+  canvas {
+    display: block;
+    max-width: 100%;
+  }
+
+  input,
+  textarea,
+  select,
+  button {
+    min-width: 0;
   }
 
   /* Custom Scrollbar for a premium feel */
@@ -39,6 +76,26 @@
   ::-webkit-scrollbar-thumb:hover {
     @apply bg-ink/40;
   }
+}
+
+.fluid-display-hero {
+  font-size: clamp(2.75rem, 6vw, 6rem);
+  line-height: 1.05;
+}
+
+.fluid-display-title {
+  font-size: clamp(2rem, 3.6vw, 3.75rem);
+  line-height: 1.08;
+}
+
+.fluid-display-card {
+  font-size: clamp(1.125rem, 2vw, 1.625rem);
+  line-height: 1.15;
+}
+
+.fluid-display-body {
+  font-size: clamp(1rem, 1.35vw, 1.25rem);
+  line-height: 1.65;
 }
 
 .glass-panel {

@@ -188,7 +188,7 @@ export default function Blogs() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.45, ease: "easeOut" }}
-            className="text-3xl md:text-4xl lg:text-5xl font-display font-medium tracking-tight text-ink"
+            className="fluid-display-title font-display font-medium tracking-tight text-ink"
           >
             Blogs & Case Studies
           </motion.h1>
@@ -197,7 +197,7 @@ export default function Blogs() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.45, ease: "easeOut", delay: 0.06 }}
-            className="mt-3 text-base md:text-lg text-ink/65 max-w-3xl leading-relaxed"
+            className="mt-3 fluid-display-body text-ink/65 max-w-3xl"
           >
             Long-form insights on voice AI, healthcare avatars, and compliance systems.
           </motion.p>
@@ -231,7 +231,7 @@ export default function Blogs() {
                       <span className="inline-flex items-center gap-1"><Calendar size={13} /> {featuredPost.date}</span>
                     </div>
 
-                    <h2 className="text-3xl md:text-4xl lg:text-[2.8rem] font-display font-medium text-ink leading-[1.08] group-hover:text-accent transition-colors">
+                    <h2 className="fluid-display-title font-display font-medium text-ink leading-[1.08] group-hover:text-accent transition-colors">
                       {featuredPost.title}
                     </h2>
                   </div>
@@ -292,7 +292,7 @@ export default function Blogs() {
                       <span>{post.date}</span>
                     </div>
 
-                    <h3 className="text-lg md:text-xl font-display font-medium text-ink leading-snug mb-3 group-hover:text-accent transition-colors">
+                    <h3 className="fluid-display-card font-display font-medium text-ink leading-snug mb-3 group-hover:text-accent transition-colors">
                       {post.title}
                     </h3>
 
@@ -347,7 +347,7 @@ export const BlogPostDetail: React.FC = () => {
 
         <div className="mb-10">
           <div className="text-xs font-semibold uppercase tracking-wider text-accent mb-4">{post.category}</div>
-          <h1 className="text-4xl md:text-5xl font-semibold mb-5 tracking-tight">{post.title}</h1>
+          <h1 className="fluid-display-title font-semibold mb-5 tracking-tight">{post.title}</h1>
           <div className="flex items-center gap-4 text-sm text-ink/60 mb-5 flex-wrap">
             <span className="inline-flex items-center gap-1.5"><Calendar size={14} /> {post.date}</span>
             <span className="text-line">|</span>

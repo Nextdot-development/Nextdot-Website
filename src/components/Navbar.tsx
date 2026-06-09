@@ -46,9 +46,9 @@ export const Navbar = () => {
           scrolled ? "py-4 bg-white/80 backdrop-blur-xl border-line shadow-sm" : "py-6 bg-transparent"
         )}
       >
-        <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-          <Link to={homeHref} onClick={handleLogoClick} className="flex items-center group cursor-pointer">
-            <img src={publicAsset("images/logo.png")} alt="Nextdot Logo" className="h-10 w-auto object-contain transition-transform duration-300 group-hover:scale-105" />
+        <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4">
+          <Link to={homeHref} onClick={handleLogoClick} className="flex items-center group cursor-pointer shrink-0">
+            <img src={publicAsset("images/logo.png")} alt="Nextdot Logo" className="h-9 sm:h-10 lg:h-11 w-auto max-w-[160px] object-contain transition-transform duration-300 group-hover:scale-105" />
           </Link>
           
           <div className="hidden md:flex items-center gap-8">
@@ -66,7 +66,7 @@ export const Navbar = () => {
             ))}
           </div>
 
-          <button aria-label="Open menu" title="Open menu" className="md:hidden p-2 text-ink" onClick={() => setIsOpen(true)}>
+          <button aria-label="Open menu" title="Open menu" className="md:hidden inline-flex h-11 w-11 items-center justify-center rounded-full border border-line bg-white/70 text-ink" onClick={() => setIsOpen(true)}>
             <Menu size={24} />
           </button>
         </div>
@@ -79,24 +79,24 @@ export const Navbar = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 bg-white z-[60] p-6 flex flex-col"
+            className="fixed inset-0 bg-white z-[60] p-4 sm:p-6 flex flex-col overflow-y-auto"
           >
-            <div className="flex justify-between items-center mb-12">
+            <div className="flex justify-between items-center mb-10 sm:mb-12">
               <Link to={homeHref} onClick={handleLogoClick} className="flex items-center gap-3">
-                <img src={publicAsset("images/logo.png")} alt="Nextdot Logo" className="h-10 w-auto object-contain" />
+                <img src={publicAsset("images/logo.png")} alt="Nextdot Logo" className="h-9 sm:h-10 w-auto object-contain" />
               </Link>
-              <button aria-label="Close menu" title="Close menu" onClick={() => setIsOpen(false)} className="p-2 bg-surface rounded-full">
+              <button aria-label="Close menu" title="Close menu" onClick={() => setIsOpen(false)} className="inline-flex h-11 w-11 items-center justify-center bg-surface rounded-full border border-line">
                 <X size={24} />
               </button>
             </div>
-            <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-4 sm:gap-6 pb-8">
               {navLinks.map((link) => (
                 <Link 
                   key={link.name} 
                   to={link.href} 
                   onClick={() => setIsOpen(false)}
                   className={cn(
-                    "text-3xl font-display font-medium tracking-tight border-b border-line pb-4",
+                    "text-2xl sm:text-3xl font-display font-medium tracking-tight border-b border-line pb-4",
                     location.pathname === link.href ? "text-ink" : "text-ink/70"
                   )}
                 >

@@ -88,7 +88,7 @@ export default function NextdotCreative() {
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, ease: "easeOut" }}
-              className="text-5xl md:text-7xl lg:text-8xl font-display font-medium tracking-tight text-ink mb-8 leading-[1.1]"
+              className="fluid-display-hero font-display font-medium tracking-tight text-ink mb-8"
             >
               Creative, rebuilt as a system
             </motion.h1>
@@ -97,7 +97,7 @@ export default function NextdotCreative() {
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
-              className="text-xl md:text-2xl text-ink/60 leading-relaxed mb-8"
+              className="fluid-display-body text-ink/60 mb-8"
             >
               We started in creative and digital. That work just got smarter.
             </motion.p>
@@ -106,7 +106,7 @@ export default function NextdotCreative() {
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
-              className="text-xl md:text-2xl text-ink/60 leading-relaxed"
+              className="fluid-display-body text-ink/60"
             >
               Same craft. A different operating model.
             </motion.p>
@@ -131,7 +131,7 @@ export default function NextdotCreative() {
       <section className="py-24 bg-surface border-t border-line">
         <div className="max-w-7xl mx-auto px-6">
           <div className="space-y-8 text-lg text-ink/70 leading-relaxed max-w-4xl">
-            <p className="text-2xl md:text-3xl text-ink font-display leading-snug">
+            <p className="fluid-display-title text-ink font-display leading-snug">
               Creative, content, campaigns - we've done the work at scale, long before AI became a talking point. What's changed is how it's built now: faster systems, tighter loops, better output.
             </p>
             
@@ -177,7 +177,7 @@ export default function NextdotCreative() {
             viewport={{ once: true, amount: 0.2 }}
             className="mb-16"
           >
-            <h2 className="text-4xl md:text-5xl font-display text-ink">
+            <h2 className="fluid-display-title font-display text-ink">
               What we do.
             </h2>
           </motion.div>
@@ -190,9 +190,9 @@ export default function NextdotCreative() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.5, ease: "easeOut", delay: idx * 0.05 }}
-                className="bg-surface border border-line p-8 md:p-10 rounded-2xl flex flex-col h-full hover:border-accent/30 hover:shadow-sm transition-all group"
+                className="bg-surface border border-line p-7 sm:p-8 md:p-10 rounded-2xl flex flex-col h-full hover:border-accent/30 hover:shadow-sm transition-all group"
               >
-                <h3 className="text-2xl font-display font-medium text-ink mb-4">{service.title}</h3>
+                <h3 className="fluid-display-card font-display font-medium text-ink mb-4">{service.title}</h3>
                 <p className="text-ink/70 leading-relaxed mb-6">
                   {service.description}
                 </p>
@@ -226,7 +226,7 @@ export default function NextdotCreative() {
             <span className="text-accent text-xs font-mono tracking-widest uppercase mb-4 block">
               PROCESS
             </span>
-            <h2 className="text-4xl md:text-5xl font-display text-ink mb-12">
+            <h2 className="fluid-display-title font-display text-ink mb-12">
               Studio thinking. Systems execution.
             </h2>
           </motion.div>
@@ -238,14 +238,14 @@ export default function NextdotCreative() {
             transition={{ duration: 0.6, ease: "easeOut" }}
             className="max-w-3xl"
           >
-            <p className="text-xl text-ink/70 leading-relaxed mb-12">
+            <p className="fluid-display-body text-ink/70 mb-12">
               One team across strategy, production, and delivery. No handoffs, no context lost. The same people accountable from brief to result.
             </p>
 
             <div className="flex flex-col md:flex-row gap-6 md:gap-4 items-start md:items-center">
               {processSteps.map((step, idx) => (
                 <div key={idx} className="flex items-center gap-4">
-                  <div className="px-6 py-4 bg-ink text-white rounded-full font-display font-medium text-lg whitespace-nowrap">
+                    <div className="min-h-11 px-6 py-4 bg-ink text-white rounded-full font-display font-medium text-lg whitespace-nowrap">
                     {step}
                   </div>
                   {idx < processSteps.length - 1 && (
@@ -270,7 +270,7 @@ export default function NextdotCreative() {
             <span className="text-accent text-xs font-mono tracking-widest uppercase mb-4 block">
               AUDIENCES
             </span>
-            <h2 className="text-4xl md:text-5xl font-display text-ink">
+            <h2 className="fluid-display-title font-display text-ink">
               Who we work with.
             </h2>
           </motion.div>
@@ -283,9 +283,9 @@ export default function NextdotCreative() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.5, ease: "easeOut", delay: idx * 0.1 }}
-                className="bg-surface border border-line p-8 rounded-2xl hover:border-accent/30 transition-all"
+                className="bg-surface border border-line p-7 sm:p-8 rounded-2xl hover:border-accent/30 transition-all"
               >
-                <p className="text-lg text-ink/70 leading-relaxed">
+                  <p className="fluid-display-body text-ink/70">
                   {audience}
                 </p>
               </motion.div>
@@ -304,10 +304,10 @@ export default function NextdotCreative() {
             transition={{ duration: 0.6, ease: "easeOut" }}
             className="text-center max-w-2xl mx-auto"
           >
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-medium tracking-tight text-white leading-[1.1] mb-6">
+            <h2 className="fluid-display-hero font-display font-medium tracking-tight text-white mb-6">
               Let's talk.
             </h2>
-            <p className="text-lg md:text-xl text-white/70 leading-relaxed mb-4">
+            <p className="fluid-display-body text-white/70 mb-4">
               Tell us what you are working on.
             </p>
             <a 

@@ -29,31 +29,31 @@ export const Platforms = () => {
   ];
 
   return (
-    <section className="py-24 bg-paper relative border-t border-line overflow-hidden" id="use-cases">
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
+    <section className="py-20 sm:py-24 bg-paper relative border-t border-line overflow-hidden" id="use-cases">
+      <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div 
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.5, ease: "easeOut" }}
-          className="flex flex-col md:flex-row justify-between items-end mb-16"
+          className="flex flex-col md:flex-row justify-between items-end gap-6 mb-12 md:mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-display font-medium tracking-tight text-ink">
+          <h2 className="fluid-display-title font-display font-medium tracking-tight text-ink">
             Nextdot for Creative
           </h2>
-          <p className="text-base md:text-lg text-ink/60 max-w-md md:text-right mt-6 md:mt-0">
+          <p className="fluid-display-body text-ink/60 max-w-md md:text-right mt-0">
             A decade of digital and creative consulting, now re-engineered with AI at the core.
           </p>
         </motion.div>
 
-        <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 h-auto lg:h-[480px]">
+        <div className="flex flex-col lg:flex-row gap-6 lg:gap-12 h-auto lg:h-[480px]">
           {/* Left List */}
           <motion.div 
             initial={{ opacity: 0, x: -40 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.5, ease: "easeOut", delay: 0.1 }}
-            className="w-full lg:w-5/12 flex flex-col gap-2"
+            className="w-full lg:w-5/12 flex flex-col gap-2 min-w-0"
           >
             {platforms.map((platform, i) => (
               <div
@@ -61,14 +61,14 @@ export const Platforms = () => {
                 onMouseEnter={() => setActiveIndex(i)}
                 onClick={() => setActiveIndex(i)}
                 className={cn(
-                  "p-5 md:p-6 rounded-2xl cursor-pointer transition-all duration-300 border",
+                  "p-4 sm:p-5 md:p-6 rounded-2xl cursor-pointer transition-all duration-300 border",
                   activeIndex === i
                     ? "bg-surface border-line shadow-sm"
                     : "bg-transparent border-transparent hover:bg-surface/50"
                 )}
               >
                 <h3 className={cn(
-                  "text-lg md:text-xl lg:text-2xl font-display font-medium transition-colors",
+                  "fluid-display-card font-display font-medium transition-colors",
                   activeIndex === i ? "text-blue-600 mb-2 md:mb-3" : "text-ink"
                 )}>
                   {platform.title}
@@ -99,7 +99,7 @@ export const Platforms = () => {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.5, ease: "easeOut", delay: 0.2 }}
-            className="w-full lg:w-7/12 relative rounded-3xl overflow-hidden border border-line bg-surface h-[300px] sm:h-[400px] lg:h-full"
+            className="w-full lg:w-7/12 relative rounded-3xl overflow-hidden border border-line bg-surface h-[300px] sm:h-[400px] lg:h-full min-w-0"
           >
             <AnimatePresence mode="wait">
               <motion.div
@@ -121,7 +121,7 @@ export const Platforms = () => {
                   <div className="inline-flex px-3 py-1 bg-white/20 backdrop-blur-md text-white text-xs rounded-full mb-3 md:mb-4 border border-white/10">
                     Case Study
                   </div>
-                  <h3 className="text-2xl sm:text-3xl md:text-5xl font-display font-medium text-white mb-4 md:mb-6 leading-tight">
+                  <h3 className="fluid-display-title font-display font-medium text-white mb-4 md:mb-6 leading-tight">
                     {platforms[activeIndex].title}
                   </h3>
                 </div>

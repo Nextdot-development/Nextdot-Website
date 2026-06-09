@@ -36,7 +36,7 @@ export function LegalPageShell({ title, effectiveDate, description, sections, ch
             <div className="inline-flex items-center gap-2 rounded-full border border-line bg-white/60 px-4 py-2 text-xs font-mono tracking-[0.24em] uppercase text-ink/55 backdrop-blur-sm">
               Legal / Enterprise
             </div>
-            <h1 className="mt-6 text-4xl md:text-5xl lg:text-6xl font-display font-medium tracking-tight text-ink leading-[1.05]">
+            <h1 className="mt-6 fluid-display-title font-display font-medium tracking-tight text-ink">
               {title}
             </h1>
             <p className="mt-5 text-base md:text-lg text-ink/65 leading-relaxed max-w-2xl">

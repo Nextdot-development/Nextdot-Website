@@ -58,7 +58,7 @@ export const WorldMap = () => {
   const [active, setActive] = useState<Office | null>(null);
 
   return (
-    <div className="relative overflow-hidden rounded-[32px] border border-[#E8EDF5] h-[520px] bg-[#F8FAFD] shadow-sm">
+    <div className="relative overflow-hidden rounded-[32px] border border-[#E8EDF5] h-[360px] sm:h-[440px] lg:h-[520px] bg-[#F8FAFD] shadow-sm">
       <ComposableMap
         projection="geoMercator"
         projectionConfig={{
@@ -67,7 +67,7 @@ export const WorldMap = () => {
         }}
         width={900}
         height={600}
-        style={{ width: "100%", height: "100%" }}
+        style={{ width: "100%", height: "100%", maxWidth: "100%" }}
       >
         {/* Neighbor countries (faded) */}
         <Geographies geography={NEIGHBORS_GEO_URL}>
@@ -129,7 +129,7 @@ export const WorldMap = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 12 }}
             transition={{ duration: 0.2 }}
-            className="absolute top-8 right-8 z-30 w-[320px] bg-white rounded-[20px] border border-[#E7ECF4] shadow-lg p-5"
+            className="absolute top-4 right-4 left-4 sm:left-auto sm:top-8 sm:right-8 z-30 w-auto sm:w-[320px] bg-white rounded-[20px] border border-[#E7ECF4] shadow-lg p-4 sm:p-5"
           >
             <div className="text-[18px] font-semibold text-[#0F172A] mb-2">
               {active.city}

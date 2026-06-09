@@ -4,20 +4,20 @@ import { ClientLogos } from "./ClientLogos";
 export const Insights = () => {
   return (
     <section className="py-24 bg-paper relative border-t border-line overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
+      <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Credibility Stats & Logos Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 mb-32 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 mb-24 lg:mb-32 items-center">
           {/* Left: Title & Compact Stats */}
           <motion.div 
             initial={{ opacity: 0, x: -40 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.5, ease: "easeOut" }}
-            className="lg:col-span-5 flex flex-col"
+            className="lg:col-span-5 flex flex-col min-w-0"
           >
             <div className="text-sm font-medium text-blue-600 mb-4 tracking-wider uppercase">Credibility</div>
-            <h2 className="text-3xl md:text-4xl font-display font-medium text-ink leading-tight mb-8">
+            <h2 className="fluid-display-title font-display font-medium text-ink mb-8">
               Who we work with
             </h2>
             
@@ -47,7 +47,7 @@ export const Insights = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.5, ease: "easeOut", delay: 0.1 }}
-            className="lg:col-span-6 lg:col-start-7 bg-surface border border-line rounded-3xl p-5 md:p-7 lg:p-8 flex items-center justify-center overflow-hidden shadow-[0_12px_30px_rgba(2,6,23,0.05)]"
+            className="lg:col-span-6 lg:col-start-7 bg-surface border border-line rounded-3xl p-4 sm:p-5 md:p-7 lg:p-8 flex items-center justify-center overflow-hidden shadow-[0_12px_30px_rgba(2,6,23,0.05)] min-w-0"
           >
             <ClientLogos />
           </motion.div>
@@ -59,7 +59,7 @@ export const Insights = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.5, ease: "easeOut" }}
-          className="flex flex-col md:flex-row justify-between items-end mb-16"
+          className="flex flex-col md:flex-row justify-between items-end gap-6 mb-12 md:mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-display font-medium tracking-tight text-ink">
             How we work
@@ -76,7 +76,7 @@ export const Insights = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.5, ease: "easeOut", delay: 0.05 }}
-            className="bg-surface rounded-3xl p-8 md:p-10 lg:p-12 flex flex-col justify-between border border-line group hover:border-blue-200 transition-colors h-[220px] md:h-[240px]"
+            className="bg-surface rounded-3xl p-7 sm:p-8 md:p-10 lg:p-12 flex flex-col justify-between border border-line group hover:border-blue-200 transition-colors min-h-[220px] md:min-h-[240px]"
           >
               <div className="flex justify-between items-start">
               <span className="inline-block px-3 py-1 md:px-4 md:py-1.5 bg-white border border-line text-ink text-[10px] md:text-xs font-medium rounded-full">01 - DISCOVER</span>
@@ -85,7 +85,7 @@ export const Insights = () => {
               </div>
             </div>
             <div>
-              <h3 className="text-xl md:text-2xl lg:text-3xl font-display font-medium text-ink mb-4 leading-tight">
+              <h3 className="fluid-display-card font-display font-medium text-ink mb-4 leading-tight">
                 Map the highest-leverage problem inside your workflow.
               </h3>
             </div>
@@ -97,7 +97,7 @@ export const Insights = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.5, ease: "easeOut", delay: 0.1 }}
-            className="bg-surface rounded-3xl p-8 md:p-10 lg:p-12 flex flex-col justify-between border border-line group hover:border-blue-200 transition-colors h-[220px] md:h-[240px]"
+            className="bg-surface rounded-3xl p-7 sm:p-8 md:p-10 lg:p-12 flex flex-col justify-between border border-line group hover:border-blue-200 transition-colors min-h-[220px] md:min-h-[240px]"
           >
               <div className="flex justify-between items-start">
               <span className="inline-block px-3 py-1 md:px-4 md:py-1.5 bg-white border border-line text-ink text-[10px] md:text-xs font-medium rounded-full">02 - ARCHITECT</span>
@@ -106,7 +106,7 @@ export const Insights = () => {
               </div>
             </div>
             <div>
-              <h3 className="text-xl md:text-2xl lg:text-3xl font-display font-medium text-ink mb-4 leading-tight">
+              <h3 className="fluid-display-card font-display font-medium text-ink mb-4 leading-tight">
                 Design the system, integrations, data flow, and governance before building.
               </h3>
             </div>
@@ -118,7 +118,7 @@ export const Insights = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.5, ease: "easeOut", delay: 0.15 }}
-            className="bg-surface rounded-3xl p-8 md:p-10 lg:p-12 flex flex-col justify-between border border-line group hover:border-blue-200 transition-colors h-[220px] md:h-[240px]"
+            className="bg-surface rounded-3xl p-7 sm:p-8 md:p-10 lg:p-12 flex flex-col justify-between border border-line group hover:border-blue-200 transition-colors min-h-[220px] md:min-h-[240px]"
           >
               <div className="flex justify-between items-start">
               <span className="inline-block px-3 py-1 md:px-4 md:py-1.5 bg-white border border-line text-ink text-[10px] md:text-xs font-medium rounded-full">03 - ENGINEER</span>
@@ -127,7 +127,7 @@ export const Insights = () => {
               </div>
             </div>
             <div>
-              <h3 className="text-xl md:text-2xl lg:text-3xl font-display font-medium text-ink mb-4 leading-tight">
+              <h3 className="fluid-display-card font-display font-medium text-ink mb-4 leading-tight">
                 Deploy real systems into real environments. Not isolated pilots.
               </h3>
             </div>
@@ -139,7 +139,7 @@ export const Insights = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.5, ease: "easeOut", delay: 0.2 }}
-            className="bg-surface rounded-3xl p-8 md:p-10 lg:p-12 flex flex-col justify-between border border-line group hover:border-blue-200 transition-colors h-[220px] md:h-[240px]"
+            className="bg-surface rounded-3xl p-7 sm:p-8 md:p-10 lg:p-12 flex flex-col justify-between border border-line group hover:border-blue-200 transition-colors min-h-[220px] md:min-h-[240px]"
           >
               <div className="flex justify-between items-start">
               <span className="inline-block px-3 py-1 md:px-4 md:py-1.5 bg-white border border-line text-ink text-[10px] md:text-xs font-medium rounded-full">04 - OPTIMISE</span>
@@ -148,7 +148,7 @@ export const Insights = () => {
               </div>
             </div>
             <div>
-              <h3 className="text-xl md:text-2xl lg:text-3xl font-display font-medium text-ink mb-4 leading-tight">
+              <h3 className="fluid-display-card font-display font-medium text-ink mb-4 leading-tight">
                 Continuously improve performance post-deployment. ROI compounds.
               </h3>
             </div>

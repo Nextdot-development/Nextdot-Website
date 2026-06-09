@@ -28,7 +28,7 @@ export default function WhatWeDo() {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
-            className="text-5xl md:text-7xl lg:text-8xl font-display font-medium tracking-tight text-ink max-w-5xl mb-8 leading-[1.1]"
+            className="fluid-display-hero font-display font-medium tracking-tight text-ink max-w-5xl mb-8"
           >
             AI systems built for production.
           </motion.h1>
@@ -36,7 +36,7 @@ export default function WhatWeDo() {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
-            className="text-xl md:text-2xl text-ink/60 max-w-3xl leading-relaxed"
+            className="fluid-display-body text-ink/60 max-w-3xl"
           >
             Nextdot engineers domain-specific AI systems, agentic architectures, and workflow automation designed to run inside real enterprise environments.
           </motion.p>
@@ -57,7 +57,7 @@ export default function WhatWeDo() {
               <span className="text-accent text-xs font-mono tracking-widest uppercase block">
                 CONTEXT
               </span>
-              <h2 className="text-4xl md:text-5xl font-display text-ink">
+              <h2 className="fluid-display-title font-display text-ink">
                 What We Build
               </h2>
               <div className="space-y-6 text-lg text-ink/70 leading-relaxed">
@@ -78,7 +78,7 @@ export default function WhatWeDo() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
-              className="rounded-2xl overflow-hidden h-[400px] md:h-[500px] border border-line relative group"
+              className="rounded-2xl overflow-hidden h-[320px] sm:h-[400px] md:h-[500px] border border-line relative group"
             >
               <div className="absolute inset-0 bg-accent/5 mix-blend-overlay z-10 group-hover:bg-transparent transition-colors duration-500"></div>
               <img 
@@ -104,7 +104,7 @@ export default function WhatWeDo() {
             <span className="text-accent text-xs font-mono tracking-widest uppercase mb-4 block">
               CORE CAPABILITIES
             </span>
-            <h2 className="text-4xl md:text-5xl font-display text-ink">
+            <h2 className="fluid-display-title font-display text-ink">
               Systems we design and deploy.
             </h2>
           </motion.div>
@@ -116,12 +116,12 @@ export default function WhatWeDo() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.5, ease: "easeOut" }}
-              className="bg-surface border border-line p-8 md:p-10 rounded-2xl flex flex-col h-full hover:border-accent/30 hover:shadow-sm transition-all group"
+              className="bg-surface border border-line p-7 sm:p-8 md:p-10 rounded-2xl flex flex-col h-full hover:border-accent/30 hover:shadow-sm transition-all group"
             >
               <div className="w-14 h-14 rounded-xl bg-paper border border-line flex items-center justify-center mb-8 group-hover:scale-110 transition-transform">
                 <Layers className="text-accent" size={28} />
               </div>
-              <h3 className="text-2xl font-display font-medium text-ink mb-4">AI Agent & Agentic Systems</h3>
+              <h3 className="fluid-display-card font-display font-medium text-ink mb-4">AI Agent & Agentic Systems</h3>
               <p className="text-ink/70 leading-relaxed mb-6">
                 Multi-agent systems designed to execute tasks, make decisions, and operate across workflows. From lead qualification and document intelligence to multi-step decision processes these systems combine autonomous agents with controlled logic to ensure reliability in production environments.
               </p>
@@ -144,12 +144,12 @@ export default function WhatWeDo() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.5, ease: "easeOut", delay: 0.1 }}
-              className="bg-surface border border-line p-8 md:p-10 rounded-2xl flex flex-col h-full hover:border-accent/30 hover:shadow-sm transition-all group"
+              className="bg-surface border border-line p-7 sm:p-8 md:p-10 rounded-2xl flex flex-col h-full hover:border-accent/30 hover:shadow-sm transition-all group"
             >
               <div className="w-14 h-14 rounded-xl bg-paper border border-line flex items-center justify-center mb-8 group-hover:scale-110 transition-transform">
                 <Workflow className="text-accent" size={28} />
               </div>
-              <h3 className="text-2xl font-display font-medium text-ink mb-4">Enterprise Workflow Automation</h3>
+              <h3 className="fluid-display-card font-display font-medium text-ink mb-4">Enterprise Workflow Automation</h3>
               <p className="text-ink/70 leading-relaxed mb-6">
                 AI embedded into how your organisation operates, not layered on top. We design systems that connect CRMs, ERPs, internal tools, and communication platforms, eliminating manual data movement and enabling real-time intelligence across workflows.
               </p>
@@ -172,12 +172,12 @@ export default function WhatWeDo() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.5, ease: "easeOut", delay: 0.2 }}
-              className="bg-surface border border-line p-8 md:p-10 rounded-2xl flex flex-col h-full hover:border-accent/30 hover:shadow-sm transition-all group"
+              className="bg-surface border border-line p-7 sm:p-8 md:p-10 rounded-2xl flex flex-col h-full hover:border-accent/30 hover:shadow-sm transition-all group"
             >
               <div className="w-14 h-14 rounded-xl bg-paper border border-line flex items-center justify-center mb-8 group-hover:scale-110 transition-transform">
                 <BarChart3 className="text-accent" size={28} />
               </div>
-              <h3 className="text-2xl font-display font-medium text-ink mb-4">AI-Powered Growth Systems</h3>
+              <h3 className="fluid-display-card font-display font-medium text-ink mb-4">AI-Powered Growth Systems</h3>
               <p className="text-ink/70 leading-relaxed mb-6">
                 Systems that combine AI with structured business data to drive marketing, content, and performance outcomes at scale. These are not content tools; they are operational systems for generating, optimising, and distributing outputs continuously.
               </p>
@@ -210,7 +210,7 @@ export default function WhatWeDo() {
               <span className="text-accent text-xs font-mono tracking-widest uppercase mb-4 block">
                 SPECIALISED SYSTEMS
               </span>
-              <h2 className="text-4xl md:text-5xl font-display text-white mb-6">
+              <h2 className="fluid-display-title font-display text-white mb-6">
                 Compliance-First Healthcare AI
               </h2>
               
@@ -246,7 +246,7 @@ export default function WhatWeDo() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
-              className="relative h-[400px] md:h-[600px]"
+              className="relative h-[320px] sm:h-[420px] md:h-[600px]"
             >
               <div className="absolute -inset-2 rounded-3xl bg-gradient-to-br from-accent/20 via-transparent to-white/10 blur-xl pointer-events-none" />
               <div className="relative h-full overflow-hidden rounded-3xl border border-white/15 bg-black shadow-[0_24px_70px_rgba(2,6,23,0.55)]">
@@ -276,7 +276,7 @@ export default function WhatWeDo() {
             <span className="text-accent text-xs font-mono tracking-widest uppercase mb-4 block">
               EXPANDING CAPABILITIES
             </span>
-            <h2 className="text-4xl md:text-5xl font-display text-ink">
+            <h2 className="fluid-display-title font-display text-ink">
               Beyond the core.
             </h2>
           </motion.div>
@@ -287,12 +287,12 @@ export default function WhatWeDo() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.5, ease: "easeOut" }}
-              className="bg-paper border border-line p-8 md:p-10 rounded-2xl hover:border-accent/30 transition-all"
+              className="bg-paper border border-line p-7 sm:p-8 md:p-10 rounded-2xl hover:border-accent/30 transition-all"
             >
               <div className="w-12 h-12 rounded-xl bg-surface border border-line flex items-center justify-center mb-6">
                 <Network className="text-accent" size={24} />
               </div>
-              <h3 className="text-2xl font-display font-medium text-ink mb-4">Enterprise AI Advisory</h3>
+              <h3 className="fluid-display-card font-display font-medium text-ink mb-4">Enterprise AI Advisory</h3>
               <p className="text-ink/70 leading-relaxed">
                 Strategic support for enterprises designing their AI roadmap. From architecture decisions to governance frameworks, we help organisations define how AI operates at scale.
               </p>
@@ -303,12 +303,12 @@ export default function WhatWeDo() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.5, ease: "easeOut", delay: 0.1 }}
-              className="bg-paper border border-line p-8 md:p-10 rounded-2xl hover:border-accent/30 transition-all"
+              className="bg-paper border border-line p-7 sm:p-8 md:p-10 rounded-2xl hover:border-accent/30 transition-all"
             >
               <div className="w-12 h-12 rounded-xl bg-surface border border-line flex items-center justify-center mb-6">
                 <Cpu className="text-accent" size={24} />
               </div>
-              <h3 className="text-2xl font-display font-medium text-ink mb-4">LLMOps & ML Engineering</h3>
+              <h3 className="fluid-display-card font-display font-medium text-ink mb-4">LLMOps & ML Engineering</h3>
               <p className="text-ink/70 leading-relaxed">
                 Infrastructure and pipelines for enterprises moving beyond off-the-shelf models. Includes model orchestration, fine-tuning workflows, and production ML systems.
               </p>
@@ -331,7 +331,7 @@ export default function WhatWeDo() {
               <span className="text-accent text-xs font-mono tracking-widest uppercase mb-4 block">
                 INTEGRATION
               </span>
-              <h2 className="text-3xl md:text-4xl font-display text-ink mb-6">
+              <h2 className="fluid-display-title font-display text-ink mb-6">
                 Not separate capabilities. One integrated system.
               </h2>
               <div className="space-y-6 text-lg text-ink/70 leading-relaxed">
@@ -355,7 +355,7 @@ export default function WhatWeDo() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
-              className="bg-surface border border-line p-8 md:p-12 rounded-3xl"
+              className="bg-surface border border-line p-7 sm:p-8 md:p-12 rounded-3xl"
             >
               <span className="text-accent text-xs font-mono tracking-widest uppercase mb-4 block">
                 DEPLOYMENT

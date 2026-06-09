@@ -47,16 +47,16 @@ export const FeatureSection = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} className="py-24 sm:py-32 bg-white overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+    <section ref={sectionRef} className="py-20 sm:py-24 md:py-32 bg-white overflow-hidden">
+      <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8">
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
           
-          <div ref={contentRef} className="max-w-xl">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-semibold tracking-tight mb-6">
+          <div ref={contentRef} className="max-w-xl min-w-0">
+            <h2 className="fluid-display-title font-display font-semibold tracking-tight mb-6">
               Enterprise-Grade Control. <br />
               <span className="text-ink/40">Consumer-Grade UX.</span>
             </h2>
-            <p className="text-lg text-ink/60 leading-relaxed mb-10">
+            <p className="fluid-display-body text-ink/60 mb-10">
               We believe powerful AI shouldn't require a Ph.D. to operate. Our interfaces are designed for business users, while maintaining strict IT governance under the hood.
             </p>
             
@@ -78,20 +78,20 @@ export const FeatureSection = () => {
                   desc: "Pre-built connectors for Salesforce, SAP, Oracle, and custom internal APIs."
                 }
               ].map((item, idx) => (
-                <div key={idx} className="flex gap-4">
+                <div key={idx} className="flex gap-4 min-w-0">
                   <div className="w-10 h-10 rounded-full bg-surface border border-line flex items-center justify-center shrink-0">
                     {item.icon}
                   </div>
                   <div>
-                    <h4 className="text-lg font-semibold mb-1">{item.title}</h4>
-                    <p className="text-ink/60 text-sm leading-relaxed">{item.desc}</p>
+                    <h4 className="fluid-display-card font-semibold mb-1">{item.title}</h4>
+                    <p className="text-ink/60 text-sm sm:text-base leading-relaxed">{item.desc}</p>
                   </div>
                 </div>
               ))}
             </div>
           </div>
 
-          <div ref={imageRef} className="relative h-[500px] lg:h-[600px] rounded-3xl overflow-hidden bg-surface border border-line p-8 flex items-center justify-center">
+          <div ref={imageRef} className="relative h-[380px] sm:h-[460px] lg:h-[600px] rounded-3xl overflow-hidden bg-surface border border-line p-4 sm:p-8 flex items-center justify-center min-w-0">
              <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center opacity-10 mix-blend-overlay" />
              
              {/* Abstract Dashboard UI */}
@@ -104,17 +104,17 @@ export const FeatureSection = () => {
                   </div>
                   <div className="h-6 w-48 bg-white rounded-md border border-line" />
                 </div>
-                <div className="flex-1 p-6 flex gap-6">
-                  <div className="w-48 hidden sm:flex flex-col gap-3">
+                <div className="flex-1 p-4 sm:p-6 flex flex-col sm:flex-row gap-4 sm:gap-6 min-w-0">
+                  <div className="w-full sm:w-48 hidden sm:flex flex-col gap-3 shrink-0">
                     <div className="h-8 w-full bg-ink/5 rounded-md" />
                     <div className="h-8 w-3/4 bg-ink/5 rounded-md" />
                     <div className="h-8 w-5/6 bg-ink/5 rounded-md" />
                   </div>
-                  <div className="flex-1 flex flex-col gap-6">
-                    <div className="flex gap-4">
-                      <div className="h-24 flex-1 bg-white border border-line rounded-xl shadow-sm" />
-                      <div className="h-24 flex-1 bg-white border border-line rounded-xl shadow-sm" />
-                      <div className="h-24 flex-1 bg-white border border-line rounded-xl shadow-sm" />
+                  <div className="flex-1 flex flex-col gap-6 min-w-0">
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                      <div className="h-24 bg-white border border-line rounded-xl shadow-sm" />
+                      <div className="h-24 bg-white border border-line rounded-xl shadow-sm" />
+                      <div className="h-24 bg-white border border-line rounded-xl shadow-sm" />
                     </div>
                     <div className="flex-1 bg-white border border-line rounded-xl shadow-sm relative overflow-hidden">
                        <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-accent/10 to-transparent" />

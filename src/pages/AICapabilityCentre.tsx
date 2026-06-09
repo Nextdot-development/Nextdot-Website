@@ -41,7 +41,7 @@ export default function AICapabilityCentre() {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
-            className="text-5xl md:text-7xl lg:text-8xl font-display font-medium tracking-tight text-ink max-w-5xl mb-8 leading-[1.1]"
+            className="fluid-display-hero font-display font-medium tracking-tight text-ink max-w-5xl mb-8"
           >
             AI Capability Center
           </motion.h1>
@@ -49,7 +49,7 @@ export default function AICapabilityCentre() {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
-            className="text-xl md:text-2xl text-ink/60 max-w-3xl leading-relaxed"
+            className="fluid-display-body text-ink/60 max-w-3xl"
           >
             Nextdot operates an AI Capability Center, bringing together forward-deployed engineers, AI system architects, and agentic specialists to design, deploy, and run AI systems in production.
           </motion.p>
@@ -67,7 +67,7 @@ export default function AICapabilityCentre() {
               transition={{ duration: 0.6, ease: "easeOut" }}
               className="space-y-8"
             >
-              <h2 className="text-4xl md:text-5xl font-display text-ink">
+              <h2 className="fluid-display-title font-display text-ink">
                 What This Is
               </h2>
               <div className="space-y-6 text-lg text-ink/70 leading-relaxed">
@@ -85,7 +85,7 @@ export default function AICapabilityCentre() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
-              className="rounded-2xl overflow-hidden h-[400px] md:h-[500px] border border-line relative group"
+              className="rounded-2xl overflow-hidden h-[320px] sm:h-[400px] md:h-[500px] border border-line relative group"
             >
               <div className="absolute inset-0 bg-accent/5 mix-blend-overlay z-10 group-hover:bg-transparent transition-colors duration-500"></div>
               <video
@@ -116,7 +116,7 @@ export default function AICapabilityCentre() {
             <span className="text-accent text-xs font-mono tracking-widest uppercase mb-4 block">
               // The Team
             </span>
-            <h2 className="text-4xl md:text-5xl font-display text-ink mb-6">
+            <h2 className="fluid-display-title font-display text-ink mb-6">
               Built by engineers who work on systems
             </h2>
             <p className="text-xl text-ink/70 leading-relaxed">
@@ -158,12 +158,12 @@ export default function AICapabilityCentre() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.5, ease: "easeOut", delay: idx * 0.1 }}
-                className="bg-surface border border-line p-8 rounded-2xl hover:border-accent/30 hover:shadow-sm transition-all group"
+                className="bg-surface border border-line p-7 sm:p-8 rounded-2xl hover:border-accent/30 hover:shadow-sm transition-all group"
               >
                 <div className="w-12 h-12 rounded-xl bg-paper border border-line flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                   {role.icon}
                 </div>
-                <h3 className="text-xl font-display font-medium text-ink mb-3">{role.title}</h3>
+                <h3 className="fluid-display-card font-display font-medium text-ink mb-3">{role.title}</h3>
                 <p className="text-ink/70 leading-relaxed">{role.desc}</p>
               </motion.div>
             ))}
@@ -183,7 +183,7 @@ export default function AICapabilityCentre() {
             <span className="text-accent text-xs font-mono tracking-widest uppercase mb-4 block">
               // Systems
             </span>
-            <h2 className="text-4xl md:text-5xl font-display text-ink">
+            <h2 className="fluid-display-title font-display text-ink">
               From architecture to deployment.
             </h2>
           </motion.div>
@@ -217,12 +217,12 @@ export default function AICapabilityCentre() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.5, ease: "easeOut", delay: idx * 0.1 }}
-                className="bg-paper border border-line p-8 md:p-10 rounded-2xl flex flex-col h-full hover:border-accent/30 hover:shadow-sm transition-all group"
+                className="bg-paper border border-line p-7 sm:p-8 md:p-10 rounded-2xl flex flex-col h-full hover:border-accent/30 hover:shadow-sm transition-all group"
               >
                 <div className="w-14 h-14 rounded-xl bg-surface border border-line flex items-center justify-center mb-8 group-hover:scale-110 transition-transform">
                   {system.icon}
                 </div>
-                <h3 className="text-2xl font-display font-medium text-ink mb-4">{system.title}</h3>
+                <h3 className="fluid-display-card font-display font-medium text-ink mb-4">{system.title}</h3>
                 <p className="text-ink/70 leading-relaxed">{system.desc}</p>
               </motion.div>
             ))}
@@ -293,7 +293,7 @@ export default function AICapabilityCentre() {
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
           >
-            <h2 className="text-4xl md:text-5xl font-display text-white mb-8">
+              <h2 className="fluid-display-title font-display text-white mb-8">
               Extended into your organisation.
             </h2>
             <div className="space-y-6 text-xl text-paper/70 leading-relaxed">
@@ -303,7 +303,7 @@ export default function AICapabilityCentre() {
               <p>
                 Its output is deployed through forward-deployed engineering pods, embedded into enterprise environments, working alongside internal teams.
               </p>
-              <p className="text-2xl text-white font-display mt-8">
+                <p className="fluid-display-title text-white font-display mt-8">
                 What is built here is implemented there. <span className="text-accent">Seamlessly.</span>
               </p>
             </div>
@@ -325,7 +325,7 @@ export default function AICapabilityCentre() {
               <span className="text-accent text-xs font-mono tracking-widest uppercase block">
                 // Philosophy
               </span>
-              <h2 className="text-4xl md:text-5xl font-display text-ink">
+              <h2 className="fluid-display-title font-display text-ink">
                 Built from emerging India.
               </h2>
               <div className="space-y-6 text-lg text-ink/70 leading-relaxed">
@@ -335,7 +335,7 @@ export default function AICapabilityCentre() {
                 <p>
                   They will be built by focused engineering teams working close to real-world problems, with the depth and discipline required for production systems.
                 </p>
-                <p className="text-ink font-medium text-xl pt-4 border-t border-line">
+                <p className="fluid-display-card text-ink font-medium pt-4 border-t border-line">
                   This is that environment.<br/>
                   <span className="text-accent">A place designed for building, not pitching.</span>
                 </p>
@@ -347,7 +347,7 @@ export default function AICapabilityCentre() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
-              className="rounded-2xl overflow-hidden h-[400px] md:h-[500px] border border-line relative group"
+              className="rounded-2xl overflow-hidden h-[320px] sm:h-[400px] md:h-[500px] border border-line relative group"
             >
               <div className="absolute inset-0 bg-accent/5 mix-blend-overlay z-10 group-hover:bg-transparent transition-colors duration-500"></div>
               <img 

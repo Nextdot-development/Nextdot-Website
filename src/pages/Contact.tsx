@@ -30,7 +30,7 @@ export default function Contact() {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
-            className="text-5xl md:text-7xl lg:text-8xl font-display font-medium tracking-tight text-ink max-w-4xl mx-auto mb-8 leading-[1.1]"
+            className="fluid-display-hero font-display font-medium tracking-tight text-ink max-w-4xl mx-auto mb-8"
           >
             Start the conversation.
           </motion.h1>
@@ -38,7 +38,7 @@ export default function Contact() {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
-            className="text-xl md:text-2xl text-ink/60 max-w-2xl mx-auto leading-relaxed mb-12"
+            className="fluid-display-body text-ink/60 max-w-2xl mx-auto mb-12"
           >
             If you're exploring how AI can move from pilot to production inside your organisation, we should talk.
           </motion.p>
@@ -49,7 +49,7 @@ export default function Contact() {
           >
             <a
               href="mailto:contact@nextdot.co.in"
-              className="inline-flex items-center gap-3 px-8 py-4 bg-ink text-paper rounded-full hover:bg-ink/90 transition-all font-medium text-lg group"
+              className="inline-flex items-center gap-3 min-h-11 px-8 py-4 bg-ink text-paper rounded-full hover:bg-ink/90 transition-all font-medium text-lg group"
             >
               <Mail size={20} className="text-paper/70 group-hover:text-paper transition-colors" />
               Email Us
@@ -71,7 +71,7 @@ export default function Contact() {
             <span className="text-accent text-xs font-mono tracking-widest uppercase mb-4 block">
               // Offices
             </span>
-            <h2 className="text-4xl md:text-5xl font-display text-ink">
+              <h2 className="fluid-display-title font-display text-ink">
               Where we operate from.
             </h2>
           </motion.div>
@@ -100,7 +100,7 @@ export default function Contact() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.5, ease: "easeOut", delay: idx * 0.1 }}
-                className="bg-paper border border-line p-8 md:p-10 rounded-2xl hover:border-accent/30 hover:shadow-sm transition-all group relative overflow-hidden"
+                className="bg-paper border border-line p-7 sm:p-8 md:p-10 rounded-2xl hover:border-accent/30 hover:shadow-sm transition-all group relative overflow-hidden"
               >
                 <div className="absolute top-0 right-0 p-6 opacity-5 group-hover:opacity-10 transition-opacity">
                   <Building2 size={120} className="text-ink" />
@@ -109,7 +109,7 @@ export default function Contact() {
                   <div className="w-12 h-12 rounded-xl bg-surface border border-line flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                     <MapPin className="text-accent" size={24} />
                   </div>
-                  <h3 className="text-2xl font-display font-medium text-ink mb-2">{office.city}</h3>
+                  <h3 className="fluid-display-card font-display font-medium text-ink mb-2">{office.city}</h3>
                   <p className="text-accent text-sm font-mono tracking-wide mb-6">{office.type}</p>
                   <p className="text-ink/70 leading-relaxed">{office.address}</p>
                 </div>
