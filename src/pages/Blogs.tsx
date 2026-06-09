@@ -29,7 +29,7 @@ const BLOG_POSTS: BlogPost[] = [
     label: "Featured Blog",
     date: "Apr 24, 2026",
     readTime: "14 min read",
-    image: publicAsset("images/voice_agent.png"),
+    image: publicAsset("images/blogs/voice-agent.png"),
     featured: true,
     content: [
       "In today's fast-paced business environment, every missed call is a missed opportunity. Whether it's a potential customer looking to book an appointment, an existing client seeking support, or a lead ready to convert, the cost of unavailability is higher than ever. That's where intelligent voice automation changes everything.",
@@ -87,7 +87,7 @@ const BLOG_POSTS: BlogPost[] = [
     label: "Blog",
     date: "Apr 24, 2026",
     readTime: "16 min read",
-    image: publicAsset("images/avatar.png"),
+    image: publicAsset("images/blogs/avatar.png"),
     content: [
       "In healthcare marketing, there's an undeniable truth: patients trust doctors. When a physician speaks, people listen. But there's a problem. Doctors are busy saving lives, not recording videos. Scheduling a single shoot requires coordinating calendars, booking studios, managing equipment, and hoping nothing goes wrong. By the time you need another video, the entire process starts over.",
       "What if you could create unlimited doctor-led content without ever scheduling another video shoot?",
@@ -130,7 +130,7 @@ const BLOG_POSTS: BlogPost[] = [
     label: "Blog",
     date: "Apr 24, 2026",
     readTime: "17 min read",
-    image: publicAsset("images/comply.png"),
+    image: publicAsset("images/blogs/comply.png"),
     content: [
       "In regulated industries, compliance isn't optional. It's the foundation everything else stands on. One missed requirement, one overlooked regulation, one communication that crosses the line, and your business faces penalties, lawsuits, damaged reputation, or worse.",
       "The Broken State of Compliance Management",
