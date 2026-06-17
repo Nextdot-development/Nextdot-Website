@@ -82,6 +82,7 @@ export const CapabilitiesGrid = () => {
           </div>
         ))}
       </div>
+      
 
       {/* Horizontal Scroll Section */}
       <motion.div 

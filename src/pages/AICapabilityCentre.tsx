@@ -69,7 +69,7 @@ export default function AICapabilityCentre() {
               className="space-y-8"
             >
               <h2 className="fluid-display-title font-display text-ink">
-                What This Is
+                What is AI Capability Center
               </h2>
               <div className="space-y-6 text-lg text-ink/70 leading-relaxed">
                 <p className="text-2xl text-ink font-display leading-snug">

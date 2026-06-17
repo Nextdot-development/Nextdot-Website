@@ -44,7 +44,7 @@ export const Testimonial = () => {
           >
             <div className="w-full h-48 sm:h-56 md:h-64 rounded-3xl overflow-hidden border border-line relative shrink-0">
               <img 
-                src={publicAsset("images/Office1.png")} 
+                src={publicAsset("images/office1.png")}
                 alt="Office Space"
                 className="w-full h-full object-cover transition-all duration-500 hover:scale-105" 
               />

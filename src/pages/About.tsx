@@ -91,7 +91,7 @@ export default function About() {
                     muted
                     playsInline
                     preload="metadata"
-                    poster={publicAsset("images/Office1.png")}
+                    poster={publicAsset("images/office1.png")}
                     className="w-full h-full object-cover"
                   >
                     <source src={nextdotVideo} type="video/mp4" />
@@ -215,7 +215,7 @@ export default function About() {
             className="mb-12"
           >
             <h2 className="fluid-display-title font-display text-ink">
-              Team
+              The Idea Behind
             </h2>
           </motion.div>
 

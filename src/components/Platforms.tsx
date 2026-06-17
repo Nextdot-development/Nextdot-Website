@@ -118,9 +118,6 @@ export const Platforms = () => {
                   referrerPolicy="no-referrer"
                 />
                 <div className="absolute bottom-0 left-0 p-6 sm:p-8 md:p-12 z-20 w-full">
-                  <div className="inline-flex px-3 py-1 bg-white/20 backdrop-blur-md text-white text-xs rounded-full mb-3 md:mb-4 border border-white/10">
-                    Case Study
-                  </div>
                   <h3 className="fluid-display-title font-display font-medium text-white mb-4 md:mb-6 leading-tight">
                     {platforms[activeIndex].title}
                   </h3>

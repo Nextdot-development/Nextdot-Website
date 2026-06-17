@@ -16,11 +16,11 @@
 }
 
 .marquee-content.scroll-left {
-  animation: scroll-left 34s linear infinite;
+  animation: scroll-left 90s linear infinite;
 }
 
 .marquee-content.scroll-right {
-  animation: scroll-right 34s linear infinite;
+  animation: scroll-right 90s linear infinite;
 }
 
 /* Pause animation on hover */
