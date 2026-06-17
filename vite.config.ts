@@ -6,7 +6,7 @@ import {defineConfig, loadEnv} from 'vite';
 export default defineConfig(({mode}) => {
   const env = loadEnv(mode, '.', '');
   return {
-    base: './',
+    base: '/',
     plugins: [react(), tailwindcss()],
     css: {
       // Keep PostCSS local to this project so home-directory configs are never inherited.
