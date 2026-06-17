@@ -1,5 +1,6 @@
 import { motion } from "motion/react";
 import { publicAsset } from "@/lib/utils";
+import office1 from "../assets/images/office1.png";
 
 export const Testimonial = () => {
   return (
@@ -43,10 +44,10 @@ export const Testimonial = () => {
             className="w-full md:w-1/2 flex flex-col gap-4 min-w-0"
           >
             <div className="w-full h-48 sm:h-56 md:h-64 rounded-3xl overflow-hidden border border-line relative shrink-0">
-              <img 
-                src={publicAsset("images/office1.png")}
+              <img
+                src={office1}
                 alt="Office Space"
-                className="w-full h-full object-cover transition-all duration-500 hover:scale-105" 
+                className="w-full h-full object-cover transition-all duration-500 hover:scale-105"
               />
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 items-start">

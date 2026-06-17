@@ -2,6 +2,7 @@ import { motion } from "motion/react";
 import { CheckCircle2, ArrowRight, Quote } from "lucide-react";
 import { Link } from "react-router-dom";
 import nextdotVideo from "../../video/nextdot.mp4";
+import office1 from "../assets/images/office1.png";
 import { publicAsset } from "@/lib/utils";
 import SEO from '@/lib/seo';
 
@@ -91,7 +92,7 @@ export default function About() {
                     muted
                     playsInline
                     preload="metadata"
-                    poster={publicAsset("images/office1.png")}
+                    poster={office1}
                     className="w-full h-full object-cover"
                   >
                     <source src={nextdotVideo} type="video/mp4" />
