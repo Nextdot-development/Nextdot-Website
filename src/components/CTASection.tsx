@@ -32,13 +32,9 @@ export const CTASection = () => {
     if (Object.keys(e).length === 0) {
       setLoading(true);
       try {
-        // Use a standard form POST to avoid CORS issues from AJAX endpoints.
-        const form = document.createElement("form");
-        form.method = "POST";
-        form.action = "https://formsubmit.co/contact@nextdot.co.in";
-        form.target = "formsubmit_iframe";
-        form.style.display = "none";
-
+        // FormSubmit AJAX endpoint: returns a real JSON result, sends CORS headers
+        // (works from any deployed domain), and _captcha:false disables the captcha
+        // page that silently drops messages submitted via a hidden iframe.
         const fields: Record<string, string> = {
           name: values.name,
           company: values.company,
@@ -49,22 +45,24 @@ export const CTASection = () => {
           _template: "table",
           _subject: "New Enquiry via Nextdot Website",
           _replyto: values.email,
-          _next: "https://nextdot.co.in/contact",
+          _captcha: "false",
           // Honeypot: bots fill this, real users leave it empty
           _honey: "",
         };
 
-        Object.entries(fields).forEach(([key, value]) => {
-          const input = document.createElement("input");
-          input.type = "hidden";
-          input.name = key;
-          input.value = value;
-          form.appendChild(input);
-        });
+        const body = new FormData();
+        Object.entries(fields).forEach(([key, value]) => body.append(key, value));
 
-        document.body.appendChild(form);
-        form.submit();
-        document.body.removeChild(form);
+        const res = await fetch("https://formsubmit.co/ajax/contact@nextdot.co.in", {
+          method: "POST",
+          headers: { Accept: "application/json" },
+          body,
+        });
+        const data = await res.json().catch(() => ({}));
+
+        if (!res.ok || data?.success === "false" || data?.success === false) {
+          throw new Error(data?.message || "Submission failed");
+        }
 
         setSuccess("Thanks - your message has been sent. We'll be in touch shortly.");
         setValues({ name: "", company: "", email: "", phone: "", message: "", countryCode: "+91", agree: false });
@@ -102,7 +100,7 @@ export const CTASection = () => {
               Let’s define what production looks like for your organisation.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <button type="button" onClick={scrollToForm} className="min-h-11 bg-white text-ink px-6 md:px-8 py-3 md:py-4 rounded-full font-semibold shadow-[0_10px_30px_rgba(255,255,255,0.08)] hover:bg-white/90 transition-colors text-sm md:text-base">
+              <button type="button" onClick={scrollToForm} className="min-h-11 bg-white text-ink px-6 md:px-8 py-3 md:py-4 rounded-full font-semibold shadow-[0_10px_30px_rgba(255,255,255,0.08)] hover:bg-white/90 active:bg-white/90 active:scale-95 transition-all text-sm md:text-base">
                 Start the Conversation
               </button>
             </div>
@@ -117,7 +115,6 @@ export const CTASection = () => {
             className="w-full lg:w-1/2 min-w-0"
           >
             <form ref={formRef} onSubmit={handleSubmit} className="flex flex-col gap-5 md:gap-6">
-              <iframe name="formsubmit_iframe" title="formsubmit transport" className="hidden" />
               {errors.submit && <p className="text-red-300 text-sm">{errors.submit}</p>}
               <div>
                 <label className="block text-sm font-medium text-white mb-2">Full Name*</label>
@@ -196,7 +193,7 @@ export const CTASection = () => {
               <button 
                 type="submit"
                 disabled={loading}
-                className="w-full sm:w-40 min-h-11 bg-blue-600 text-white rounded-full py-3 font-semibold hover:bg-blue-500 transition-colors mt-4 sm:self-start disabled:opacity-70 disabled:cursor-not-allowed"
+                className="w-full sm:w-40 min-h-11 bg-blue-600 text-white rounded-full py-3 font-semibold hover:bg-blue-500 active:bg-blue-500 active:scale-95 transition-all mt-4 sm:self-start disabled:opacity-70 disabled:cursor-not-allowed"
               >
                 {loading ? "Submitting..." : "Submit"}
               </button>

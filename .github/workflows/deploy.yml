@@ -1,0 +1,53 @@
+name: Build & Deploy Nextdot site
+
+# SEO-safe automated publishing:
+# fetches published (and due-scheduled) CMS blogs from Supabase, prerenders the
+# static site, updates the sitemap, and deploys dist/ to GoDaddy — so new and
+# scheduled blogs go live automatically without a manual build.
+on:
+  workflow_dispatch: {}          # manual "Run workflow" button — instant publish
+  schedule:
+    - cron: "*/30 * * * *"       # every 30 minutes. Change to "0 * * * *" for hourly.
+
+concurrency:
+  group: deploy
+  cancel-in-progress: true
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Chromium system libraries (for the prerender step)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            libnss3 libatk-bridge2.0-0 libatk1.0-0 libcups2 libdrm2 libgbm1 \
+            libgtk-3-0 libxdamage1 libxrandr2 libxcomposite1 libxfixes3 \
+            libpango-1.0-0 libcairo2 fonts-liberation libasound2t64 \
+            2>/dev/null || sudo apt-get install -y libnss3 libgbm1 libasound2
+
+      - name: Build (fetch CMS blogs + prerender + sitemap)
+        env:
+          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_PUBLISHABLE_KEY: ${{ secrets.VITE_SUPABASE_PUBLISHABLE_KEY }}
+        run: npm run build
+
+      - name: Deploy dist/ to GoDaddy via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps            # GoDaddy usually supports FTPS; use "ftp" if this fails
+          local-dir: ./dist/
+          server-dir: ${{ secrets.FTP_SERVER_DIR }}   # e.g. /public_html/  (must end with /)

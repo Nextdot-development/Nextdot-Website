@@ -1,6 +1,6 @@
 import { motion } from "motion/react";
 import { publicAsset } from "@/lib/utils";
-import office1 from "../assets/images/office1.png";
+import office1 from "../assets/images/office1.webp";
 
 export const Testimonial = () => {
   return (
@@ -46,23 +46,29 @@ export const Testimonial = () => {
             <div className="w-full h-48 sm:h-56 md:h-64 rounded-3xl overflow-hidden border border-line relative shrink-0">
               <img
                 src={office1}
-                alt="Office Space"
-                className="w-full h-full object-cover transition-all duration-500 hover:scale-105"
+                alt="Nextdot office workspace"
+                loading="lazy"
+                decoding="async"
+                className="w-full h-full object-cover transition-all duration-500 hover:scale-105 active:scale-105"
               />
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 items-start">
               <div className="w-full h-32 sm:h-40 md:h-48 rounded-3xl overflow-hidden border border-line relative shrink-0">
-                <img 
-                  src={publicAsset("images/office2.png")} 
-                  alt="Team Collaboration"
-                  className="w-full h-full object-cover transition-all duration-500 hover:scale-105" 
+                <img
+                  src={publicAsset("images/office2.webp")}
+                  alt="Nextdot team collaborating at the workplace"
+                  loading="lazy"
+                  decoding="async"
+                  className="w-full h-full object-cover transition-all duration-500 hover:scale-105 active:scale-105"
                 />
               </div>
               <div className="w-full h-32 sm:h-40 md:h-48 rounded-3xl overflow-hidden border border-line relative shrink-0">
-                <img 
-                  src={publicAsset("images/office4.webp")} 
-                  alt="Office Meeting"
-                  className="w-full h-full object-cover transition-all duration-500 hover:scale-105" 
+                <img
+                  src={publicAsset("images/office4.webp")}
+                  alt="Nextdot team meeting in the office"
+                  loading="lazy"
+                  decoding="async"
+                  className="w-full h-full object-cover transition-all duration-500 hover:scale-105 active:scale-105"
                 />
               </div>
             </div>

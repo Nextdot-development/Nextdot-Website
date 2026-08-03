@@ -27,6 +27,7 @@ export const Navbar = () => {
   };
 
   const navLinks = [
+    { name: "Home", href: "/" },
     { name: "About Us", href: "/about" },
     { name: "What We Do", href: "/what-we-do" },
     { name: "Nextdot Creative", href: "/creative" },
@@ -48,7 +49,7 @@ export const Navbar = () => {
       >
         <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4">
           <Link to={homeHref} onClick={handleLogoClick} className="flex items-center group cursor-pointer shrink-0">
-            <img src={publicAsset("images/logo.png")} alt="Nextdot Logo" className="h-9 sm:h-10 lg:h-11 w-auto max-w-[160px] object-contain transition-transform duration-300 group-hover:scale-105" />
+            <img src={publicAsset("images/logo.png")} alt="Nextdot Logo" className="h-9 sm:h-10 lg:h-11 w-auto max-w-[160px] object-contain transition-transform duration-300 group-hover:scale-105 group-active:scale-105" />
           </Link>
           
           <div className="hidden md:flex items-center gap-8">
@@ -96,7 +97,7 @@ export const Navbar = () => {
                   to={link.href} 
                   onClick={() => setIsOpen(false)}
                   className={cn(
-                    "text-2xl sm:text-3xl font-display font-medium tracking-tight border-b border-line pb-4",
+                    "text-2xl sm:text-3xl font-display font-medium tracking-tight border-b border-line pb-4 transition-colors active:text-ink",
                     location.pathname === link.href ? "text-ink" : "text-ink/70"
                   )}
                 >

@@ -23,8 +23,9 @@
   animation: scroll-right 90s linear infinite;
 }
 
-/* Pause animation on hover */
-.marquee-container:hover .marquee-content {
+/* Pause animation on hover/touch */
+.marquee-container:hover .marquee-content,
+.marquee-container:active .marquee-content {
   animation-play-state: paused;
 }
 
@@ -55,7 +56,8 @@
   filter: none;
 }
 
-.client-logo:hover {
+.client-logo:hover,
+.client-logo:active {
   transform: scale(1.03);
   filter: none;
   opacity: 1;

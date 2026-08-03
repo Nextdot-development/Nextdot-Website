@@ -9,22 +9,22 @@ export const Platforms = () => {
     {
       title: "AI-Augmented Content Systems",
       desc: "High-volume, high-consistency content pipelines powered by AI.",
-      image: publicAsset("images/AACS.png")
+      image: publicAsset("images/AACS.webp")
     },
     {
       title: "Performance Marketing Systems",
       desc: "Campaigns driven by real-time intelligence and optimisation loops.",
-      image: publicAsset("images/PMS.png")
+      image: publicAsset("images/PMS.webp")
     },
     {
       title: "Video & Design Production",
       desc: "Faster iteration. Scalable production. Enterprise-grade output.",
-      image: publicAsset("images/VDP.png")
+      image: publicAsset("images/VDP.webp")
     },
     {
       title: "Digital Growth Systems",
       desc: "End-to-end growth infrastructure, not isolated campaigns.",
-      image: publicAsset("images/DGS.png")
+      image: publicAsset("images/DGS.webp")
     }
   ];
 
@@ -64,7 +64,7 @@ export const Platforms = () => {
                   "p-4 sm:p-5 md:p-6 rounded-2xl cursor-pointer transition-all duration-300 border",
                   activeIndex === i
                     ? "bg-surface border-line shadow-sm"
-                    : "bg-transparent border-transparent hover:bg-surface/50"
+                    : "bg-transparent border-transparent hover:bg-surface/50 active:bg-surface/50"
                 )}
               >
                 <h3 className={cn(
@@ -114,7 +114,9 @@ export const Platforms = () => {
                 <img
                   src={platforms[activeIndex].image}
                   alt={platforms[activeIndex].title}
-                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+                  loading="lazy"
+                  decoding="async"
+                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-active:grayscale-0 transition-all duration-700"
                   referrerPolicy="no-referrer"
                 />
                 <div className="absolute bottom-0 left-0 p-6 sm:p-8 md:p-12 z-20 w-full">

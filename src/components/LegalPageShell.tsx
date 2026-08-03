@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { motion } from "motion/react";
 import { ArrowUpRight } from "lucide-react";
 
 export type LegalSection = {
@@ -26,13 +27,18 @@ export function LegalPageShell({ title, effectiveDate, description, sections, ch
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Link
             to="/"
-            className="inline-flex items-center gap-2 text-sm font-medium text-ink/60 hover:text-ink transition-colors group"
+            className="inline-flex items-center gap-2 text-sm font-medium text-ink/60 hover:text-ink active:text-ink transition-colors group"
           >
-            <ArrowUpRight size={16} className="rotate-180 transition-transform group-hover:-translate-x-0.5 group-hover:-translate-y-0.5" />
+            <ArrowUpRight size={16} className="rotate-180 transition-transform group-hover:-translate-x-0.5 group-active:-translate-x-0.5 group-hover:-translate-y-0.5 group-active:-translate-y-0.5" />
             Back to Home
           </Link>
 
-          <div className="mt-10 max-w-4xl">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="mt-10 max-w-4xl"
+          >
             <div className="inline-flex items-center gap-2 rounded-full border border-line bg-white/60 px-4 py-2 text-xs font-mono tracking-[0.24em] uppercase text-ink/55 backdrop-blur-sm">
               Legal / Enterprise
             </div>
@@ -47,14 +53,20 @@ export function LegalPageShell({ title, effectiveDate, description, sections, ch
               <span className="rounded-full border border-line bg-white/70 px-4 py-2">Effective Date</span>
               <span className="rounded-full border border-line bg-white/70 px-4 py-2 font-medium text-ink">{effectiveDate}</span>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
       <section className="py-10 md:py-14">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-[240px_minmax(0,1fr)] gap-8 lg:gap-12 items-start">
-            <aside className="lg:sticky lg:top-28 self-start">
+            <motion.aside
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
+              className="lg:sticky lg:top-28 self-start"
+            >
               <div className="rounded-2xl border border-line bg-white/70 backdrop-blur-sm p-5 shadow-[0_1px_0_rgba(0,0,0,0.02)]">
                 <p className="text-xs font-mono tracking-[0.2em] uppercase text-ink/45 mb-4">On this page</p>
                 <nav className="space-y-2">
@@ -62,16 +74,22 @@ export function LegalPageShell({ title, effectiveDate, description, sections, ch
                     <a
                       key={section.id}
                       href={`#${section.id}`}
-                      className="block rounded-lg px-3 py-2 text-sm text-ink/60 hover:text-ink hover:bg-surface/70 transition-colors"
+                      className="block rounded-lg px-3 py-2 text-sm text-ink/60 hover:text-ink active:text-ink hover:bg-surface/70 active:bg-surface/70 transition-colors"
                     >
                       {section.label}
                     </a>
                   ))}
                 </nav>
               </div>
-            </aside>
+            </motion.aside>
 
-            <article className="min-w-0 rounded-3xl border border-line bg-white/80 backdrop-blur-sm shadow-[0_12px_40px_rgba(15,23,42,0.04)] overflow-hidden">
+            <motion.article
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.1 }}
+              transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
+              className="min-w-0 rounded-3xl border border-line bg-white/80 backdrop-blur-sm shadow-[0_12px_40px_rgba(15,23,42,0.04)] overflow-hidden"
+            >
               <div className="border-b border-line bg-surface/50 px-5 sm:px-8 py-5 sm:py-6">
                 <p className="text-sm text-ink/60 leading-relaxed">Please read carefully. The content below defines the terms that govern use of this website and related communications.</p>
               </div>
@@ -80,7 +98,7 @@ export function LegalPageShell({ title, effectiveDate, description, sections, ch
                   {children}
                 </div>
               </div>
-            </article>
+            </motion.article>
           </div>
         </div>
       </section>

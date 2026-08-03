@@ -2,6 +2,7 @@ import { motion } from "motion/react";
 import whatThisIsVideo from "../../video/WhatThisIs.mp4";
 import SEO from '@/lib/seo';
 import { publicAsset } from "@/lib/utils";
+import { LazyVideo } from "@/components/LazyVideo";
 import { 
   ArrowRight, 
   CheckCircle2, 
@@ -11,9 +12,10 @@ import {
   Link, 
   ShieldCheck, 
   Layers, 
-  Database, 
-  Globe, 
-  Zap 
+  Database,
+  Globe,
+  Zap,
+  Sparkles
 } from "lucide-react";
 
 export default function AICapabilityCentre() {
@@ -88,18 +90,11 @@ export default function AICapabilityCentre() {
               transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
               className="rounded-2xl overflow-hidden h-[320px] sm:h-[400px] md:h-[500px] border border-line relative group"
             >
-              <div className="absolute inset-0 bg-accent/5 mix-blend-overlay z-10 group-hover:bg-transparent transition-colors duration-500"></div>
-              <video
-                autoPlay
-                loop
-                muted
-                playsInline
-                preload="metadata"
-                className="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
-              >
-                <source src={whatThisIsVideo} type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
+              <div className="absolute inset-0 bg-accent/5 mix-blend-overlay z-10 group-hover:bg-transparent group-active:bg-transparent transition-colors duration-500"></div>
+              <LazyVideo
+                src={whatThisIsVideo}
+                className="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-active:opacity-100 group-hover:scale-105 group-active:scale-105 transition-all duration-700"
+              />
             </motion.div>
           </div>
         </div>
@@ -125,50 +120,7 @@ export default function AICapabilityCentre() {
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              {
-                title: "AI Systems Engineers",
-                desc: "Design and build multi-agent systems, orchestration layers, and decision frameworks.",
-                icon: <Cpu className="text-accent" size={24} />
-              },
-              {
-                title: "Workflow & Product Architects",
-                desc: "Map business processes into structured, automatable systems.",
-                icon: <Workflow className="text-accent" size={24} />
-              },
-              {
-                title: "Agentic Specialists",
-                desc: "Design how agents interact, collaborate, and execute multi-step workflows.",
-                icon: <Network className="text-accent" size={24} />
-              },
-              {
-                title: "Integration Engineers",
-                desc: "Connect AI systems to CRMs, ERPs, APIs, and internal platforms.",
-                icon: <Link className="text-accent" size={24} />
-              },
-              {
-                title: "QA & Deployment Leads",
-                desc: "Ensure systems are stable, reliable, and production-ready.",
-                icon: <ShieldCheck className="text-accent" size={24} />
-              }
-            ].map((role, idx) => (
-              <motion.div 
-                key={idx}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.5, ease: "easeOut", delay: idx * 0.1 }}
-                className="bg-surface border border-line p-7 sm:p-8 rounded-2xl hover:border-accent/30 hover:shadow-sm transition-all group"
-              >
-                <div className="w-12 h-12 rounded-xl bg-paper border border-line flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                  {role.icon}
-                </div>
-                <h3 className="fluid-display-card font-display font-medium text-ink mb-3">{role.title}</h3>
-                <p className="text-ink/70 leading-relaxed">{role.desc}</p>
-              </motion.div>
-            ))}
-          </div>
+
         </div>
       </section>
 
@@ -218,9 +170,10 @@ export default function AICapabilityCentre() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.5, ease: "easeOut", delay: idx * 0.1 }}
-                className="bg-paper border border-line p-7 sm:p-8 md:p-10 rounded-2xl flex flex-col h-full hover:border-accent/30 hover:shadow-sm transition-all group"
+                whileTap={{ scale: 0.98 }}
+                className="bg-paper border border-line p-7 sm:p-8 md:p-10 rounded-2xl flex flex-col h-full hover:border-accent/30 active:border-accent/30 hover:shadow-sm active:shadow-sm transition-all group"
               >
-                <div className="w-14 h-14 rounded-xl bg-surface border border-line flex items-center justify-center mb-8 group-hover:scale-110 transition-transform">
+                <div className="w-14 h-14 rounded-xl bg-surface border border-line flex items-center justify-center mb-8 group-hover:scale-110 group-active:scale-110 transition-transform">
                   {system.icon}
                 </div>
                 <h3 className="fluid-display-card font-display font-medium text-ink mb-4">{system.title}</h3>
@@ -350,12 +303,14 @@ export default function AICapabilityCentre() {
               transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
               className="rounded-2xl overflow-hidden h-[320px] sm:h-[400px] md:h-[500px] border border-line relative group"
             >
-              <div className="absolute inset-0 bg-accent/5 mix-blend-overlay z-10 group-hover:bg-transparent transition-colors duration-500"></div>
-              <img 
-                src={publicAsset("images/Nextdot_AU.png")} 
-                alt="Tech Hub Environment" 
-                className="w-full h-full object-contain bg-surface grayscale opacity-80 group-hover:opacity-100 transition-all duration-700" 
-                referrerPolicy="no-referrer" 
+              <div className="absolute inset-0 bg-accent/5 mix-blend-overlay z-10 group-hover:bg-transparent group-active:bg-transparent transition-colors duration-500"></div>
+              <img
+                src={publicAsset("images/Nextdot_AU.webp")}
+                alt="Nextdot AI Capability Centre engineering workspace"
+                loading="lazy"
+                decoding="async"
+                className="w-full h-full object-contain bg-surface grayscale opacity-80 group-hover:opacity-100 group-active:opacity-100 transition-all duration-700"
+                referrerPolicy="no-referrer"
               />
             </motion.div>
           </div>
@@ -392,7 +347,8 @@ export default function AICapabilityCentre() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.5, ease: "easeOut", delay: idx * 0.1 }}
-                className="bg-surface border border-line p-8 rounded-2xl text-center hover:border-accent/30 transition-all"
+                whileTap={{ scale: 0.98 }}
+                className="bg-surface border border-line p-8 rounded-2xl text-center hover:border-accent/30 active:border-accent/30 transition-all"
               >
                 <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-6">
                   <CheckCircle2 className="text-accent" size={24} />

@@ -22,7 +22,7 @@ export default function TermsOfService() {
         { id: 'contact-information', label: '12. Contact Information' },
       ]}
     >
-      <SEO title="Terms of Service - Nextdot" description="Terms of Service for Nextdot Digital Solutions Pvt. Ltd." path="/terms-of-service" />
+      <SEO title="Terms of Service" description="Read the terms that govern access to and use of Nextdot Digital Solutions' website, services, deliverables, and digital platforms, and the obligations they set." path="/terms-of-service" />
       <h3 id="company-overview">1. Company Overview</h3>
       <p>
         Nextdot Digital Solutions Pvt. Ltd. is engaged in software solutions, creative solutions, branding,

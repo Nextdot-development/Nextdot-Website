@@ -28,6 +28,9 @@ export default defineConfig(({mode}) => {
       hmr: process.env.DISABLE_HMR !== 'true',
     },
     build: {
+      // Always start from a clean dist so stale prerendered blog folders from a
+      // previous build (e.g. a CMS blog that was since deleted) can never survive.
+      emptyOutDir: true,
       cssCodeSplit: false,
       rollupOptions: {
         output: {

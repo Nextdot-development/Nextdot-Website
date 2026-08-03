@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, lazy, Suspense } from "react";
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import Lenis from "lenis";
 import { motion, AnimatePresence } from "motion/react";
@@ -7,16 +7,22 @@ import { Footer } from "./components/Footer";
 import { ScrollProgress } from "./components/ScrollProgress";
 import { Cursor } from "./components/Cursor";
 
-// Pages
+// Home loads eagerly since it's the most common landing page.
+// Every other route is code-split so visitors only download the JS for
+// the page they actually visit, instead of the whole site upfront.
 import Home from "./pages/Home";
-import About from "./pages/About";
-import WhatWeDo from "./pages/WhatWeDo";
-import NextdotCreative from "./pages/NextdotCreative";
-import AICapabilityCentre from "./pages/AICapabilityCentre";
-import Blogs, { BlogPostDetail } from "./pages/Blogs";
-import Contact from "./pages/Contact";
-import PrivacyPolicy from "./pages/PrivacyPolicy";
-import TermsOfService from "./pages/TermsOfService";
+const About = lazy(() => import("./pages/About"));
+const WhatWeDo = lazy(() => import("./pages/WhatWeDo"));
+const NextdotCreative = lazy(() => import("./pages/NextdotCreative"));
+const AICapabilityCentre = lazy(() => import("./pages/AICapabilityCentre"));
+const Blogs = lazy(() => import("./pages/Blogs").then((m) => ({ default: m.default })));
+const BlogPostDetail = lazy(() => import("./pages/Blogs").then((m) => ({ default: m.BlogPostDetail })));
+const Contact = lazy(() => import("./pages/Contact"));
+const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
+const TermsOfService = lazy(() => import("./pages/TermsOfService"));
+// The admin panel is a separate, code-split app with its own chrome-free layout.
+// Public visitors never download it.
+const AdminApp = lazy(() => import("./pages/admin/AdminApp"));
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -30,8 +36,13 @@ function ScrollToTop() {
 
 export default function App() {
   const [loading, setLoading] = useState(true);
+  const { pathname } = useLocation();
+  // The admin panel runs as its own app: no public chrome, no Lenis smooth
+  // scroll, no preloader. Everything else is the public site, unchanged.
+  const isAdmin = pathname.startsWith("/admin");
 
   useEffect(() => {
+    if (isAdmin) return;
     // Initialize Lenis for smooth scrolling
     const lenis = new Lenis({
       duration: 0.8,
@@ -59,7 +70,16 @@ export default function App() {
       lenis.destroy();
       clearTimeout(timer);
     };
-  }, []);
+  }, [isAdmin]);
+
+  // Admin panel: its own self-contained app, no public chrome.
+  if (isAdmin) {
+    return (
+      <Suspense fallback={<div className="min-h-screen bg-paper" />}>
+        <AdminApp />
+      </Suspense>
+    );
+  }
 
   return (
     <>
@@ -89,20 +109,25 @@ export default function App() {
 
         <div className="noise-overlay" />
         <Navbar />
-        
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/what-we-do" element={<WhatWeDo />} />
-          <Route path="/creative" element={<NextdotCreative />} />
-          <Route path="/ai-capability-centre" element={<AICapabilityCentre />} />
-          <Route path="/blogs" element={<Blogs />} />
-          <Route path="/blogs/:slug" element={<BlogPostDetail />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-          <Route path="/terms-of-service" element={<TermsOfService />} />
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
+
+        <Suspense fallback={<div className="min-h-screen bg-paper" />}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/what-we-do" element={<WhatWeDo />} />
+            <Route path="/creative" element={<NextdotCreative />} />
+            <Route path="/ai-capability-centre" element={<AICapabilityCentre />} />
+            <Route path="/blogs" element={<Blogs />} />
+            <Route path="/blogs/:slug" element={<BlogPostDetail />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/terms-of-service" element={<TermsOfService />} />
+            {/* Legacy URL redirects (also handled server-side in .htaccess) */}
+            <Route path="/about-us" element={<Navigate to="/about" replace />} />
+            <Route path="/services" element={<Navigate to="/terms-of-service" replace />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </Suspense>
 
         <Footer />
       </div>

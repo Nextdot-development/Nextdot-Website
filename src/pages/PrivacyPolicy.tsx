@@ -21,7 +21,7 @@ export default function PrivacyPolicy() {
         { id: 'contact-information', label: '11. Contact Information' },
       ]}
     >
-      <SEO title="Privacy Policy - Nextdot" description="Privacy Policy for Nextdot Digital Solutions Pvt. Ltd." path="/privacy-policy" />
+      <SEO title="Privacy Policy" description="Learn how Nextdot Digital Solutions collects, uses, stores, and protects the personal information gathered through its website and business communications." path="/privacy-policy" />
       <h3 id="information-we-collect">1. Information We Collect</h3>
       <p>
         The Company may collect: name, email address, phone number, company information, inquiry and

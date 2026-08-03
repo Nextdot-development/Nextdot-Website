@@ -1,12 +1,13 @@
 import { motion } from "motion/react";
 import { publicAsset } from "@/lib/utils";
+import whatWeBuild from "../assets/images/what_we_build2.webp";
 
 export const CapabilitiesGrid = () => {
   const capabilities = [
     {
       title: "AI Agent & Agentic Systems",
       desc: "Multi-agent architectures designed for real workflows - from document intelligence to decision automation. Autonomous where possible, controlled where necessary.",
-      img: publicAsset("images/AI_AA_System.png")
+      img: publicAsset("images/AI_AA_System.webp")
     },
     {
       title: "Enterprise Workflow Automation",
@@ -16,17 +17,17 @@ export const CapabilitiesGrid = () => {
     {
       title: "AI-Powered Growth Systems",
       desc: "Content, campaign, and performance systems that combine LLMs with structured business data - built for scale, not experimentation.",
-      img: publicAsset("images/AI_PG_System.jpg.jpeg")
+      img: publicAsset("images/AI_PG_System.webp")
     },
     {
       title: "Enterprise AI Advisory",
       desc: "Architecture, governance, and operating models for organisations building long-term AI capability.",
-      img: publicAsset("images/Enterprice_AA.jpg.jpeg")
+      img: publicAsset("images/Enterprice_AA.webp")
     },
     {
       title: "LLMOps & ML Engineering",
       desc: "Model pipelines, orchestration layers, and infrastructure for enterprises moving toward domain-specific AI systems.",
-      img: publicAsset("images/LLM_ML.png")
+      img: publicAsset("images/LLM_ML.webp")
     }
   ];
 
@@ -56,41 +57,26 @@ export const CapabilitiesGrid = () => {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.5, ease: "easeOut", delay: 0.1 }}
-            className="w-full md:w-1/2 h-[240px] md:h-[300px] bg-surface rounded-3xl border border-line flex items-center justify-center relative overflow-hidden min-w-0"
+            className="w-full md:w-1/2 aspect-[592/300] bg-surface rounded-3xl border border-line relative overflow-hidden min-w-0 group"
           >
-            <img 
-              src={publicAsset("images/What_we_build2.png")} 
-              alt="What we build" 
-              className="absolute inset-0 w-full h-full object-cover"
+            <img
+              src={whatWeBuild}
+              alt="Nextdot AI engineering and agentic systems built for enterprise production"
+              loading="lazy"
+              decoding="async"
+              className="absolute inset-0 w-full h-full object-cover object-center"
             />
           </motion.div>
         </div>
       </div>
 
-      {/* Mobile / tablet stacked cards */}
-      <div className="lg:hidden grid grid-cols-1 md:grid-cols-2 gap-6 px-4 sm:px-6 pb-12">
-        {capabilities.map((cap, i) => (
-          <div key={i} className="bg-surface rounded-3xl border border-line overflow-hidden flex flex-col min-w-0">
-            <div className="h-52 sm:h-64 relative overflow-hidden border-b border-line">
-              <img src={cap.img} alt={cap.title} className="absolute inset-0 w-full h-full object-cover grayscale opacity-80" referrerPolicy="no-referrer" />
-            </div>
-            <div className="p-6 sm:p-8 flex flex-col gap-4">
-              <div className="text-xs font-medium text-ink/40 uppercase tracking-widest">0{i + 1}</div>
-              <h3 className="fluid-display-card font-display font-medium text-ink">{cap.title}</h3>
-              <p className="text-sm sm:text-base text-ink/60 leading-relaxed">{cap.desc}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-      
-
-      {/* Horizontal Scroll Section */}
-      <motion.div 
+      {/* Horizontal Scroll Section — same carousel on every breakpoint */}
+      <motion.div
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
         transition={{ duration: 0.5, ease: "easeOut", delay: 0.15 }}
-        className="hidden lg:block w-full overflow-x-auto snap-x snap-mandatory pb-12 pt-4 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+        className="w-full overflow-x-auto snap-x snap-mandatory pb-12 pt-4 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
       >
         <div className="flex gap-6 px-6 md:px-12 lg:px-24 w-max min-w-full">
           {capabilities.map((cap, i) => (
@@ -106,10 +92,12 @@ export const CapabilitiesGrid = () => {
                 </p>
               </div>
               <div className="w-full md:w-1/2 h-1/2 md:h-full relative overflow-hidden order-1 md:order-2 border-b md:border-b-0 md:border-l border-line">
-                <img 
-                  src={cap.img} 
+                <img
+                  src={cap.img}
                   alt={cap.title}
-                  className="absolute inset-0 w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700" 
+                  loading="lazy"
+                  decoding="async"
+                  className="absolute inset-0 w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 group-active:grayscale-0 group-hover:scale-105 group-active:scale-105 transition-all duration-700"
                   referrerPolicy="no-referrer"
                 />
               </div>
@@ -123,7 +111,7 @@ export const CapabilitiesGrid = () => {
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5, delay: 0.3 }}
-        className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 mt-4 flex justify-end"
+        className="hidden lg:flex max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 mt-4 justify-end"
       >
         <div className="text-sm font-medium text-ink/40 flex items-center gap-2">
           <span>Scroll to explore</span>

@@ -1,6 +1,6 @@
 import { Hero } from "../components/Hero";
-import { PartnersShowcase } from "../components/PartnersShowcase";
-import { SuccessStories } from "../components/SuccessStories";
+import { AIEcosystem } from "../components/AIEcosystem";
+import { ProblemBanner } from "../components/ProblemBanner";
 import { CapabilitiesGrid } from "../components/CapabilitiesGrid";
 import { Platforms } from "../components/Platforms";
 import { Insights } from "../components/Insights";
@@ -14,9 +14,9 @@ export default function Home() {
       <SEO title="Domain Engineered AI Systems" description="Nextdot builds domain-engineered AI systems and enterprise-grade AI products for large enterprises." path="/" />
       <main>
       <Hero />
-      <PartnersShowcase />
+      <AIEcosystem />
+      <ProblemBanner />
       <CapabilitiesGrid />
-      <SuccessStories />
       <Platforms />
       <Insights />
       <Testimonial />

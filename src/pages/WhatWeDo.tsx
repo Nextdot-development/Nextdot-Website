@@ -1,5 +1,6 @@
 import { motion } from "motion/react";
 import SEO from '@/lib/seo';
+import whatWeBuild from "../assets/images/what_we_build.webp";
 import { CheckCircle2, Layers, Workflow, BarChart3, ShieldCheck, Cpu, Network } from "lucide-react";
 
 export default function WhatWeDo() {
@@ -80,12 +81,13 @@ export default function WhatWeDo() {
               transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
               className="rounded-2xl overflow-hidden h-[320px] sm:h-[400px] md:h-[500px] border border-line relative group"
             >
-              <div className="absolute inset-0 bg-accent/5 mix-blend-overlay z-10 group-hover:bg-transparent transition-colors duration-500"></div>
-              <img 
-                src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=2070&auto=format&fit=crop" 
-                alt="Integrated Systems" 
-                className="w-full h-full object-cover grayscale opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" 
-                referrerPolicy="no-referrer" 
+              <div className="absolute inset-0 bg-accent/5 mix-blend-overlay z-10 group-hover:bg-transparent group-active:bg-transparent transition-colors duration-500"></div>
+              <img
+                src={whatWeBuild}
+                alt="Nextdot integrated AI systems deployed and optimised in production"
+                loading="lazy"
+                decoding="async"
+                className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-active:grayscale-0 group-hover:scale-105 group-active:scale-105 transition-all duration-700 ease-out"
               />
             </motion.div>
           </div>
@@ -116,9 +118,9 @@ export default function WhatWeDo() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.5, ease: "easeOut" }}
-              className="bg-surface border border-line p-7 sm:p-8 md:p-10 rounded-2xl flex flex-col h-full hover:border-accent/30 hover:shadow-sm transition-all group"
+              className="bg-surface border border-line p-7 sm:p-8 md:p-10 rounded-2xl flex flex-col h-full hover:border-accent/30 active:border-accent/30 hover:shadow-sm active:shadow-sm transition-all group"
             >
-              <div className="w-14 h-14 rounded-xl bg-paper border border-line flex items-center justify-center mb-8 group-hover:scale-110 transition-transform">
+              <div className="w-14 h-14 rounded-xl bg-paper border border-line flex items-center justify-center mb-8 group-hover:scale-110 group-active:scale-110 transition-transform">
                 <Layers className="text-accent" size={28} />
               </div>
               <h3 className="fluid-display-card font-display font-medium text-ink mb-4">AI Agent & Agentic Systems</h3>
@@ -144,9 +146,9 @@ export default function WhatWeDo() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.5, ease: "easeOut", delay: 0.1 }}
-              className="bg-surface border border-line p-7 sm:p-8 md:p-10 rounded-2xl flex flex-col h-full hover:border-accent/30 hover:shadow-sm transition-all group"
+              className="bg-surface border border-line p-7 sm:p-8 md:p-10 rounded-2xl flex flex-col h-full hover:border-accent/30 active:border-accent/30 hover:shadow-sm active:shadow-sm transition-all group"
             >
-              <div className="w-14 h-14 rounded-xl bg-paper border border-line flex items-center justify-center mb-8 group-hover:scale-110 transition-transform">
+              <div className="w-14 h-14 rounded-xl bg-paper border border-line flex items-center justify-center mb-8 group-hover:scale-110 group-active:scale-110 transition-transform">
                 <Workflow className="text-accent" size={28} />
               </div>
               <h3 className="fluid-display-card font-display font-medium text-ink mb-4">Enterprise Workflow Automation</h3>
@@ -172,9 +174,9 @@ export default function WhatWeDo() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.5, ease: "easeOut", delay: 0.2 }}
-              className="bg-surface border border-line p-7 sm:p-8 md:p-10 rounded-2xl flex flex-col h-full hover:border-accent/30 hover:shadow-sm transition-all group"
+              className="bg-surface border border-line p-7 sm:p-8 md:p-10 rounded-2xl flex flex-col h-full hover:border-accent/30 active:border-accent/30 hover:shadow-sm active:shadow-sm transition-all group"
             >
-              <div className="w-14 h-14 rounded-xl bg-paper border border-line flex items-center justify-center mb-8 group-hover:scale-110 transition-transform">
+              <div className="w-14 h-14 rounded-xl bg-paper border border-line flex items-center justify-center mb-8 group-hover:scale-110 group-active:scale-110 transition-transform">
                 <BarChart3 className="text-accent" size={28} />
               </div>
               <h3 className="fluid-display-card font-display font-medium text-ink mb-4">AI-Powered Growth Systems</h3>
@@ -287,7 +289,7 @@ export default function WhatWeDo() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.5, ease: "easeOut" }}
-              className="bg-paper border border-line p-7 sm:p-8 md:p-10 rounded-2xl hover:border-accent/30 transition-all"
+              className="bg-paper border border-line p-7 sm:p-8 md:p-10 rounded-2xl hover:border-accent/30 active:border-accent/30 transition-all"
             >
               <div className="w-12 h-12 rounded-xl bg-surface border border-line flex items-center justify-center mb-6">
                 <Network className="text-accent" size={24} />
@@ -303,7 +305,7 @@ export default function WhatWeDo() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.5, ease: "easeOut", delay: 0.1 }}
-              className="bg-paper border border-line p-7 sm:p-8 md:p-10 rounded-2xl hover:border-accent/30 transition-all"
+              className="bg-paper border border-line p-7 sm:p-8 md:p-10 rounded-2xl hover:border-accent/30 active:border-accent/30 transition-all"
             >
               <div className="w-12 h-12 rounded-xl bg-surface border border-line flex items-center justify-center mb-6">
                 <Cpu className="text-accent" size={24} />

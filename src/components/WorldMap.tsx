@@ -117,6 +117,7 @@ export const WorldMap = () => {
             active={active?.city === office.city}
             onHover={() => setActive(office)}
             onLeave={() => setActive(null)}
+            onTap={() => setActive((prev) => (prev?.city === office.city ? null : office))}
           />
         ))}
       </ComposableMap>
@@ -153,17 +154,20 @@ function OfficeMarker({
   active,
   onHover,
   onLeave,
+  onTap,
 }: {
   office: Office;
   active: boolean;
   onHover: () => void;
   onLeave: () => void;
+  onTap: () => void;
 }) {
   return (
     <Marker
       coordinates={office.coordinates}
       onMouseEnter={onHover}
       onMouseLeave={onLeave}
+      onClick={onTap}
     >
       <g style={{ cursor: "pointer" }}>
         {/* Glow effect on hover */}

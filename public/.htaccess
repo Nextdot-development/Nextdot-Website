@@ -78,6 +78,51 @@
   </FilesMatch>
 </IfModule>
 
+# Legacy URL Handling (SEO)
+# =========================
+# Old WordPress URLs that are still indexed. These rules run BEFORE the SPA
+# fallback below, so they take effect instead of the catch-all that would
+# otherwise soft-redirect every unknown path to the homepage.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # 301 permanent redirects to the current equivalent pages
+  RewriteRule ^about-us/?$ /about [R=301,L]
+  RewriteRule ^services/?$ /terms-of-service [R=301,L]
+
+  # 410 Gone: permanently removed pages, so search engines deindex them
+  # (410 is a stronger, faster deindex signal than a soft 404 to the homepage).
+  RewriteRule ^ad-film-makers-in-delhi/?$ - [G,L]
+  RewriteRule ^content-modernization/?$ - [G,L]
+  RewriteRule ^corporate-video-makers-in-noida/?$ - [G,L]
+  RewriteRule ^documentary-filmmakers-in-delhi/?$ - [G,L]
+  RewriteRule ^hello/?$ - [G,L]
+  RewriteRule ^lach/?$ - [G,L]
+  # Whole dead WordPress sections (covers listed URLs and any sub-paths)
+  RewriteRule ^marketing(/|$) - [G,L]
+  RewriteRule ^portfolio(/|$) - [G,L]
+  RewriteRule ^category/case-studies(/|$) - [G,L]
+</IfModule>
+
+# Prerendered Route Serving (SEO)
+# ===============================
+# Each route is prerendered to a directory containing index.html. Apache's
+# mod_dir would 301 /about to /about/ before serving it, which contradicts the
+# canonical tags and sitemap entries (both use the non-slash form). Rewriting
+# to the index.html directly serves it with a 200 and no redirect.
+# Must run BEFORE the SPA fallback: that fallback skips real directories, so
+# without this rule mod_dir takes over and issues the redirect.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  RewriteCond %{REQUEST_URI} !/$
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteCond %{REQUEST_FILENAME}/index.html -f
+  RewriteRule ^(.+)$ /$1/index.html [L]
+</IfModule>
+
 # SPA Fallback Routing (React Router)
 # ====================================
 <IfModule mod_rewrite.c>

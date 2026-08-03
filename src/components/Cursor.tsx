@@ -1,21 +1,45 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 
+const MOBILE_BREAKPOINT = 768;
+
+function shouldShowCursor() {
+  if (typeof window === 'undefined') return false;
+  const isCoarsePointer = window.matchMedia('(pointer: coarse)').matches;
+  const isNarrowViewport = window.innerWidth < MOBILE_BREAKPOINT;
+  return !isCoarsePointer && !isNarrowViewport;
+}
+
 export const Cursor = () => {
+  const [enabled, setEnabled] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
+  const [hasMoved, setHasMoved] = useState(false);
+
+  // Re-check on resize/orientation change so the cursor never gets stuck
+  // showing (or hiding) when the viewport crosses the mobile breakpoint,
+  // e.g. when testing via a resizable desktop browser window.
+  useEffect(() => {
+    const sync = () => setEnabled(shouldShowCursor());
+    sync();
+    window.addEventListener('resize', sync);
+    return () => window.removeEventListener('resize', sync);
+  }, []);
 
   useEffect(() => {
+    if (!enabled) return;
+
     const updateMousePosition = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
+      setHasMoved(true);
     };
-    
+
     const handleMouseOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       if (
-        target.tagName.toLowerCase() === 'button' || 
-        target.tagName.toLowerCase() === 'a' || 
-        target.closest('button') || 
+        target.tagName.toLowerCase() === 'button' ||
+        target.tagName.toLowerCase() === 'a' ||
+        target.closest('button') ||
         target.closest('a')
       ) {
         setIsHovering(true);
@@ -31,10 +55,11 @@ export const Cursor = () => {
       window.removeEventListener('mousemove', updateMousePosition);
       window.removeEventListener('mouseover', handleMouseOver);
     };
-  }, []);
+  }, [enabled]);
 
-  // Hide on touch devices
-  if (typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches) {
+  // Never render on touch/narrow viewports, and never render before the
+  // real mouse position is known (avoids a frozen dot flashing at 0,0).
+  if (!enabled || !hasMoved) {
     return null;
   }
 

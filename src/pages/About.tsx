@@ -2,9 +2,10 @@ import { motion } from "motion/react";
 import { CheckCircle2, ArrowRight, Quote } from "lucide-react";
 import { Link } from "react-router-dom";
 import nextdotVideo from "../../video/nextdot.mp4";
-import office1 from "../assets/images/office1.png";
+import office1 from "../assets/images/office1.webp";
 import { publicAsset } from "@/lib/utils";
 import SEO from '@/lib/seo';
+import { LazyVideo } from "@/components/LazyVideo";
 
 export default function About() {
   return (
@@ -52,7 +53,7 @@ export default function About() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
               >
-                <Link to="/contact" className="min-h-11 px-8 py-4 bg-transparent border border-accent text-accent rounded-full hover:bg-accent hover:text-white transition-all flex items-center gap-3 text-sm font-medium tracking-wide uppercase inline-flex">
+                <Link to="/contact" className="min-h-11 px-8 py-4 bg-transparent border border-accent text-accent rounded-full hover:bg-accent active:bg-accent hover:text-white active:text-white transition-all flex items-center gap-3 text-sm font-medium tracking-wide uppercase inline-flex">
                   Contact Us <ArrowRight size={18} />
                 </Link>
               </motion.div>
@@ -85,19 +86,12 @@ export default function About() {
               transition={{ duration: 0.6, ease: "easeOut" }}
               className="w-full"
             >
-                 <div className="overflow-hidden rounded-[28px] border border-line bg-surface shadow-[0_20px_60px_rgba(15,23,42,0.08)] h-[320px] sm:h-[420px] md:h-[620px]">
-                <video
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    preload="metadata"
-                    poster={office1}
-                    className="w-full h-full object-cover"
-                  >
-                    <source src={nextdotVideo} type="video/mp4" />
-                    Your browser does not support the video tag.
-                  </video>
+                 <div className="relative overflow-hidden rounded-[28px] border border-line bg-surface shadow-[0_20px_60px_rgba(15,23,42,0.08)] h-[320px] sm:h-[420px] md:h-[620px]">
+                <LazyVideo
+                  src={nextdotVideo}
+                  poster={office1}
+                  className="w-full h-full object-cover"
+                />
               </div>
             </motion.div>
 
@@ -192,9 +186,10 @@ export default function About() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.2 }}
                   transition={{ duration: 0.5, ease: "easeOut", delay: idx * 0.1 }}
-                  className="bg-paper border border-line p-7 sm:p-8 md:p-10 rounded-2xl hover:border-accent/30 hover:bg-surface hover:shadow-sm transition-all duration-300 group"
+                  whileTap={{ scale: 0.98 }}
+                  className="bg-paper border border-line p-7 sm:p-8 md:p-10 rounded-2xl hover:border-accent/30 active:border-accent/30 hover:bg-surface active:bg-surface hover:shadow-sm active:shadow-sm transition-all duration-300 group"
                 >
-                  <div className="text-5xl font-display text-accent/80 mb-6 group-hover:text-accent transition-colors">
+                  <div className="text-5xl font-display text-accent/80 mb-6 group-hover:text-accent group-active:text-accent transition-colors">
                     {item.num}
                   </div>
                      <h3 className="fluid-display-card font-display font-medium text-ink mb-4">{item.title}</h3>
@@ -231,10 +226,12 @@ export default function About() {
             <div className="grid md:grid-cols-12 gap-10 md:gap-16 items-center">
               <div className="md:col-span-4 lg:col-span-3">
                 <div className="aspect-[4/5] rounded-2xl overflow-hidden border border-line bg-paper">
-                  <img 
-                    src={publicAsset("images/Founder.png")} 
-                    alt="Ayush Prashar" 
-                    className="w-full h-full object-cover grayscale hover:grayscale-0 transition-[filter] duration-500 ease-out" 
+                  <img
+                    src={publicAsset("images/Founder.webp")}
+                    alt="Ayush Prashar, Founder of Nextdot"
+                    loading="lazy"
+                    decoding="async"
+                    className="w-full h-full object-cover grayscale hover:grayscale-0 active:grayscale-0 transition-[filter] duration-500 ease-out"
                   />
                 </div>
               </div>
@@ -318,11 +315,13 @@ export default function About() {
               transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
               className="rounded-2xl overflow-hidden h-[280px] sm:h-[340px] md:h-[400px] border border-line relative group"
             >
-              <div className="absolute inset-0 bg-accent/5 mix-blend-overlay z-10 group-hover:bg-transparent transition-colors duration-500"></div>
-              <img 
-                src={publicAsset("images/Our_Evalution.png")} 
-                alt="Our Evolution" 
-                className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105" 
+              <div className="absolute inset-0 bg-accent/5 mix-blend-overlay z-10 group-hover:bg-transparent group-active:bg-transparent transition-colors duration-500"></div>
+              <img
+                src={publicAsset("images/Our_Evalution.webp")}
+                alt="Nextdot's evolution from enterprise services to AI engineering"
+                loading="lazy"
+                decoding="async"
+                className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105 group-active:scale-105"
               />
             </motion.div>
           </div>

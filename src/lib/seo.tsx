@@ -12,6 +12,20 @@ type SEOProps = {
   path?: string;
   image?: string;
   breadcrumbs?: { name: string; url: string }[];
+  /** og:type — defaults to 'website'. Use 'article' for blog posts. */
+  type?: 'website' | 'article';
+  /** ISO date (e.g. '2026-06-26') — emitted as article:published_time for articles. */
+  publishedTime?: string;
+  /** Author name — emitted as article:author for articles. */
+  author?: string;
+  /** Extra JSON-LD nodes appended to the page @graph (e.g. BlogPosting, FAQPage). */
+  schema?: Record<string, unknown>[];
+  /**
+   * Whether to append " | Nextdot" to the rendered <title>. Defaults to true.
+   * Pass false when `title` is already a complete, length-tuned SEO title
+   * (e.g. a blog post's metaTitle) so it isn't pushed past ~60 characters.
+   */
+  appendSiteName?: boolean;
 };
 
 function setMetaTag(name: string, content: string, attr: 'name' | 'property' = 'name') {
@@ -24,10 +38,10 @@ function setMetaTag(name: string, content: string, attr: 'name' | 'property' = '
   el.setAttribute('content', content);
 }
 
-export default function SEO({title, description, path='/', image, breadcrumbs}: SEOProps) {
+export default function SEO({title, description, path='/', image, breadcrumbs, type='website', publishedTime, author, schema, appendSiteName=true}: SEOProps) {
   useEffect(() => {
     const canonical = `${SITE_URL}${path === '/' ? '' : path}`;
-    document.title = `${title} | ${SITE_NAME}`;
+    document.title = appendSiteName ? `${title} | ${SITE_NAME}` : title;
 
     // canonical link
     let link = document.querySelector("link[rel='canonical']") as HTMLLinkElement | null;
@@ -45,10 +59,17 @@ export default function SEO({title, description, path='/', image, breadcrumbs}: 
     setMetaTag('twitter:description', description);
     setMetaTag('og:title', title, 'property');
     setMetaTag('og:description', description, 'property');
-    setMetaTag('og:type', 'website', 'property');
+    setMetaTag('og:type', type, 'property');
     setMetaTag('og:url', canonical, 'property');
     setMetaTag('og:image', image || DEFAULT_IMAGE, 'property');
+    setMetaTag('twitter:image', image || DEFAULT_IMAGE);
     setMetaTag('og:site_name', SITE_NAME, 'property');
+
+    // Article-specific Open Graph tags
+    if (type === 'article') {
+      if (publishedTime) setMetaTag('article:published_time', publishedTime, 'property');
+      if (author) setMetaTag('article:author', author, 'property');
+    }
 
     // JSON-LD structured data: Organization + Website + WebPage + Breadcrumbs
     const sdId = 'site-structured-data';
@@ -114,6 +135,11 @@ export default function SEO({title, description, path='/', image, breadcrumbs}: 
       });
     }
 
+    // Page-specific structured data (e.g. BlogPosting, FAQPage)
+    if (schema && schema.length) {
+      jsonLd['@graph'].push(...schema);
+    }
+
     if (!sd) {
       sd = document.createElement('script');
       sd.id = sdId;
@@ -125,7 +151,7 @@ export default function SEO({title, description, path='/', image, breadcrumbs}: 
     return () => {
       // optional cleanup not to remove canonical/meta persistently
     };
-  }, [title, description, path, image, breadcrumbs]);
+  }, [title, description, path, image, breadcrumbs, type, publishedTime, author, schema, appendSiteName]);
 
   return null;
 }

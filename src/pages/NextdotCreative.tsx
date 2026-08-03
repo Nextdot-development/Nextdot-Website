@@ -1,6 +1,7 @@
 import { useState, useRef, useCallback, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "motion/react";
+import { Gauge, RefreshCw, Network } from "lucide-react";
 import aiCreativeVideo from "../../video/ai creative.mp4";
 import SEO from '@/lib/seo';
 
@@ -50,6 +51,21 @@ export default function NextdotCreative() {
       title: "Fractional CTO / CPO",
       description: "Technology and product leadership for teams that need senior judgment without full-time overhead.",
       tags: ["Fractional CPO", "Tech strategy", "Product roadmap", "Team structuring"]
+    },
+    {
+      title: "Learning Experience Design",
+      description: "Courses built for working professionals using proven adult learning principles, structured curricula, and engagement systems that drive completion.",
+      tags: ["Adult Learning", "7Cs Framework", "Knowledge Pods", "Gamification"]
+    },
+    {
+      title: "AI-Led Production Engine",
+      description: "Scale medical learning with AI avatars, motion graphics, multilingual delivery, and expert-reviewed healthcare content.",
+      tags: ["AI Avatars", "Motion Graphics", "Multilingual", "Medical Vetting"]
+    },
+    {
+      title: "Healthcare Knowledge Center",
+      description: "Domain-led healthcare storytelling powering learning programs, campaign assets, and editorial content at scale.",
+      tags: ["Medical Content", "Campaign Assets", "Editorial Systems", "Healthcare Experts"]
     }
   ];
 
@@ -141,13 +157,13 @@ export default function NextdotCreative() {
             </motion.p>
           </div>
 
-          <div className="relative m-0 p-0 w-full md:flex-1 md:min-w-0 mt-8 md:mt-0 aspect-video overflow-hidden rounded-[24px] md:rounded-r-none">
+          <div className="relative m-0 p-0 w-full md:flex-1 md:min-w-0 mt-8 md:mt-0 aspect-video overflow-hidden rounded-[24px] md:rounded-r-none bg-surface">
             <video
               autoPlay
               loop
               muted
               playsInline
-              preload="auto"
+              preload="metadata"
               className="block m-0 p-0 w-full h-full object-cover"
             >
               <source src={aiCreativeVideo} type="video/mp4" />
@@ -174,10 +190,7 @@ export default function NextdotCreative() {
                 // A decade of craft
               </span>
               <h2 className="fluid-display-title font-display font-medium text-ink leading-[1.1] mb-8">
-                Creative, content, campaigns —{" "}
-                <span className="text-ink/35">
-                  we've done the work at scale, long before AI became a talking point.
-                </span>
+                Creative, content, campaigns - we've done the work at scale, long before AI became a talking point.
               </h2>
               <div className="flex items-start gap-4 mt-8 pt-8 border-t border-line/60">
                 <div className="w-1 h-full min-h-[60px] bg-accent/30 rounded-full shrink-0 mt-1" />
@@ -231,9 +244,9 @@ export default function NextdotCreative() {
             </p>
             <div className="grid md:grid-cols-3 gap-4 md:gap-5">
               {[
-                { num: "01", text: "Production cycles compressed from weeks to days" },
-                { num: "02", text: "Creative tested continuously, not campaign by campaign" },
-                { num: "03", text: "Systems that generate, adapt, and optimise output at scale" },
+                { num: "01", text: "Production cycles compressed from weeks to days", icon: <Gauge size={22} strokeWidth={1.5} /> },
+                { num: "02", text: "Creative tested continuously, not campaign by campaign", icon: <RefreshCw size={22} strokeWidth={1.5} /> },
+                { num: "03", text: "Systems that generate, adapt, and optimise output at scale", icon: <Network size={22} strokeWidth={1.5} /> },
               ].map((item, idx) => (
                 <motion.div
                   key={idx}
@@ -241,11 +254,16 @@ export default function NextdotCreative() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.3 }}
                   transition={{ duration: 0.4, ease: "easeOut", delay: idx * 0.08 }}
-                  className="bg-surface border border-line rounded-2xl p-7 md:p-8 flex flex-col gap-8 group hover:border-ink/20 hover:shadow-[0_8px_28px_rgba(2,6,23,0.07)] transition-all duration-300"
+                  className="bg-surface border border-line rounded-2xl p-7 md:p-8 flex flex-col gap-8 group hover:border-ink/20 active:border-ink/20 hover:shadow-[0_8px_28px_rgba(2,6,23,0.07)] active:shadow-[0_8px_28px_rgba(2,6,23,0.07)] transition-all duration-300"
                 >
-                  <span className="text-4xl font-display font-semibold text-ink/12 group-hover:text-ink/25 transition-colors duration-300 select-none leading-none">
-                    {item.num}
-                  </span>
+                  <div className="flex items-center justify-between">
+                    <div className="w-12 h-12 rounded-xl bg-paper border border-line flex items-center justify-center text-ink/40 group-hover:text-accent group-active:text-accent group-hover:border-accent/30 group-active:border-accent/30 transition-colors duration-300">
+                      {item.icon}
+                    </div>
+                    <span className="text-3xl font-display font-semibold text-ink/10 group-hover:text-ink/20 group-active:text-ink/20 transition-colors duration-300 select-none leading-none">
+                      {item.num}
+                    </span>
+                  </div>
                   <p className="text-ink font-medium text-base md:text-lg leading-snug">
                     {item.text}
                   </p>
@@ -266,7 +284,7 @@ export default function NextdotCreative() {
               The foundation is the same.{" "}
               <span className="text-ink/35">The way it runs is not.</span>
             </p>
-            <div className="shrink-0 w-12 h-12 rounded-full border border-line flex items-center justify-center text-ink/30 hover:border-ink/30 hover:text-ink/60 transition-colors cursor-default">
+            <div className="shrink-0 w-12 h-12 rounded-full border border-line flex items-center justify-center text-ink/30 hover:border-ink/30 active:border-ink/30 hover:text-ink/60 active:text-ink/60 transition-colors cursor-default">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
               </svg>
@@ -317,12 +335,12 @@ export default function NextdotCreative() {
             {services.map((service, idx) => (
               <div
                 key={idx}
-                className="flex-none w-[82vw] sm:w-[340px] lg:w-[380px] snap-start bg-surface border border-line p-7 sm:p-8 md:p-10 rounded-2xl flex flex-col hover:border-accent/30 hover:shadow-[0_8px_28px_rgba(2,6,23,0.07)] transition-all duration-300 group"
+                className="flex-none w-[82vw] sm:w-[340px] lg:w-[380px] snap-start bg-surface border border-line p-7 sm:p-8 md:p-10 rounded-2xl flex flex-col hover:border-accent/30 active:border-accent/30 hover:shadow-[0_8px_28px_rgba(2,6,23,0.07)] active:shadow-[0_8px_28px_rgba(2,6,23,0.07)] transition-all duration-300 group"
               >
                 <div className="text-[10px] font-mono tracking-widest uppercase text-ink/30 mb-5">
                   {String(idx + 1).padStart(2, '0')}
                 </div>
-                <h3 className="fluid-display-card font-display font-medium text-ink mb-4 group-hover:text-accent transition-colors duration-200">
+                <h3 className="fluid-display-card font-display font-medium text-ink mb-4 group-hover:text-accent group-active:text-accent transition-colors duration-200">
                   {service.title}
                 </h3>
                 <p className="text-ink/60 leading-relaxed mb-6 text-sm md:text-base">
@@ -351,7 +369,7 @@ export default function NextdotCreative() {
               <button
                 onClick={() => slide('left')}
                 disabled={!canPrev}
-                className="w-10 h-10 rounded-full border border-line flex items-center justify-center text-ink transition-all disabled:opacity-25"
+                className="w-10 h-10 rounded-full border border-line flex items-center justify-center text-ink transition-all active:bg-surface active:border-ink/30 disabled:opacity-25"
                 aria-label="Previous slide"
               >
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>
@@ -359,7 +377,7 @@ export default function NextdotCreative() {
               <button
                 onClick={() => slide('right')}
                 disabled={!canNext}
-                className="w-10 h-10 rounded-full border border-line flex items-center justify-center text-ink transition-all disabled:opacity-25"
+                className="w-10 h-10 rounded-full border border-line flex items-center justify-center text-ink transition-all active:bg-surface active:border-ink/30 disabled:opacity-25"
                 aria-label="Next slide"
               >
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m9 18 6-6-6-6"/></svg>
@@ -374,7 +392,7 @@ export default function NextdotCreative() {
                   onClick={() => scrollToDot(i)}
                   aria-label={`Go to slide group ${i + 1}`}
                   className={`h-1.5 rounded-full transition-all duration-300 ${
-                    i === activeDot ? 'w-6 bg-ink' : 'w-1.5 bg-ink/20 hover:bg-ink/40'
+                    i === activeDot ? 'w-6 bg-ink' : 'w-1.5 bg-ink/20 hover:bg-ink/40 active:bg-ink/40'
                   }`}
                 />
               ))}
@@ -403,10 +421,10 @@ export default function NextdotCreative() {
               to="/contact"
               className="group inline-flex items-center gap-3 md:gap-5 mb-6 cursor-pointer"
             >
-              <h2 className="fluid-display-hero font-display font-medium tracking-tight text-white transition-colors duration-300 group-hover:text-blue-400">
+              <h2 className="fluid-display-hero font-display font-medium tracking-tight text-white transition-colors duration-300 group-hover:text-blue-400 group-active:text-blue-400">
                 Let's talk.
               </h2>
-              <span className="flex items-center justify-center w-12 h-12 md:w-16 md:h-16 rounded-full border border-white/20 text-white shrink-0 transition-all duration-300 group-hover:border-blue-400 group-hover:bg-blue-400 group-hover:text-ink group-hover:translate-x-1">
+              <span className="flex items-center justify-center w-12 h-12 md:w-16 md:h-16 rounded-full border border-white/20 text-white shrink-0 transition-all duration-300 group-hover:border-blue-400 group-active:border-blue-400 group-hover:bg-blue-400 group-active:bg-blue-400 group-hover:text-ink group-active:text-ink group-hover:translate-x-1 group-active:translate-x-1">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
                 </svg>
@@ -417,7 +435,7 @@ export default function NextdotCreative() {
             </p>
             <a 
               href="mailto:contact@nextdot.co.in"
-              className="text-xl md:text-2xl text-blue-400 font-medium hover:text-blue-300 transition-colors"
+              className="text-xl md:text-2xl text-blue-400 font-medium hover:text-blue-300 active:text-blue-300 transition-colors"
             >
               contact@nextdot.co.in
             </a>
