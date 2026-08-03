@@ -39,8 +39,12 @@ function readEnv() {
 }
 
 const env = readEnv();
-const SUPA_URL = (env.VITE_SUPABASE_URL ?? "").replace(/\/rest\/v1\/?$/i, "").replace(/\/+$/, "");
-const SUPA_KEY = env.VITE_SUPABASE_PUBLISHABLE_KEY ?? "";
+// Prefer real environment variables (GitHub Actions / CI inject secrets there),
+// then fall back to the .env files (local dev). This is why CI builds can read
+// Supabase even though .env.local is git-ignored and absent on the runner.
+const rawUrl = process.env.VITE_SUPABASE_URL || env.VITE_SUPABASE_URL || "";
+const SUPA_URL = rawUrl.replace(/\/rest\/v1\/?$/i, "").replace(/\/+$/, "");
+const SUPA_KEY = process.env.VITE_SUPABASE_PUBLISHABLE_KEY || env.VITE_SUPABASE_PUBLISHABLE_KEY || "";
 
 // --- helpers --------------------------------------------------------------
 const zonedDate = (iso, tz, opts) =>

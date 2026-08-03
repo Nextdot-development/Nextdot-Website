@@ -5,9 +5,11 @@ name: Build & Deploy Nextdot site
 # static site, updates the sitemap, and deploys dist/ to GoDaddy — so new and
 # scheduled blogs go live automatically without a manual build.
 on:
+  push:
+    branches: [main]             # deploy whenever code is pushed to main
   workflow_dispatch: {}          # manual "Run workflow" button — instant publish
   schedule:
-    - cron: "*/30 * * * *"       # every 30 minutes. Change to "0 * * * *" for hourly.
+    - cron: "*/30 * * * *"       # every 30 minutes — picks up new + scheduled-now blogs
 
 concurrency:
   group: deploy
