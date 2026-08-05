@@ -1,0 +1,61 @@
+# Nextdot
+
+> Nextdot builds domain-engineered, enterprise-grade agentic AI systems — voice agents, healthcare AI (clinical scribes, doctor avatars, discovery), compliance operating systems, and AI-native creative — delivered by small forward-deployed engineering pods.
+
+Nextdot is an enterprise AI company focused on production systems rather than demos. This file indexes the site's key pages and full blog archive for AI models and answer engines.
+
+## Pages
+
+- [About](https://nextdot.co.in/about): Who Nextdot is — a forward-deployed AI engineering company building production agentic systems.
+- [What We Do](https://nextdot.co.in/what-we-do): Nextdot's services across enterprise AI, healthcare AI, compliance, and creative.
+- [Nextdot Creative](https://nextdot.co.in/creative): AI-native creative production — content at scale, briefs, and creative pods.
+- [AI Capability Centre](https://nextdot.co.in/ai-capability-centre): Nextdot's AI Capability Centre in Jamshedpur.
+- [Blogs](https://nextdot.co.in/blogs): Long-form insights on enterprise AI, healthcare AI, agentic systems, compliance, and answer engine optimisation (AEO).
+- [Contact](https://nextdot.co.in/contact): Get in touch with Nextdot.
+
+## Blog
+
+- [The Orchestration Layer Is Where Multi-Agent Systems Break](https://nextdot.co.in/blogs/orchestration-layer-where-multi-agent-systems-break): Multi-agent AI systems often fail at orchestration, not the model. Learn how coordination, shared state, error propagation and verification affect reliability.
+- [MLR Review Is the Bottleneck. AI Is Finally Good Enough to Touch It](https://nextdot.co.in/blogs/mlr-review-is-the-bottleneck-ai-is-finally-good-enough-to-touch-it): See how AI can speed up pharma MLR review through claim verification, label reconciliation and precedent retrieval while keeping final approval human.
+- [LLM Ops: the unglamorous work that keeps enterprise AI alive](https://nextdot.co.in/blogs/llm-ops-keeps-enterprise-ai-alive): Learn how LLM Ops keeps enterprise AI reliable through cost control, model routing, caching and continuous evaluation in production.
+- [Pharmacovigilance case processing: the highest-volume AI opportunity in pharma](https://nextdot.co.in/blogs/pharmacovigilance-case-processing-ai-opportunity-pharma): How AI can improve pharmacovigilance case processing, from intake and MedDRA coding to narrative generation, while keeping human review and compliance.
+- [Your Integration Layer Decides Whether AI Works, Not Your Model](https://nextdot.co.in/blogs/integration-layer-decides-whether-hospital-ai-works)
+- [The Data Security Wall: What Large Hospital Groups Are Actually Afraid Of](https://nextdot.co.in/blogs/hospital-ai-data-security-wall)
+- [30 People, Enterprise-Grade Agentic Systems: What That Actually Looks Like](https://nextdot.co.in/blogs/30-people-enterprise-grade-agentic-systems)
+- [Why We Built Nextdot's AI Capability Centre in Jamshedpur](https://nextdot.co.in/blogs/why-nextdot-ai-capability-centre-jamshedpur)
+- [Domain-Engineered vs General AI: Why Pointing a Foundation Model at Healthcare Does Not Work](https://nextdot.co.in/blogs/domain-engineered-vs-general-ai-healthcare)
+- [How to Evaluate an Enterprise AI Vendor: A CXO Checklist](https://nextdot.co.in/blogs/how-to-evaluate-an-enterprise-ai-vendor-cxo-checklist)
+- [What Is a Forward Deployed AI Engineering Pod? (And Why It Beats a Vendor Relationship)](https://nextdot.co.in/blogs/what-is-a-forward-deployed-ai-engineering-pod)
+- [What a Prompt Engineer Inside a Creative Pod Actually Does All Day](https://nextdot.co.in/blogs/what-a-prompt-engineer-in-a-creative-pod-does)
+- [Six Variants in a Week vs One Idea in Six Weeks: The Case for Creative as a System](https://nextdot.co.in/blogs/creative-as-a-system-six-variants-in-a-week)
+- [The Brief Is Where a Campaign Is Won or Lost: Why We Give It the Most Senior Attention](https://nextdot.co.in/blogs/the-brief-is-where-a-campaign-is-won-or-lost)
+- [The AI Agent Governance Gap: Only 1 in 5 Enterprises Can Manage What They Have Deployed](https://nextdot.co.in/blogs/ai-agent-governance-gap)
+- [Autonomous vs Controlled: How to Design the Human Handoff in an Agentic System](https://nextdot.co.in/blogs/designing-the-human-handoff-in-an-agentic-system)
+- [Why Multi-Agent Systems Fail on the Cost of Coordination Rather Than Compute](https://nextdot.co.in/blogs/why-multi-agent-systems-fail-on-coordination-cost)
+- [What Is Agentic AI Orchestration? A Plain-English Guide for Decision-Makers](https://nextdot.co.in/blogs/what-is-agentic-ai-orchestration)
+- [Error Propagation in Multi-Step AI: The Failure Mode No Pilot Tests For](https://nextdot.co.in/blogs/error-propagation-in-multi-step-ai-agents)
+- [Token Costs, Caching and Model Routing: How Design Decides Your AI Unit Economics](https://nextdot.co.in/blogs/token-costs-caching-model-routing-ai-unit-economics)
+- [What the Claude Certified Architect Exam Taught Us About Building Agents](https://nextdot.co.in/blogs/what-the-claude-certified-architect-exam-taught-us-about-building-agents)
+- [The Four Parts of a Production AI Agent (Most Teams Ship Only Three)](https://nextdot.co.in/blogs/four-parts-of-a-production-ai-agent)
+- [Why Enterprise AI Agent Projects Fail in Production (and It Is Rarely the Model)](https://nextdot.co.in/blogs/why-enterprise-ai-agent-projects-fail-in-production)
+- [AI Scribes in Indian Languages: Why an English-Only Tool Fails in the OPD](https://nextdot.co.in/blogs/ai-scribes-in-indian-languages-why-english-only-fails-in-opd)
+- [A Hospital AI Readiness Checklist: 8 Questions to Answer Before You Deploy](https://nextdot.co.in/blogs/hospital-ai-readiness-checklist-8-questions-before-you-deploy)
+- [Building a Small Language Model for Healthcare Compliance: What We Learned](https://nextdot.co.in/blogs/building-a-small-language-model-for-healthcare-compliance)
+- [From Search Rankings to AI Answers: A New Discovery Playbook for Healthcare Brands](https://nextdot.co.in/blogs/from-search-rankings-to-ai-answers-healthcare-discovery-playbook)
+- [The Compliant Way for Indian Doctors to Be Found by AI, Without Advertising](https://nextdot.co.in/blogs/compliant-way-for-indian-doctors-to-be-found-by-ai)
+- [Why Your Hospital Is Invisible to AI Assistants, and How to Fix It](https://nextdot.co.in/blogs/why-your-hospital-is-invisible-to-ai-assistants)
+- [AEO vs SEO: What Changed When Buyers Started Asking AI Instead of Google](https://nextdot.co.in/blogs/aeo-vs-seo-what-changed-when-buyers-started-asking-ai)
+- [When Production Gets Cheap, Taste Becomes Scarce: AI and the Future of Creative Work](https://nextdot.co.in/blogs/when-production-gets-cheap-taste-becomes-scarce)
+- [The Future of Customer Communication: AI Voice Agents That Never Miss a Call](https://nextdot.co.in/blogs/ai-voice-agents-never-miss-a-call)
+- [AI Doctor Avatars: Revolutionizing Healthcare Communication at Scale](https://nextdot.co.in/blogs/ai-doctor-avatars-revolutionizing-healthcare-communication)
+- [NextComplyAI: The Compliance Operating System That Prevents Problems Before They Happen](https://nextdot.co.in/blogs/nextcomplyai-compliance-operating-system)
+- [What Is Answer Engine Optimisation (AEO)? A Field Guide for Healthcare and Enterprise](https://nextdot.co.in/blogs/what-is-answer-engine-optimisation-aeo)
+- [How to Check Whether Your Business Appears in AI Answers (A 10-Minute Method)](https://nextdot.co.in/blogs/how-to-check-if-your-business-appears-in-ai-answers)
+- [AI Scribe for Doctors OPD](https://nextdot.co.in/blogs/ai-scribe-for-doctors-opd)
+- [Healthcare AI and the DPDP Act: What Every Hospital CXO Must Understand Before Deploying Agents](https://nextdot.co.in/blogs/healthcare-ai-and-the-dpdp-act)
+
+## Optional
+
+- [Privacy Policy](https://nextdot.co.in/privacy-policy)
+- [Terms of Service](https://nextdot.co.in/terms-of-service)
+- [XML Sitemap](https://nextdot.co.in/sitemap.xml)
