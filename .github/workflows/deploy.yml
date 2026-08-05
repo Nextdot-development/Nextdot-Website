@@ -7,13 +7,15 @@ name: Build & Deploy Nextdot site
 on:
   push:
     branches: [main]             # deploy whenever code is pushed to main
-  workflow_dispatch: {}          # manual "Run workflow" button — instant publish
+  workflow_dispatch: {}          # manual "Run workflow" button
+  repository_dispatch:           # fired by the Supabase webhook on publish → instant deploy
+    types: [cms-publish]
   schedule:
-    - cron: "*/30 * * * *"       # every 30 minutes — picks up new + scheduled-now blogs
+    - cron: "*/10 * * * *"       # every 10 minutes — picks up new + scheduled-now blogs automatically
 
 concurrency:
   group: deploy
-  cancel-in-progress: true
+  cancel-in-progress: false      # never cancel a deploy mid-upload (would leave a partial site)
 
 jobs:
   build-deploy:
