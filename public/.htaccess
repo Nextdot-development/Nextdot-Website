@@ -91,18 +91,27 @@
   RewriteRule ^about-us/?$ /about [R=301,L]
   RewriteRule ^services/?$ /terms-of-service [R=301,L]
 
-  # 410 Gone: permanently removed pages, so search engines deindex them
-  # (410 is a stronger, faster deindex signal than a soft 404 to the homepage).
-  RewriteRule ^ad-film-makers-in-delhi/?$ - [G,L]
-  RewriteRule ^content-modernization/?$ - [G,L]
-  RewriteRule ^corporate-video-makers-in-noida/?$ - [G,L]
-  RewriteRule ^documentary-filmmakers-in-delhi/?$ - [G,L]
-  RewriteRule ^hello/?$ - [G,L]
-  RewriteRule ^lach/?$ - [G,L]
-  # Whole dead WordPress sections (covers listed URLs and any sub-paths)
+  # 410 Gone: permanently removed old WordPress sections. A 410 is a stronger,
+  # faster deindex signal than a 404. These cover whole dead areas and any
+  # sub-path under them. (Long-tail one-off old pages get a normal 404 via the
+  # SPA fallback below.)
   RewriteRule ^marketing(/|$) - [G,L]
   RewriteRule ^portfolio(/|$) - [G,L]
-  RewriteRule ^category/case-studies(/|$) - [G,L]
+  RewriteRule ^category(/|$) - [G,L]
+  RewriteRule ^solutions(/|$) - [G,L]
+  RewriteRule ^resources(/|$) - [G,L]
+  RewriteRule ^service(/|$) - [G,L]
+  RewriteRule ^careers(/|$) - [G,L]
+  RewriteRule ^clients(/|$) - [G,L]
+  RewriteRule ^clientele/?$ - [G,L]
+  RewriteRule ^cases(/|$) - [G,L]
+  RewriteRule ^influencers(/|$) - [G,L]
+  RewriteRule ^influencer-marketing(/|$) - [G,L]
+  RewriteRule ^wp-(admin|content|includes)(/|$) - [G,L]
+  RewriteRule ^corporate-video- - [G,L]
+  RewriteRule ^explainer-video- - [G,L]
+  RewriteRule ^documentary-filmmakers- - [G,L]
+  RewriteRule ^content- - [G,L]
 </IfModule>
 
 # Prerendered Route Serving (SEO)
@@ -123,17 +132,29 @@
   RewriteRule ^(.+)$ /$1/index.html [L]
 </IfModule>
 
-# SPA Fallback Routing (React Router)
-# ====================================
+# SPA Fallback Routing + real 404s
+# =================================
+# All public pages are prerendered (served by the rule above) and the admin
+# panel is the only client-side-only area. So the app shell is served for
+# /admin/* (client routing), and EVERY other unknown path returns a genuine 404
+# instead of soft-serving the homepage with a 200 — which is what made old
+# WordPress URLs look like real pages to Google.
+ErrorDocument 404 /404.html
+
 <IfModule mod_rewrite.c>
   RewriteEngine On
-
   RewriteBase /
   RewriteRule ^index\.html$ - [L]
 
+  # Admin panel (client-side SPA, not prerendered) → serve the app shell.
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteRule . /index.html [L]
+  RewriteRule ^admin(/|$) /index.html [L]
+
+  # Anything else that is not a real file/directory is genuinely not found.
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule . - [R=404,L]
 </IfModule>
 
 # File Type Handling
