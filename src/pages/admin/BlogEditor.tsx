@@ -13,6 +13,7 @@ import { ConfirmModal } from "@/components/admin/ConfirmModal";
 import { VersionHistoryModal } from "@/components/admin/VersionHistoryModal";
 import { FaqEditor } from "@/components/admin/editor/FaqEditor";
 import { RelatedPicker, type RelatedOption } from "@/components/admin/editor/RelatedPicker";
+import { STATIC_BLOG_INDEX } from "@/data/staticBlogsIndex";
 import { useAuth } from "@/hooks/useAuth";
 import { useCategories } from "@/hooks/useCategories";
 import { useBlogs } from "@/hooks/useBlogs";
@@ -93,15 +94,25 @@ export default function BlogEditor() {
   const [faq, setFaq] = useState<FaqItem[]>([]);
   const [relatedBlogs, setRelatedBlogs] = useState<string[]>([]);
 
-  // Published blogs available to link in "Related in this series" (+ resolve titles).
+  // Blogs available to link in "Related in this series": every CMS blog
+  // (published / scheduled / draft — so a whole series can be cross-linked while
+  // it is still being scheduled) PLUS all the old static blogs, searchable by
+  // title. Archived and the current post are excluded.
   const { blogs } = useBlogs();
-  const relatedOptions: RelatedOption[] = useMemo(
-    () =>
-      blogs
-        .filter((b) => b.status === "published" && b.slug && b.id !== docId)
-        .map((b) => ({ slug: b.slug, title: b.title || b.slug })),
-    [blogs, docId]
-  );
+  const relatedOptions: RelatedOption[] = useMemo(() => {
+    const cms = blogs
+      .filter((b) => b.slug && b.id !== docId && b.status !== "archived")
+      .map((b) => ({
+        slug: b.slug,
+        title: b.title || b.slug,
+        hint: b.status !== "published" ? b.status : undefined,
+      }));
+    const cmsSlugs = new Set(cms.map((o) => o.slug));
+    const statics = STATIC_BLOG_INDEX
+      .filter((s) => !cmsSlugs.has(s.slug))
+      .map((s) => ({ slug: s.slug, title: s.title, hint: "static" }));
+    return [...cms, ...statics];
+  }, [blogs, docId]);
   const relatedForPreview = useMemo(() => {
     const titleFor = new Map(relatedOptions.map((o) => [o.slug, o.title]));
     return relatedBlogs.map((slug) => ({ slug, title: titleFor.get(slug) ?? slug }));

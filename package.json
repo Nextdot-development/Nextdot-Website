@@ -5,8 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite --port=3000 --host=0.0.0.0",
-    "build": "node scripts/fetch-cms-blogs.mjs && vite build && node scripts/prerender.mjs",
-    "build:nossg": "node scripts/fetch-cms-blogs.mjs && vite build",
+    "build": "node scripts/gen-static-index.mjs && node scripts/fetch-cms-blogs.mjs && vite build && node scripts/prerender.mjs",
+    "build:nossg": "node scripts/gen-static-index.mjs && node scripts/fetch-cms-blogs.mjs && vite build",
     "fetch:cms": "node scripts/fetch-cms-blogs.mjs",
     "prerender": "node scripts/prerender.mjs",
     "preview": "vite preview",
