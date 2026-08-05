@@ -3,6 +3,116 @@
 // static public Blogs page. No Supabase runtime code ships to the browser.
 export const CMS_BLOGS = [
   {
+    "id": 1785916411,
+    "slug": "orchestration-layer-where-multi-agent-systems-break",
+    "title": "The Orchestration Layer Is Where Multi-Agent Systems Break",
+    "description": "",
+    "metaTitle": "Why Multi-Agent Systems Fail at the Orchestration Layer",
+    "metaDescription": "Multi-agent AI systems often fail at orchestration, not the model. Learn how coordination, shared state, error propagation and verification affect reliability.",
+    "category": "AI Strategy",
+    "label": "Blog",
+    "date": "Aug 5, 2026",
+    "readTime": "7 min read",
+    "image": "https://jxfcncdphzctcoiepfhs.supabase.co/storage/v1/object/public/blog-images/1785915382957-whatsapp-image-2026-08-03-at-10-18-44-am.jpeg",
+    "imageAlt": "Multi-agent AI system showing orchestration, agent handoffs, shared state and verification",
+    "author": "Nextdot Digital Solutions Pvt. Ltd.",
+    "tags": [],
+    "publishedISO": "2026-08-05",
+    "relatedBlogs": [
+      "what-is-agentic-ai-orchestration",
+      "why-multi-agent-systems-fail-on-coordination-cost",
+      "error-propagation-in-multi-step-ai-agents",
+      "four-parts-of-a-production-ai-agent",
+      "llm-ops-keeps-enterprise-ai-alive"
+    ],
+    "body": [
+      {
+        "text": "The orchestration layer is where multi-agent systems break",
+        "type": "h2"
+      },
+      {
+        "text": "When a multi-agent system fails in production, the instinct is to blame the model. The output was wrong, so the reasoning was wrong, so the model needs to be bigger or better prompted. That instinct is almost always misdirected. In the largest study of the question so far, researchers at UC Berkeley annotated more than 1,600 execution traces across seven popular multi-agent frameworks and found that most failures had nothing to do with the underlying model's capability. They came from the layer that decides which agent runs, when, with what context, and how their outputs get combined. The orchestration layer. Cemri et al., \"Why Do Multi-Agent LLM Systems Fail?\", arXiv, March 2025, reports failure rates between 41 percent and 86.7 percent across those frameworks, with system design and inter-agent coordination accounting for the large majority.",
+        "type": "p"
+      },
+      {
+        "text": "This matters because the market is selling the opposite story. The pitch for multi-agent architecture is that you decompose a hard problem into specialist agents, each good at one thing, and the whole is smarter than the parts. The engineering reality is that decomposition moves the difficulty. It does not remove it. You have traded a single hard reasoning problem for a distributed systems problem, and distributed systems fail in ways that are harder to see, harder to reproduce, and harder to fix.",
+        "type": "p"
+      },
+      {
+        "text": "Here is where the breaks actually happen, and how to design so they happen less.",
+        "type": "p"
+      },
+      {
+        "text": "Coordination failure is the default state, not the exception",
+        "type": "h2"
+      },
+      {
+        "text": "The most common failure mode in multi-agent systems is not a wrong answer. It is two agents operating on incompatible assumptions and neither of them noticing. The Berkeley taxonomy names fourteen distinct failure modes and clusters them into three groups: specification and system design, inter-agent misalignment, and task verification. Inter-agent misalignment alone, agents ignoring each other's input, talking past each other, or diverging on what the task even is, accounted for roughly 37 percent of failures in that dataset.",
+        "type": "p"
+      },
+      {
+        "text": "The mechanics are mundane, which is exactly why they get missed in a demo. A planner agent hands a task to a worker agent with an instruction that is technically complete and practically ambiguous. The worker fills the ambiguity with a reasonable guess. The guess is wrong for this case. Nothing errors. No exception is thrown. The system continues, confidently, down a branch that no human intended. By the time the output surfaces, three more agents have built on top of the bad assumption and the trace is long enough that finding the origin takes an afternoon.",
+        "type": "p"
+      },
+      {
+        "text": "Role ambiguity compounds this. When two agents both believe they own a decision, they either duplicate work or overwrite each other. When neither believes they own it, the decision falls through the gap. Termination is its own category of failure: a system with no clear stopping condition will loop, agents re-triggering each other, or halt early with a partial result that reads as complete. None of these are model problems. They are contract problems. The agents were never given an unambiguous specification of who is responsible for what, and orchestration frameworks make it easy to skip writing that contract because the demo works without it.",
+        "type": "p"
+      },
+      {
+        "text": "State is the thing nobody owns",
+        "type": "h2"
+      },
+      {
+        "text": "Ask a team building a multi-agent system where the authoritative state lives and you will often get a pause. In a single-agent system the answer is obvious: the state is the context window, plus whatever the tool calls read and write. In a multi-agent system, state is smeared across every agent's private context, the messages they pass, and whatever shared memory the framework provides. There is no single source of truth unless you build one.",
+        "type": "p"
+      },
+      {
+        "text": "This is the failure that scales worst. Two patterns dominate. The first is context drift: each agent carries a slightly different picture of the world because it was initialised at a different point, saw a different subset of the history, or summarised the shared context to fit its window. The summaries lose exactly the detail that mattered. The agents now disagree about facts, and because the disagreement lives inside their separate contexts, no single log line shows it. The second is stale reads. Agent A updates a record, Agent B was dispatched before the update and acts on the old value, and the system produces an internally contradictory result. This is the classic distributed systems race condition, and multi-agent frameworks reintroduce it while presenting a friendly conversational surface that hides the concurrency entirely.",
+        "type": "p"
+      },
+      {
+        "text": "The design response is unfashionable and correct: treat shared state as an explicit, externalised, versioned store, not as a byproduct of message passing. Agents should read from and write to a defined state object with clear ownership rules, and the orchestrator should be the only thing allowed to advance the canonical version. If you cannot point at a single artefact and say \"this is what the system currently believes to be true,\" you do not have a state management strategy. You have hope.",
+        "type": "p"
+      },
+      {
+        "text": "Error propagation is arithmetic, and the arithmetic is brutal",
+        "type": "h2"
+      },
+      {
+        "text": "The reason multi-agent systems degrade faster than their operators expect is compounding. Reliability multiplies down a chain. If each step in a pipeline is 99 percent reliable, a ten-step chain lands at roughly 90 percent, and a hundred-step chain collapses to about 37 percent. Drop per-step reliability to 95 percent and ten steps gives you around 60 percent, twenty steps around 36 percent. This is not a claim that needs a citation. It is the multiplication of probabilities, and it is the single most important number in the field because agentic workflows quietly generate very long chains. Every tool call, every hand-off, every intermediate reasoning step is a link. A system that looks like five agents can easily be sixty sequential model decisions under the hood.",
+        "type": "p"
+      },
+      {
+        "text": "Two properties make this worse than the raw math suggests. First, errors in these systems are usually silent. A traditional pipeline fails loudly with a stack trace at the point of failure. An agent produces a fluent, plausible, wrong intermediate result, and downstream agents treat it as ground truth. There is no exception to catch. Second, errors are correlated, not independent. When one agent misreads the task, the agents downstream inherit the misreading and often reinforce it, because a confident wrong premise from a peer reads exactly like a correct one. The failure does not stay contained at 1 percent. It cascades.",
+        "type": "p"
+      },
+      {
+        "text": "The implication for architecture is direct. You do not fix compounding by making each agent slightly better. Moving from 95 to 99 percent per step helps, but you cannot prompt your way to the reliability a long chain demands. You fix it by making chains shorter, by making failures loud, and by inserting verification.",
+        "type": "p"
+      },
+      {
+        "text": "Designing so the orchestration layer holds",
+        "type": "h2"
+      },
+      {
+        "text": "The teams that ship multi-agent systems that survive contact with production tend to make the same set of unglamorous decisions.",
+        "type": "p"
+      },
+      {
+        "text": "They keep the coordination topology centralised where it counts. Fully decentralised agent-to-agent architectures look elegant and amplify errors, because there is no single place to enforce a contract or catch a divergence. A structured coordinator that dispatches, collects, and validates is easier to observe and easier to bound. The evidence also suggests the benefit of adding agents plateaus quickly, often past a handful, after which coordination overhead eats the gains [verify]. More agents is not a strategy. It is usually the problem.",
+        "type": "p"
+      },
+      {
+        "text": "They add verification as a first-class component, not a nice-to-have. A checking step placed after a primary agent, with an explicit mandate to challenge the output rather than agree with it, catches a large share of errors before they propagate. This is the single highest-return intervention available, because it attacks the correlation problem directly: an adversarial verifier does not inherit the premise it is checking.",
+        "type": "p"
+      },
+      {
+        "text": "They make state explicit and hand-offs typed. Every agent boundary is a contract. Define the schema of what passes across it, validate against that schema, and reject malformed hand-offs loudly instead of letting the next agent improvise. A hand-off that fails a schema check is a caught error. A hand-off that silently carries a wrong value is a production incident three weeks later.",
+        "type": "p"
+      }
+    ]
+  },
+  {
     "id": 1785826197,
     "slug": "mlr-review-is-the-bottleneck-ai-is-finally-good-enough-to-touch-it",
     "title": "MLR Review Is the Bottleneck. AI Is Finally Good Enough to Touch It",

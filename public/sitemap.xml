@@ -260,6 +260,12 @@
   </url>
 <!-- CMS_BLOGS_START (generated — do not edit) -->
   <url>
+    <loc>https://nextdot.co.in/blogs/orchestration-layer-where-multi-agent-systems-break</loc>
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://nextdot.co.in/blogs/mlr-review-is-the-bottleneck-ai-is-finally-good-enough-to-touch-it</loc>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>

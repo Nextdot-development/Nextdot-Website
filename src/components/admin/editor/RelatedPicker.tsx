@@ -1,11 +1,8 @@
 import { useMemo, useState } from "react";
 import { Plus, Trash2, ChevronUp, ChevronDown, Search, Link2 } from "lucide-react";
+import type { RelatedOption } from "@/lib/editor/relatedOptions";
 
-export interface RelatedOption {
-  slug: string;
-  title: string;
-  hint?: string; // e.g. "scheduled", "draft", "static" — shown greyed in the list
-}
+export type { RelatedOption };
 
 interface Props {
   value: string[]; // ordered slugs
@@ -65,7 +62,7 @@ export function RelatedPicker({ value, onChange, options }: Props) {
           {value.map((slug, i) => (
             <li key={slug} className="flex items-center gap-2 rounded-xl border border-line bg-white px-3 py-2">
               <span className="min-w-0 flex-1 truncate text-sm text-ink" title={slug}>{titleFor(slug)}</span>
-              {hintFor(slug) && <span className="shrink-0 text-xs text-amber-600">{hintFor(slug)}</span>}
+              {hintFor(slug) && <span className="shrink-0 text-xs text-ink/45">{hintFor(slug)}</span>}
               <span className="hidden truncate text-xs text-ink/40 sm:inline">/{slug}</span>
               <div className="flex shrink-0 items-center gap-0.5">
                 <button type="button" title="Move up" disabled={i === 0} onClick={() => move(i, -1)} className="rounded p-1 text-ink/50 hover:bg-ink/5 disabled:opacity-30"><ChevronUp size={14} /></button>
@@ -100,7 +97,7 @@ export function RelatedPicker({ value, onChange, options }: Props) {
                 className="block w-full truncate px-3 py-2 text-left text-sm text-ink hover:bg-accent/10"
               >
                 {o.title} <span className="text-xs text-ink/40">/{o.slug}</span>
-                {o.hint && <span className="ml-1 text-xs text-amber-600">· {o.hint}</span>}
+                {o.hint && <span className="ml-1 text-xs text-ink/45">· {o.hint}</span>}
               </button>
             ))
           )}
