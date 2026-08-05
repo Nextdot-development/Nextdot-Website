@@ -55,3 +55,4 @@ jobs:
           protocol: ftps            # GoDaddy usually supports FTPS; use "ftp" if this fails
           local-dir: ./dist/
           server-dir: ${{ secrets.FTP_SERVER_DIR }}   # e.g. /public_html/  (must end with /)
+          timeout: 120000           # GoDaddy's FTP control socket is slow; 30s default times out mid-upload
