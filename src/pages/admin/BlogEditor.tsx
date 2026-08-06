@@ -341,10 +341,9 @@ export default function BlogEditor() {
   const onPublishClick = () => {
     if (publishBlockers.length) return setError(`Cannot publish — please complete: ${publishBlockers.join(", ")}.`);
     setError("");
-    setConfirm("publish");
+    runSave("published"); // publish straight away — no confirmation popup
   };
 
-  const confirmPublish = async () => { setConfirm(null); await runSave("published"); };
   const confirmArchive = async () => { setConfirm(null); await runSave("archived"); };
   const onUnarchive = () => runSave("draft");
   const confirmDelete = async () => {
@@ -546,9 +545,6 @@ export default function BlogEditor() {
           <BlogPreviewModal open={previewOpen} onClose={() => setPreviewOpen(false)} data={{ title, category, excerpt, featuredImage, imageAlt, readTime, author, dateLabel: previewDate, content, faq, tags: tags.split(",").map((t) => t.trim()).filter(Boolean), related: relatedForPreview }} />
           <VersionHistoryModal open={historyOpen} blogId={docId} currentVersion={version} onClose={() => setHistoryOpen(false)} onRestore={handleRestore} />
 
-          <ConfirmModal open={confirm === "publish"} title="Publish this blog?" tone="primary" busy={busy}
-            message={<>It becomes <strong>Published</strong> in the CMS and goes live on the next build &amp; deploy.</>}
-            confirmLabel="Publish now" onConfirm={confirmPublish} onCancel={() => setConfirm(null)} />
           <ConfirmModal open={confirm === "archive"} title="Archive this blog?" tone="warning" busy={busy}
             message="Archived blogs are hidden from the public site and excluded from the sitemap. You can unarchive anytime."
             confirmLabel="Archive" onConfirm={confirmArchive} onCancel={() => setConfirm(null)} />
