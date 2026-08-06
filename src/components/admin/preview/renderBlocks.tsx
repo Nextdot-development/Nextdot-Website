@@ -38,9 +38,9 @@ export function renderInline(text: string): React.ReactNode[] {
         const [, label, href] = link;
         const cls = "text-accent underline underline-offset-2 hover:text-ink active:text-ink transition-colors";
         return href.startsWith("/") ? (
-          <Link key={i} to={href} className={cls}>{label}</Link>
+          <Link key={i} to={href} className={cls}>{renderInline(label)}</Link>
         ) : (
-          <a key={i} href={href} target="_blank" rel="noopener noreferrer" className={cls}>{label}</a>
+          <a key={i} href={href} target="_blank" rel="noopener noreferrer" className={cls}>{renderInline(label)}</a>
         );
       }
       return <React.Fragment key={i}>{part}</React.Fragment>;

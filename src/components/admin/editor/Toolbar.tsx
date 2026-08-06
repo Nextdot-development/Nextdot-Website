@@ -34,14 +34,33 @@ export function Toolbar({ editor, onInsertImage }: Props) {
 
   const setLink = () => {
     const prev = editor.getAttributes("link").href as string | undefined;
-    const url = window.prompt("Link URL (use /path for internal links)", prev ?? "");
-    if (url === null) return;
+    const raw = window.prompt("Link URL (use /path for internal links)", prev ?? "");
+    if (raw === null) return; // cancelled
+    const url = raw.trim();
     if (url === "") {
+      // Empty → remove any link on the current selection/word.
       editor.chain().focus().extendMarkRange("link").unsetLink().run();
       return;
     }
-    const target = url.startsWith("/") ? null : "_blank";
-    editor.chain().focus().extendMarkRange("link").setLink({ href: url, target }).run();
+    // Normalise: internal /paths, mailto:/tel: and full URLs pass through;
+    // a bare "example.com" (common non-coder input) gets https:// so it isn't
+    // treated as a broken relative link.
+    const href =
+      /^(https?:\/\/|mailto:|tel:|\/|#)/i.test(url) ? url : `https://${url}`;
+    const target = href.startsWith("/") || href.startsWith("#") ? null : "_blank";
+    const linkAttrs = { href, target, rel: "noopener noreferrer" };
+
+    if (editor.state.selection.empty) {
+      // No text selected → insert the URL itself as clickable, linked text, so
+      // clicking "Link" always produces a working link even without a selection.
+      editor
+        .chain()
+        .focus()
+        .insertContent({ type: "text", text: url, marks: [{ type: "link", attrs: linkAttrs }] })
+        .run();
+      return;
+    }
+    editor.chain().focus().extendMarkRange("link").setLink(linkAttrs).run();
   };
 
   const insertTable = () =>

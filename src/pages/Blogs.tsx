@@ -3089,7 +3089,7 @@ const leadDuplicatesBody = (post: BlogPost): boolean => {
 
 // Inline markup: **bold**, *italic*, and [label](url). Internal (/path) links use <Link>.
 // Bold is matched before italic so **text** never falls through to the italic branch.
-const INLINE_RE = /(\*\*[^*]+\*\*|\[[^\]]+\]\([^)]+\)|\*[^*]+\*)/g;
+const INLINE_RE = /(\*\*[^*]+\*\*|__[^_]+__|~~[^~]+~~|\[[^\]]+\]\([^)]+\)|\*[^*]+\*)/g;
 const renderInline = (text: string): React.ReactNode[] =>
   text.split(INLINE_RE).filter((part) => part !== "").map((part, i) => {
     if (part.startsWith("**") && part.endsWith("**")) {
@@ -3097,6 +3097,20 @@ const renderInline = (text: string): React.ReactNode[] =>
         <strong key={i} className="font-semibold text-ink">
           {part.slice(2, -2)}
         </strong>
+      );
+    }
+    if (part.startsWith("__") && part.endsWith("__") && part.length > 4) {
+      return (
+        <u key={i} className="underline underline-offset-2">
+          {part.slice(2, -2)}
+        </u>
+      );
+    }
+    if (part.startsWith("~~") && part.endsWith("~~") && part.length > 4) {
+      return (
+        <s key={i} className="line-through opacity-80">
+          {part.slice(2, -2)}
+        </s>
       );
     }
     if (part.startsWith("*") && part.endsWith("*") && part.length > 2) {
@@ -3109,16 +3123,19 @@ const renderInline = (text: string): React.ReactNode[] =>
     const link = part.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
     if (link) {
       const [, label, href] = link;
+      // Recurse into the label so inline formatting inside a link (e.g. a bold
+      // link) renders instead of leaking raw ** / __ tokens onto the page.
+      const cls = "text-accent underline underline-offset-2 hover:text-ink active:text-ink transition-colors";
       if (href.startsWith("/")) {
         return (
-          <Link key={i} to={href} className="text-accent underline underline-offset-2 hover:text-ink active:text-ink transition-colors">
-            {label}
+          <Link key={i} to={href} className={cls}>
+            {renderInline(label)}
           </Link>
         );
       }
       return (
-        <a key={i} href={href} target="_blank" rel="noopener noreferrer" className="text-accent underline underline-offset-2 hover:text-ink active:text-ink transition-colors">
-          {label}
+        <a key={i} href={href} target="_blank" rel="noopener noreferrer" className={cls}>
+          {renderInline(label)}
         </a>
       );
     }
