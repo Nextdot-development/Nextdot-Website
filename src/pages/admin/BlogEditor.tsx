@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Timestamp } from "@/lib/time";
 import {
   Save, Send, CalendarClock, ArrowLeft, ImagePlus, Eye, Sparkles, AlertTriangle,
-  History, Archive, ArchiveRestore, Trash2, Check, Loader2, CircleDot,
+  History, Archive, ArchiveRestore, Trash2, Check, Loader2, CircleDot, FileText,
 } from "lucide-react";
 import { AdminLayout } from "@/components/admin/AdminLayout";
 import { RichTextEditor } from "@/components/admin/editor/RichTextEditor";
@@ -13,7 +13,9 @@ import { ConfirmModal } from "@/components/admin/ConfirmModal";
 import { VersionHistoryModal } from "@/components/admin/VersionHistoryModal";
 import { FaqEditor } from "@/components/admin/editor/FaqEditor";
 import { RelatedPicker } from "@/components/admin/editor/RelatedPicker";
+import { ImportMarkdownModal } from "@/components/admin/editor/ImportMarkdownModal";
 import { buildRelatedOptions } from "@/lib/editor/relatedOptions";
+import type { MarkdownImport } from "@/lib/editor/importMarkdown";
 import { STATIC_BLOG_INDEX } from "@/data/staticBlogsIndex";
 import { useAuth } from "@/hooks/useAuth";
 import { useCategories } from "@/hooks/useCategories";
@@ -122,6 +124,7 @@ export default function BlogEditor() {
   const [error, setError] = useState("");
   const [featuredPicker, setFeaturedPicker] = useState(false);
   const [previewOpen, setPreviewOpen] = useState(false);
+  const [importOpen, setImportOpen] = useState(false);
   const [historyOpen, setHistoryOpen] = useState(false);
   const [confirm, setConfirm] = useState<ConfirmKind>(null);
   const [saveState, setSaveState] = useState<SaveState>("idle");
@@ -177,6 +180,26 @@ export default function BlogEditor() {
     setSchedDate(parts.date); setSchedTime(parts.time);
     if (typeof b.version === "number") setVersion(b.version);
     setContentKey((k) => k + 1);
+  };
+
+  // Apply a parsed Markdown import into the form. Only sets fields the document
+  // actually provided, so it never wipes anything you've already filled in.
+  const applyImport = (r: MarkdownImport) => {
+    if (r.title) setTitle(r.title);
+    if (r.slug) { setSlug(slugify(r.slug)); setSlugTouched(true); }
+    if (r.excerpt) setExcerpt(r.excerpt);
+    if (r.metaDescription) setMetaDescription(r.metaDescription);
+    if (r.seoTitle) setSeoTitle(r.seoTitle);
+    if (r.category) setCategory(r.category);
+    if (r.tags.length) setTags(r.tags.join(", "));
+    if (r.author) setAuthor(r.author);
+    if (r.featuredImage) setFeaturedImage(r.featuredImage);
+    if (r.imageAlt) setImageAlt(r.imageAlt);
+    if (r.readTime) { setReadTime(r.readTime); setReadTimeTouched(true); }
+    if (r.related.length) setRelatedBlogs(r.related);
+    if (r.faq.length) setFaq(r.faq);
+    if (r.content.length) { setContent(r.content); setContentKey((k) => k + 1); }
+    setError("");
   };
 
   // Auto read-time unless the author overrode it.
@@ -371,6 +394,9 @@ export default function BlogEditor() {
               <History size={16} /> History
             </button>
           )}
+          <button onClick={() => setImportOpen(true)} className="inline-flex items-center gap-2 rounded-full border border-line px-3.5 py-2 text-sm font-medium text-ink hover:border-accent" title="Fill every field from a Markdown file">
+            <FileText size={16} /> Import .md
+          </button>
           <button onClick={() => setPreviewOpen(true)} className="inline-flex items-center gap-2 rounded-full border border-line px-3.5 py-2 text-sm font-medium text-ink hover:border-accent">
             <Eye size={16} /> Preview
           </button>
@@ -515,6 +541,7 @@ export default function BlogEditor() {
             Publishing marks the blog live in the CMS. The public website updates on the next build &amp; deploy (Feature 6/7 pipeline).
           </p>
 
+          <ImportMarkdownModal open={importOpen} onClose={() => setImportOpen(false)} onImport={applyImport} />
           <MediaPickerModal open={featuredPicker} onClose={() => setFeaturedPicker(false)} onSelect={pickFeatured} title="Featured image" />
           <BlogPreviewModal open={previewOpen} onClose={() => setPreviewOpen(false)} data={{ title, category, excerpt, featuredImage, imageAlt, readTime, author, dateLabel: previewDate, content, faq, tags: tags.split(",").map((t) => t.trim()).filter(Boolean), related: relatedForPreview }} />
           <VersionHistoryModal open={historyOpen} blogId={docId} currentVersion={version} onClose={() => setHistoryOpen(false)} onRestore={handleRestore} />
