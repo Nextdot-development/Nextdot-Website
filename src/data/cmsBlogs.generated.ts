@@ -3,7 +3,393 @@
 // static public Blogs page. No Supabase runtime code ships to the browser.
 export const CMS_BLOGS = [
   {
-    "id": 1785916411,
+    "id": 1786354197,
+    "slug": "e-sushrut-clinic-economics-small-clinic",
+    "title": "e-Sushrut@Clinic just changed the economics of the small clinic",
+    "description": "The Union government's e-Sushrut@Clinic puts an ABDM-connected HMIS in front of the smallest clinics at an effective Rs 299 a month. The real story is the base of digitised clinics it creates — and what can sit on top of it.",
+    "metaTitle": "What e-Sushrut@Clinic Means for Small Clinics",
+    "metaDescription": "e-Sushrut@Clinic gives small clinics an ABDM-ready HMIS at an effective Rs 299 a month. What it does well, what built-in speech-to-text is not, and where an ambient scribe still fits.",
+    "category": "Healthcare",
+    "label": "Blog",
+    "date": "Aug 10, 2026",
+    "readTime": "7 min read",
+    "image": "https://jxfcncdphzctcoiepfhs.supabase.co/storage/v1/object/public/blog-images/1786353939897-whatsapp-image-2026-08-10-at-2-06-43-pm.jpeg",
+    "imageAlt": "e-Sushrut@Clinic digital healthcare platform for small clinics with ABDM, HPR and HFR integration",
+    "author": "Nextdot Digital Solutions Pvt. Ltd.",
+    "tags": [
+      "e-Sushrut",
+      "ABDM",
+      "Healthcare AI",
+      "Clinic Management",
+      "AI Scribe",
+      "DPDP"
+    ],
+    "publishedISO": "2026-08-10",
+    "relatedBlogs": [
+      "hospital-ai-readiness-checklist-8-questions-before-you-deploy",
+      "integration-layer-decides-whether-hospital-ai-works",
+      "healthcare-ai-and-the-dpdp-act",
+      "hospital-ai-data-security-wall",
+      "building-a-small-language-model-for-healthcare-compliance"
+    ],
+    "body": [
+      {
+        "text": "e-Sushrut@Clinic is a light, cloud-based clinic management system the Union government released on 29 June 2026, built by C-DAC and wired into the national health stack. It runs patient registration, billing, MIS reporting, speech-to-text documentation and clinical decision support, and it onboards a clinic onto ABDM through the Healthcare Professional Registry and the Health Facility Registry. (Source: Medical Dialogues, 29 June 2026.) At an effective Rs 299 a month it answers the question that kept most small clinics on paper: what does going digital actually cost, and is it worth it.",
+        "type": "p"
+      },
+      {
+        "text": "For a 40-bed nursing home or a single-doctor OPD, that question used to have an ugly answer. A commercial HMIS meant a licence fee, an implementation partner, a server or a cloud contract, and someone to keep it running. None of that survived contact with a clinic billing a few hundred rupees per consultation. So the clinic stayed on paper, and the paper stayed invisible to everything downstream: no structured record, no referral history, no claim trail.",
+        "type": "p"
+      },
+      {
+        "text": "e-Sushrut removes the cost objection cleanly. The software is priced at Rs 499 a month for up to five users, and an NHA subsidy of Rs 200 brings the effective price to Rs 299, with the first three months free. (Source: Outlook Money, June 2026.) Under a memorandum of understanding, C-DAC maintains and upgrades the software while the NHA funds cloud hosting and patient SMS and provides first-level call-centre support. (Source: The Hindu, 28 June 2026.) A clinic owner does not run infrastructure and does not pay for it. That is the whole point of the release, and it is a good piece of policy.",
+        "type": "p"
+      },
+      {
+        "text": "The real event is the base of clinics it puts on the record",
+        "type": "h2"
+      },
+      {
+        "text": "Take the numbers at face value and the second-order effect is the story. On launch day the government reported more than 800 facilities onboarded and over 680 health records generated. (Source: Medical Dialogues, 29 June 2026.) Those are launch-day figures and small, and that is the wrong place to look. The right place is the stack they connect to. ABDM crossed 100 crore health records linked to more than 90 crore ABHA accounts in May 2026, up from 50 crore records in February 2025, with more than 450 health-technology systems integrated. (Source: Press Information Bureau, May 2026.)",
+        "type": "p"
+      },
+      {
+        "text": "A free, government-backed HMIS aimed at the smallest clinics is the missing on-ramp to that record. Every clinic that adopts e-Sushrut arrives with an HPR-registered doctor, an HFR-listed facility, and a structured patient record where there was a paper pad. For the clinic, that means portability and a claim trail it never had. For anyone building clinical software in India, it means the base of clinics capable of taking a more capable layer just grew, and it will keep growing at government distribution speed rather than sales speed. A rising base of digitised clinics lifts everything that can sit on top of a structured record. That is the economics the title refers to, and it is why a small launch-day count is not the thing to watch.",
+        "type": "p"
+      },
+      {
+        "text": "What e-Sushrut does well, stated plainly",
+        "type": "h2"
+      },
+      {
+        "text": "It is worth being specific about what the product includes, because dismissing it would be both wrong and easy to see through. e-Sushrut@Clinic handles registration, billing and MIS reporting, carries a clinical decision support component, and ships with speech-to-text documentation built in. (Source: Medical Buyer, June 2026.) For a high-volume, low-margin OPD, that combination covers the daily operational load and the ABDM reporting obligation in one subscription. A clinic that adopts it, completes HPR and HFR onboarding, and uses the free three months to get its front desk off paper has done the single highest-value digitisation step available to it this year.",
+        "type": "p"
+      },
+      {
+        "text": "There is a DPDP consequence worth naming. A structured, portable record is patient personal data, and the clinic becomes responsible for consent and access to it under the DPDP Act 2023. e-Sushrut handles the plumbing. The clinic still owns the obligation, and the smallest clinics are the least equipped to notice they now carry it.",
+        "type": "p"
+      },
+      {
+        "text": "Built-in speech-to-text and ambient scribing are two different jobs",
+        "type": "h2"
+      },
+      {
+        "text": "The feature most likely to be misread is the speech-to-text. It is real and useful, and it does a different job from ambient clinical scribing. Built-in STT is dictation the doctor drives: the clinician speaks structured text into a field in place of typing. Ambient scribing captures the doctor-patient conversation as it happens, at consultation pace, and turns it into a structured note without the doctor stopping to dictate. One removes typing. The other removes the documentation step from the consultation altogether. A doctor seeing sixty patients in a morning, switching between Hindi and a local dialect and English drug names in the same sentence, feels that difference on every encounter.",
+        "type": "p"
+      },
+      {
+        "text": "The honest uncertainty is quality, and it belongs in the open. Government speech tooling is improving quickly. In the deployments Nextdot has run, the government voice layers we have tested have not yet matched a capture engine tuned to the pace and code-switching of a real Hindi consultation. That is an observation with a date on it, not a permanent state of affairs. If that quality converges, the distance between built-in dictation and a tuned ambient layer narrows to very little, and a clinic owner should hold anyone selling the ambient layer to exactly that test. The correct posture toward a fast-moving government product is to keep watching it and keep the claim falsifiable, and this piece is written to be checked against e-Sushrut a year from now.",
+        "type": "p"
+      },
+      {
+        "text": "What a clinic should actually do now",
+        "type": "h2"
+      },
+      {
+        "text": "The practical sequence is short. Adopt e-Sushrut@Clinic and use the free three months. Complete HPR and HFR onboarding so the record is real and portable. Get the front desk, billing and reporting off paper. For a large share of low-volume clinics, that is the right place to stop, and the built-in documentation will be enough. The clinic that should look further is the one where documentation load is the actual constraint: the high-throughput OPD where the doctor loses real minutes per patient to writing rather than seeing. That clinic has a volume problem an ambient layer sitting on top of the e-Sushrut record can pay for itself against, and it should evaluate that layer on the convergence test above rather than on a demo.",
+        "type": "p"
+      },
+      {
+        "text": "This is the design problem NextScribe was built to answer: reading the structured record e-Sushrut now creates, and capturing the consultation without the doctor stopping to dictate. It is one option among what will soon be several, and it deserves the same scrutiny as any other.",
+        "type": "p"
+      },
+      {
+        "text": "The government just made the floor of clinical digitisation free and national. The work worth doing, for clinics and for the people who build for them, moves to what sits on that floor.",
+        "type": "p"
+      },
+      {
+        "type": "h2",
+        "text": "Frequently asked questions"
+      },
+      {
+        "type": "faq",
+        "items": [
+          {
+            "a": "A light, cloud-based clinic management system launched by Union Health Minister JP Nadda on 29 June 2026 and built by C-DAC, aimed at small clinics, primary health centres, sub-centres and private OPDs. It handles registration, billing, MIS reporting, speech-to-text documentation and clinical decision support, and connects the clinic to ABDM.",
+            "q": "What is e-Sushrut@Clinic?"
+          },
+          {
+            "a": "The first three months are free. After that it is priced at Rs 499 a month for up to five users, reduced to an effective Rs 299 a month by a Rs 200 NHA subsidy.",
+            "q": "Is e-Sushrut@Clinic free?"
+          },
+          {
+            "a": "Yes. It ships with built-in speech-to-text documentation, which lets a clinician dictate structured notes. That is a different function from ambient scribing, which captures the full consultation without the doctor dictating.",
+            "q": "Does e-Sushrut have speech-to-text?"
+          },
+          {
+            "a": "For a low-volume clinic, its built-in documentation may be all that is needed. For a high-throughput OPD where writing time per patient is the constraint, an ambient scribe running on top of the e-Sushrut record does a job the built-in dictation does not. Whether that gap is worth paying for depends on how far government speech quality has converged, which is worth testing directly.",
+            "q": "Yes. It ships with built-in speech-to-text documentation, which lets a clinician dictate structured notes. That is a different function from ambient scribing, which captures the full consultation without the doctor dictating."
+          },
+          {
+            "a": "Yes. Onboarding requires the doctor to be registered on the Healthcare Professional Registry and integrates with both the HPR and the Health Facility Registry, placing the clinic and its records on the ABDM stack. ",
+            "q": "For a low-volume clinic, its built-in documentation may be all that is needed. For a high-throughput OPD where writing time per patient is the constraint, an ambient scribe running on top of the e-Sushrut record does a job the built-in dictation does not. Whether that gap is worth paying for depends on how far government speech quality has converged, which is worth testing directly."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1786080240,
+    "slug": "ai-infrastructure-for-clinics-that-cannot-afford-infrastructure",
+    "title": "AI Infrastructure for Clinics That Cannot Afford Infrastructure",
+    "description": "Most AI built for Indian healthcare assumes a server room, a network engineer, and a fibre line that stays up. A 30-bed nursing home in a district town has none of those, and it never will. The owner runs the pharmacy, t",
+    "metaTitle": "AI Infrastructure for Clinics That Cannot Afford Infrastructure",
+    "metaDescription": "Most AI built for Indian healthcare assumes a server room, a network engineer, and a fibre line that stays up. A 30-bed nursing home in a district town has none of those, and it never will. The owner runs the pharmacy, t",
+    "category": "Healthcare",
+    "label": "Blog",
+    "date": "Aug 7, 2026",
+    "readTime": "8 min read",
+    "image": "https://jxfcncdphzctcoiepfhs.supabase.co/storage/v1/object/public/blog-images/1786012024891-whatsapp-image-2026-08-06-at-11-35-23-am.jpeg",
+    "imageAlt": "AI Infrastructure for Clinics That Cannot Afford Infrastructure",
+    "author": "Nextdot Digital Solutions Pvt. Ltd.",
+    "tags": [],
+    "publishedISO": "2026-08-07",
+    "relatedBlogs": [
+      "hospital-ai-readiness-checklist-8-questions-before-you-deploy",
+      "integration-layer-decides-whether-hospital-ai-works",
+      "healthcare-ai-and-the-dpdp-act",
+      "hospital-ai-data-security-wall",
+      "building-a-small-language-model-for-healthcare-compliance"
+    ],
+    "body": [
+      {
+        "text": "Most AI built for Indian healthcare assumes a server room, a network engineer, and a fibre line that stays up. A 30-bed nursing home in a district town has none of those, and it never will. The owner runs the pharmacy, the billing counter, and the front desk from the same three people. There is no IT team. There is one shared computer at reception, a couple of Android phones, and a power supply that drops for hours at a stretch.",
+        "type": "p"
+      },
+      {
+        "text": "The question is not whether such a clinic wants AI. Plenty do. The question is whether anything on the market was designed for the constraints it actually operates under. Almost nothing was. So the honest place to start is with the environment, not the software.",
+        "type": "p"
+      },
+      {
+        "text": "The infrastructure that actually exists",
+        "type": "h2"
+      },
+      {
+        "text": "Rural internet penetration in India sits at 48.31 subscribers per 100 people as of end-March 2026, against 126.80 in urban areas (TRAI quarterly data, March 2026). That number describes coverage, not reliability. A clinic can have a connection and still lose it for an hour at midday when the tower congests or the sky opens up.",
+        "type": "p"
+      },
+      {
+        "text": "Power is the harder problem. Average rural electricity availability rose to roughly 21.9 hours a day in 2024, but the average hides the pattern that matters. Households across Uttar Pradesh, Jharkhand, Haryana, Assam and Bihar still report six or more hours of outage in a day, and outages arrive in blocks, not in convenient overnight windows. For a clinic, that means the system of record has to survive a dead router and a dark reception desk during OPD hours.",
+        "type": "p"
+      },
+      {
+        "text": "Devices are shared. Rural mobile penetration is about 58.8 per 100 people against 125.3 in urban areas (TRAI, 2025), and in practice a single Android phone often serves a whole household or a whole front desk. The clinic does not have one device per staff member. It has one device that four people touch across a shift.",
+        "type": "p"
+      },
+      {
+        "text": "This is the ground truth. A district health officer signing off on any AI tool should test it against these three facts first: the line will drop, the power will drop, and the device is shared.",
+        "type": "p"
+      },
+      {
+        "text": "Cost architecture: price it per consultation, not per seat",
+        "type": "h2"
+      },
+      {
+        "text": "The pricing model kills more small-clinic deployments than the technology does. Enterprise AI is sold per seat, per site, or as an annual license in the range large hospital groups pay. A clinic-chain operator running eight OPDs cannot carry a per-seat SaaS line that assumes named users with dedicated logins. The users are not named. They rotate.",
+        "type": "p"
+      },
+      {
+        "text": "The architecture that works bills against a unit the clinic already understands: the consultation, the document, the call. If a scribe costs a few rupees per completed consultation and produces a clean note the doctor would otherwise write by hand, the owner can do that math in his head at the billing counter. If it costs a fixed monthly sum whether the OPD saw 20 patients or 200, he cannot, and he will not sign.",
+        "type": "p"
+      },
+      {
+        "text": "Two design consequences follow. First, the model tier has to match the task. A structured OPD note or a triage summary does not need the most expensive model on the market. Routing routine work to a smaller, cheaper model and reserving a larger one for genuinely hard cases is the difference between a viable per-consultation price and one that never clears. Second, the hardware budget has to be near zero. The clinic is not buying a server. Anything that requires on-premise GPU hardware is disqualified before the conversation starts. The compute lives in the cloud and the clinic pays only for what it uses.",
+        "type": "p"
+      },
+      {
+        "text": "Design for the line dropping, because it will",
+        "type": "h2"
+      },
+      {
+        "text": "Intermittent connectivity is the constraint that separates tools built for this market from tools ported into it. A system that needs a live connection for every action stops the OPD dead the moment the tower congests. That is not a rare failure. In this environment it is a daily one.",
+        "type": "p"
+      },
+      {
+        "text": "The workable pattern is local-first capture with deferred sync. The front-desk app holds registration, the queue, and billing in local storage on the device. It keeps working with the network unplugged. When connectivity returns, it syncs in the background and reconciles. The doctor never waits on a spinner during a consultation, and the receptionist never tells a patient to come back after lunch because the software is down.",
+        "type": "p"
+      },
+      {
+        "text": "For anything that genuinely needs the cloud, voice transcription and clinical summarisation among them, the design has to degrade gracefully rather than fail. Audio for a consultation can be captured and queued on the device, then transcribed when the line comes back, with the doctor reviewing the note at the end of the session instead of in real time. The clinic loses a few minutes of immediacy. It does not lose the record. A tool that treats a dropped connection as an error state, rather than as the expected state, will be abandoned inside a month.",
+        "type": "p"
+      },
+      {
+        "text": "The shared-device problem is a clinical safety problem",
+        "type": "h2"
+      },
+      {
+        "text": "One device, four users, no individual logins. This is not a minor UX inconvenience. In a clinical setting it is a records-integrity risk. If the app cannot tell who captured a note or who ran a triage check, the audit trail is worthless, and under DPDP 2023 the clinic is the entity holding personal health data it cannot properly account for.",
+        "type": "p"
+      },
+      {
+        "text": "The design answer is lightweight, fast identity that suits a shared device. Not a password screen that a rushed receptionist will defeat by staying permanently logged in as one user. A quick-switch profile, a PIN, or a tap-to-identify step that takes two seconds and stamps every action with the person who took it. The friction has to be low enough that staff actually use it and high enough that the record knows whose hands were on the device. Session timeouts matter here too, because a shared phone left unlocked on the counter is a data-exposure event waiting to happen.",
+        "type": "p"
+      },
+      {
+        "text": "Get this right and a shared device is workable. Ignore it and the clinic has an unaccountable system that no district health officer should approve.",
+        "type": "p"
+      },
+      {
+        "text": "Voice, because the typing does not happen",
+        "type": "h2"
+      },
+      {
+        "text": "The receptionist in a district clinic is not going to type structured data into forms between patients. The doctor is not going to break eye contact to fill dropdown fields. In practice, text-first data entry in these settings produces thin, late, or fabricated records. Voice is the interface that fits the actual workflow, and it fits the shared-device reality too, because speaking into one phone needs no per-user setup.",
+        "type": "p"
+      },
+      {
+        "text": "The technical catch is that the voice is rarely clean English or clean Hindi. It is Bhojpuri-inflected Hindi, it is code-switched, it is a medicine name dropped into a regional sentence. General-purpose speech-to-text models trained mostly on Western-accented English degrade sharply on this input, and a scribe that mishears a drug name is worse than no scribe at all. This is the specific reason Nextdot's clinical work leans on Sarvam AI's speech models for the Indian-language layer: they are built on Indian language and dialect data, so they hold up on the regional inflection and code-switching that a district OPD actually produces, running against audio captured on an ordinary low-end Android phone rather than a studio mic. Ambient capture through Nextdot's NextScribe is designed around exactly this input, review-first, so the doctor confirms the note rather than trusting a raw transcript.",
+        "type": "p"
+      },
+      {
+        "text": "What breaks, and who fixes it when there is no IT team",
+        "type": "h2"
+      },
+      {
+        "text": "The maintenance question is the one vendors dodge. In a large hospital, when the AI misbehaves, an internal team files a ticket. In a nursing home, the person who notices is the owner, and his only lever is to stop using the tool. So the support model has to assume zero local technical capability.",
+        "type": "p"
+      },
+      {
+        "text": "That means updates push silently and never require someone on-site to run them. It means the failure modes are visible and self-explanatory in plain language, so the receptionist can see that a note is still syncing rather than assuming it is lost. It means a human support line that answers in the local language and understands that the person calling is mid-OPD with a queue building. And it means the tool degrades to a safe manual fallback the clinic already knows, paper, when it cannot function, instead of blocking the workflow entirely. The measure of a well-designed system here is not how it behaves when everything works. It is how little damage it does when the line, the power, or the model fails.",
+        "type": "p"
+      },
+      {
+        "text": "Where not to cut",
+        "type": "h2"
+      },
+      {
+        "text": "Costs get cut. Clinical safety and data accountability do not. A district health officer or a clinic-chain operator evaluating any of this should hold three lines firm. Every AI-generated clinical note is reviewed by the clinician before it enters the record, with no silent auto-filing. Every action is attributable to a person, even on a shared device. And personal health data is handled to DPDP 2023 standards regardless of how small the clinic is, because the law does not scale its expectations down for a 30-bed facility.",
+        "type": "p"
+      },
+      {
+        "text": "Everything else is negotiable against budget. Model tier, sync frequency, feature depth, all of it can flex to hit a price the clinic can actually pay. The floor is that the system stays safe when it is offline, dark, and shared, which is the condition it will spend most of its life in. Build for that condition and AI reaches the clinics where most of India actually gets treated. Build for the server room, and it never leaves the metros.",
+        "type": "p"
+      }
+    ]
+  },
+  {
+    "id": 1786003262,
+    "slug": "the-roi-model-for-ai-across-a-multi-site-hospital-group",
+    "title": "The ROI model for AI across a multi-site hospital group",
+    "description": "The business case that gets signed is rarely the one with the largest savings number on the cover slide. It is the one where the CIO can defend every line to the CFO nine months later, when the pilot site is live and som",
+    "metaTitle": "The ROI model for AI across a multi-site hospital group",
+    "metaDescription": "The business case that gets signed is rarely the one with the largest savings number on the cover slide. It is the one where the CIO can defend every line to the CFO nine months later, when the pilot site is live and som",
+    "category": "AI Strategy",
+    "label": "Blog",
+    "date": "Aug 6, 2026",
+    "readTime": "8 min read",
+    "image": "https://jxfcncdphzctcoiepfhs.supabase.co/storage/v1/object/public/blog-images/1786002985626-whatsapp-image-2026-08-06-at-11-17-53-am.jpeg",
+    "imageAlt": "AI ROI model across a multi-site hospital group",
+    "author": "Nextdot Digital Solutions Pvt. Ltd.",
+    "tags": [],
+    "publishedISO": "2026-08-06",
+    "relatedBlogs": [
+      "hospital-ai-readiness-checklist-8-questions-before-you-deploy",
+      "healthcare-ai-and-the-dpdp-act",
+      "hospital-ai-data-security-wall",
+      "building-a-small-language-model-for-healthcare-compliance",
+      "integration-layer-decides-whether-hospital-ai-works"
+    ],
+    "body": [
+      {
+        "text": "The business case that gets signed is rarely the one with the largest savings number on the cover slide. It is the one where the CIO can defend every line to the CFO nine months later, when the pilot site is live and someone asks why the number on the slide has not shown up in the P&L yet. If you are building a case for AI across a hospital group, the job is not to maximise the headline. The job is to be right about where the money lands, how long it takes to arrive, and which of your assumptions is quietly load-bearing.",
+        "type": "p"
+      },
+      {
+        "text": "This is a model you build with your own numbers. Treat the figures below as reference points from published studies and from how deployments are actually priced, then substitute your own volumes, your own tariffs, and your own site count. A business case built on someone else's benchmark is a business case that falls apart in the second budget review.",
+        "type": "p"
+      },
+      {
+        "text": "Where the savings actually land",
+        "type": "h2"
+      },
+      {
+        "text": "Across a hospital group, AI savings come from three pools, and they behave very differently.",
+        "type": "p"
+      },
+      {
+        "text": "The first is clinician time on documentation. This is the pool everyone models first and overstates most. The best current evidence is a large study across five US academic centres covering 8,581 ambulatory clinicians, which found ambient AI scribes reduced total EHR time by 13.4 minutes and documentation time by 16.0 minutes per day, and was associated with 0.49 additional visits per clinician per week (reported by STAT and Healthcare Dive, April 2026). That last number is the one that matters for a business case, because minutes saved are soft until they convert into either capacity or retention. Half a visit per clinician per week, multiplied across a large outpatient roster, is real throughput. But it only materialises if your clinics are demand-constrained rather than slot-constrained. In a hospital already turning patients away, that half-visit is revenue. In a clinic with empty afternoon slots, it is just a shorter day for the doctor, which is worth something for attrition and nothing for the P&L this quarter.",
+        "type": "p"
+      },
+      {
+        "text": "The second pool is contact centre and front-office deflection. This is where the cleanest, fastest savings sit, and it is the one CFOs believe most easily because the unit economics are legible. A fully loaded human agent in an Indian metro contact centre runs roughly 8 to 20 rupees per minute once you account for salary, infrastructure, supervision, and idle time, against roughly 3 to 8 rupees per minute for a voice agent handling the same enquiry [verify: figures from Indian voice-AI vendor pricing surveys, 2026, not an independent audit]. The savings here are not really about per-minute cost. They come from deflecting the high-volume, low-complexity traffic: appointment booking, report status, directions, timing, prep instructions. If a voice agent absorbs the repetitive third of your inbound volume, the saving is the headcount you do not add as the group grows, not the headcount you remove today.",
+        "type": "p"
+      },
+      {
+        "text": "The third pool is revenue capture, and it is usually the largest and the least modelled. No-show rates in Indian OPDs run as high as 30 percent in some urban settings [verify: DocTrue and Engageo India clinic reports, 2026, vendor-published]. A voice agent that confirms, reminds, and reschedules recovers a slice of that lost capacity directly into revenue. This pool matters because it does not depend on removing any cost at all. It monetises capacity you have already paid for. When a business case underperforms, it is usually because the team modelled only the first two pools, which are cost-side and modest, and ignored the third, which is revenue-side and large.",
+        "type": "p"
+      },
+      {
+        "text": "How long the savings take to arrive",
+        "type": "h2"
+      },
+      {
+        "text": "Every honest AI business case has a J-curve, and hiding it is how you lose the CFO's trust in month four. Costs land first. Integration work, clinician onboarding, and the parallel-running period where staff do the old process and the new one at once, all hit before any saving does.",
+        "type": "p"
+      },
+      {
+        "text": "Timing splits by pool. Contact centre deflection is the fast one, showing up within weeks of go-live at a site, because call deflection is measurable from day one and does not wait on behaviour change. Documentation savings are slow, and the reason is adoption, which the next section covers. Revenue capture from no-show recovery lands in the middle, dependent on how quickly your reminder and reschedule flows reach steady state.",
+        "type": "p"
+      },
+      {
+        "text": "For a multi-site group, the discipline is to model payback per site and per pool, never as one blended number. A blended payback hides the fact that your first site carries the entire build cost while later sites carry almost none. Which is the whole economic argument for doing this across sites at all.",
+        "type": "p"
+      },
+      {
+        "text": "The multi-site economics that change the case",
+        "type": "h2"
+      },
+      {
+        "text": "Single-site AI is a hard business case. The build cost, the integration effort, and the model and evaluation work all land on one site's savings, and the payback often looks marginal. Multi-site is where the maths turns, because you build the intelligence once and deploy it many times.",
+        "type": "p"
+      },
+      {
+        "text": "But the reuse is uneven, and modelling it as a flat per-site cost is the most common error I see. Three things do not get cheaper at the second site: local integration into that site's HIS or EHR configuration, clinician onboarding, and site-specific evaluation. Three things collapse almost to zero: the core agent logic, the prompt and orchestration layer, and the compliance and audit scaffolding. So the second site is not half the cost of the first. It is the first site's cost minus the reusable core, which in practice means the marginal site can run 40 to 60 percent cheaper than the pilot [verify: illustrative range based on Nextdot deployment cost structure, confirm against actuals with Ayush]. [NEEDS AYUSH CONFIRMATION: do we have a real pilot-to-second-site cost delta from a live multi-site engagement to cite here instead of an illustrative range?]",
+        "type": "p"
+      },
+      {
+        "text": "This is also where the engagement model has to match the maths. A voice agent build priced at a setup fee plus monthly recurring makes sense per site, because integration is genuinely per-site work. A compliance layer licensed per entity per year makes sense group-wide, because the scaffolding is shared. The reason to separate them in the business case is that they have different owners and different budget lines, and blending them into one number gives the CFO nothing to approve incrementally.",
+        "type": "p"
+      },
+      {
+        "text": "The strategic move for a group is to fund the pilot as a capability build, not as a site return. The pilot's job is to produce the reusable core and prove the integration pattern. Sites two through ten are where the return lives, and they should be modelled as a rollout curve, not as ten independent cases.",
+        "type": "p"
+      },
+      {
+        "text": "What does not show in the business case but decides it",
+        "type": "h2"
+      },
+      {
+        "text": "Here is the part that never makes the slide and determines whether the whole thing works.",
+        "type": "p"
+      },
+      {
+        "text": "Adoption gates every documentation saving. In that five-centre study, only 32 percent of clinicians who had the scribe used it in half or more of their visits, and the largest benefits accrued only above that threshold (STAT, April 2026). Read that carefully. The technology worked. The savings were real for the doctors who used it. But roughly two-thirds of the licences underdelivered because usage never reached the level where the return exists. A business case that assumes full adoption from day one is not optimistic. It is wrong. Model a ramp, budget for the onboarding that drives it, and put a named clinical champion at each site into the cost line, because that person is the difference between a licence used and a licence billed.",
+        "type": "p"
+      },
+      {
+        "text": "Attrition is the saving no CFO will let you put in the model, and it is often the biggest one. Clinician and nursing burnout carries a replacement cost that runs into lakhs per exit once you count recruitment, ramp, and lost continuity. Documentation burden is a measured driver of that burnout. You cannot cleanly attribute a retained clinician to an AI tool, so it stays out of the formal case, but a Medical Director knows exactly what a reduced attrition rate is worth, and it belongs in the conversation even when it cannot sit in the spreadsheet.",
+        "type": "p"
+      },
+      {
+        "text": "Standardisation across sites is the quiet compounding return. When every site runs the same agent, the same documentation structure, and the same audit trail, the group gains something no single-site deployment can: comparable data across sites, a single compliance posture under DPDP 2023, and one place to fix a problem instead of ten. This never appears as a rupee figure in the year-one case, and it is frequently the thing that pays back most over three years.",
+        "type": "p"
+      },
+      {
+        "text": "Building the model you can defend",
+        "type": "h2"
+      },
+      {
+        "text": "The model that survives contact with a CFO has four properties. It separates cost-side savings from revenue-side capture, because they carry different confidence and land on different timelines. It models payback per site and per pool rather than as one blended number. It shows the J-curve honestly, with costs landing before returns. And it puts adoption on the critical path, with the onboarding investment that adoption requires written into the cost line rather than assumed away.",
+        "type": "p"
+      },
+      {
+        "text": "The uncomfortable truth is that the strongest business case is usually the more conservative one. A case that promises a modest, well-timed, defensible return and then beats it earns the CIO the credibility to fund the next phase. A case built on the biggest number on the slide gets signed once and never again. Across a multi-site group, where the real return depends on getting to site ten, the ability to fund the next phase is the entire game.",
+        "type": "p"
+      }
+    ]
+  },
+  {
+    "id": 1785916410,
     "slug": "orchestration-layer-where-multi-agent-systems-break",
     "title": "The Orchestration Layer Is Where Multi-Agent Systems Break",
     "description": "",
@@ -113,7 +499,7 @@ export const CMS_BLOGS = [
     ]
   },
   {
-    "id": 1785826197,
+    "id": 1785826196,
     "slug": "mlr-review-is-the-bottleneck-ai-is-finally-good-enough-to-touch-it",
     "title": "MLR Review Is the Bottleneck. AI Is Finally Good Enough to Touch It",
     "description": "",
@@ -251,7 +637,7 @@ export const CMS_BLOGS = [
     ]
   },
   {
-    "id": 1785738933,
+    "id": 1785738932,
     "slug": "llm-ops-keeps-enterprise-ai-alive",
     "title": "LLM Ops: the unglamorous work that keeps enterprise AI alive",
     "description": "",
@@ -385,7 +771,7 @@ export const CMS_BLOGS = [
     ]
   },
   {
-    "id": 1785581144,
+    "id": 1785581143,
     "slug": "pharmacovigilance-case-processing-ai-opportunity-pharma",
     "title": "Pharmacovigilance case processing: the highest-volume AI opportunity in pharma",
     "description": "",

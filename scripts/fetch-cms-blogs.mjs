@@ -70,7 +70,11 @@ function toSlug(value) {
 
 /** Map a Supabase row to the public BlogPost shape. */
 function rowToPost(r) {
-  const published = r.published_at || r.publish_at || r.created_at;
+  // Display/sort by the intended publish date the author set (publish_at) — the
+  // same value the editor's "Publish Date" field shows. published_at is only the
+  // internal first-went-live stamp and must NOT drive the visible date, or a post
+  // dated in the past jumps forward to whenever the build first picked it up.
+  const published = r.publish_at || r.published_at || r.created_at;
   const faq = Array.isArray(r.faq) ? r.faq : [];
   const content = Array.isArray(r.content) ? r.content : [];
   // Append the FAQ as body blocks so it renders on the page AND the existing

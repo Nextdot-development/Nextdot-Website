@@ -23,7 +23,10 @@ const STATUS_TABS: { value: "all" | BlogStatus; label: string }[] = [
 type SortKey = "title" | "category" | "status" | "publish" | "updated" | "createdBy" | "readTime";
 type SortDir = "asc" | "desc";
 
-const publishTs = (b: BlogDoc) => b.publishedAt ?? b.publishAt ?? null;
+// Show the author-set publish date (publishAt) — same value the editor shows —
+// not the internal first-went-live stamp (publishedAt), which would make a
+// back-dated post appear to jump to whenever it first went live.
+const publishTs = (b: BlogDoc) => b.publishAt ?? b.publishedAt ?? null;
 
 function sortValue(b: BlogDoc, key: SortKey): string | number {
   switch (key) {
