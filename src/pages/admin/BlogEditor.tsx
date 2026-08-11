@@ -24,7 +24,7 @@ import { createBlog, updateBlog, getBlog, deleteBlog } from "@/services/blogs";
 import { slugify, blogCanonicalUrl } from "@/utils/slug";
 import { suggestSeoTitle, suggestMetaDescription, suggestImageAlt, readTimeFromBlocks } from "@/utils/suggest";
 import { TIME_ZONES, DEFAULT_TIME_ZONE, zonedInputsToDate, dateToZonedInputs, formatInZone, timeAgo } from "@/utils/timezone";
-import type { BlogBlock, BlogInput, BlogStatus, BlogVersion, FaqItem } from "@/types/blog";
+import type { BlogBlock, BlogDoc, BlogInput, BlogStatus, BlogVersion, FaqItem } from "@/types/blog";
 import type { MediaItem } from "@/types/media";
 
 const DEFAULT_AUTHOR = "Nextdot Digital Solutions Pvt. Ltd.";
@@ -109,6 +109,18 @@ export default function BlogEditor() {
     const titleFor = new Map(relatedOptions.map((o) => [o.slug, o.title]));
     return relatedBlogs.map((slug) => ({ slug, title: titleFor.get(slug) ?? slug }));
   }, [relatedBlogs, relatedOptions]);
+
+  // The latest 4 published blogs (newest first, excluding this one) — used to
+  // auto-fill "Related in this series" so a new post in a series links back to
+  // the recent ones without manual picking.
+  const latestPublishedSlugs = useMemo(() => {
+    const ms = (b: BlogDoc) => b.publishAt?.toMillis() ?? b.publishedAt?.toMillis() ?? b.createdAt?.toMillis() ?? 0;
+    return blogs
+      .filter((b) => b.status === "published" && b.slug && b.id !== docId)
+      .sort((a, b) => ms(b) - ms(a))
+      .slice(0, 4)
+      .map((b) => b.slug);
+  }, [blogs, docId]);
   const [contentKey, setContentKey] = useState(0); // remounts the editor on load/restore
 
   // Workflow state
@@ -207,6 +219,16 @@ export default function BlogEditor() {
     if (!editorReady.current || readTimeTouched) return;
     setReadTime(readTimeFromBlocks(content, excerpt));
   }, [content, excerpt, readTimeTouched]);
+
+  // Auto-fill "Related in this series" with the latest published blogs for a
+  // NEW post (once, only if nothing was set — e.g. by a Markdown import). The
+  // author can freely remove/reorder afterwards.
+  const relatedPrefilled = useRef(false);
+  useEffect(() => {
+    if (isEdit || relatedPrefilled.current || !blogs.length) return;
+    relatedPrefilled.current = true;
+    if (!relatedBlogs.length && latestPublishedSlugs.length) setRelatedBlogs(latestPublishedSlugs);
+  }, [isEdit, blogs.length, latestPublishedSlugs, relatedBlogs.length]);
 
   // Tick the "saved Xs ago" label once a minute.
   useEffect(() => {
@@ -458,7 +480,12 @@ export default function BlogEditor() {
               </div>
 
               <FaqEditor value={faq} onChange={setFaq} />
-              <RelatedPicker value={relatedBlogs} onChange={setRelatedBlogs} options={relatedOptions} />
+              <RelatedPicker
+                value={relatedBlogs}
+                onChange={setRelatedBlogs}
+                options={relatedOptions}
+                onAutoFill={latestPublishedSlugs.length ? () => setRelatedBlogs(latestPublishedSlugs) : undefined}
+              />
             </div>
 
             {/* Sidebar column */}

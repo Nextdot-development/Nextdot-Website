@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { Plus, Trash2, ChevronUp, ChevronDown, Search, Link2 } from "lucide-react";
+import { Plus, Trash2, ChevronUp, ChevronDown, Search, Link2, Sparkles } from "lucide-react";
 import type { RelatedOption } from "@/lib/editor/relatedOptions";
 
 export type { RelatedOption };
@@ -8,6 +8,7 @@ interface Props {
   value: string[]; // ordered slugs
   onChange: (slugs: string[]) => void;
   options: RelatedOption[]; // published blogs to choose from
+  onAutoFill?: () => void; // set the latest published blogs (optional)
 }
 
 /**
@@ -15,7 +16,7 @@ interface Props {
  * ordered list of slugs in the existing `related_blogs` field. When empty, the
  * public page renders no Related section.
  */
-export function RelatedPicker({ value, onChange, options }: Props) {
+export function RelatedPicker({ value, onChange, options, onAutoFill }: Props) {
   const [q, setQ] = useState("");
   const [manual, setManual] = useState("");
 
@@ -53,7 +54,14 @@ export function RelatedPicker({ value, onChange, options }: Props) {
         <h3 className="inline-flex items-center gap-2 text-sm font-semibold text-ink">
           <Link2 size={16} /> Related in this series <span className="font-normal text-ink/40">(optional)</span>
         </h3>
-        <span className="text-xs text-ink/40">{value.length} selected</span>
+        <div className="flex items-center gap-3">
+          {onAutoFill && (
+            <button type="button" onClick={onAutoFill} title="Fill with the latest published blogs" className="inline-flex items-center gap-1 text-xs font-medium text-accent hover:underline">
+              <Sparkles size={12} /> Auto-add latest
+            </button>
+          )}
+          <span className="text-xs text-ink/40">{value.length} selected</span>
+        </div>
       </div>
 
       {/* Selected */}
