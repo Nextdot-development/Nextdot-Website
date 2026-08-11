@@ -306,6 +306,16 @@ export default function BlogEditor() {
     return missing;
   }, [title, effectiveSlug, featuredImage, imageAlt, category, content, seoTitle, metaDescription]);
 
+  // ---- Duplicate detection (warn if another blog shares this title/slug) --
+  const duplicate = useMemo(() => {
+    const t = title.trim().toLowerCase();
+    const others = blogs.filter((b) => b.id !== docId);
+    return {
+      title: t ? others.find((b) => (b.title || "").trim().toLowerCase() === t) ?? null : null,
+      slug: effectiveSlug ? others.find((b) => b.slug === effectiveSlug) ?? null : null,
+    };
+  }, [blogs, title, effectiveSlug, docId]);
+
   // ---- Save flows ---------------------------------------------------------
   const runSave = async (nextStatus: BlogStatus, goList = true) => {
     setError("");
@@ -415,6 +425,16 @@ export default function BlogEditor() {
             <div className="mb-5 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3">
               <p className="flex items-center gap-2 text-sm font-semibold text-amber-800"><AlertTriangle size={15} /> Complete these before publishing ({publishBlockers.length})</p>
               <ul className="mt-1.5 list-disc pl-8 text-sm text-amber-700">{publishBlockers.map((w) => <li key={w}>{w}</li>)}</ul>
+            </div>
+          )}
+
+          {(duplicate.title || duplicate.slug) && (
+            <div className="mb-5 rounded-xl border border-orange-300 bg-orange-50 px-4 py-3">
+              <p className="flex items-center gap-2 text-sm font-semibold text-orange-800"><AlertTriangle size={15} /> Possible duplicate</p>
+              <ul className="mt-1.5 list-disc pl-8 text-sm text-orange-700">
+                {duplicate.title && <li>Another blog already uses this <strong>title</strong>: “{duplicate.title.title}” ({duplicate.title.status}).</li>}
+                {duplicate.slug && <li>Another blog already uses this <strong>URL slug</strong> <code>/{duplicate.slug.slug}</code>: “{duplicate.slug.title}”. Publishing with the same slug can overwrite that page — change the slug to avoid a clash.</li>}
+              </ul>
             </div>
           )}
 

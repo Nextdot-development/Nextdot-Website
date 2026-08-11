@@ -249,23 +249,36 @@ function findSection(blocks: BlogBlock[], re: RegExp): { headIdx: number; start:
   return { headIdx, start: headIdx + 1, end };
 }
 
-const isBoldOnly = (b: BlogBlock) => b.type === "p" && /^\*\*[^*]+\*\*[?:.]?$/.test(b.text.trim());
-
 function extractFaq(section: BlogBlock[]): FaqItem[] {
   const items: FaqItem[] = [];
   let cur: FaqItem | null = null;
-  const pushAnswer = (t: string) => { if (cur) cur.a = cur.a ? `${cur.a} ${t}` : t; };
+  const push = () => { if (cur && cur.q) items.push(cur); };
+  const addAnswer = (t: string) => { if (cur && t) cur.a = cur.a ? `${cur.a} ${t}` : t; };
   for (const b of section) {
-    const asQuestion = headingLevel(b) > 0 || isBoldOnly(b);
-    if (asQuestion) {
-      if (cur && cur.q) items.push(cur);
-      cur = { q: plain(headingText(b) || ("text" in b ? b.text : "")), a: "" };
-    } else if (cur) {
-      if (b.type === "p" || b.type === "blockquote") pushAnswer(b.text.trim());
-      else if (b.type === "ul" || b.type === "ol") pushAnswer(b.items.join(" "));
+    // A heading is always a question.
+    if (headingLevel(b) > 0) {
+      push();
+      cur = { q: plain(headingText(b)), a: "" };
+      continue;
     }
+    if (b.type === "p") {
+      // A paragraph that STARTS with a bold run is a question. Because authors
+      // often put the answer on the very next line (no blank line between), the
+      // question and answer arrive merged in one paragraph — split them here:
+      //   "**Can an AI scribe…?** Yes, and for most clinics…"
+      const m = b.text.trim().match(/^\*\*(.+?)\*\*[:.\s]*([\s\S]*)$/);
+      if (m && m[1].trim()) {
+        push();
+        cur = { q: plain(m[1]), a: m[2].trim() };
+        continue;
+      }
+      addAnswer(b.text.trim()); // a following paragraph continues the answer
+      continue;
+    }
+    if (b.type === "blockquote") addAnswer(b.text.trim());
+    else if (b.type === "ul" || b.type === "ol") addAnswer(b.items.join(" "));
   }
-  if (cur && cur.q) items.push(cur);
+  push();
   return items.filter((f) => f.q);
 }
 
@@ -288,7 +301,10 @@ function extractRelated(section: BlogBlock[]): string[] {
 // ---------------------------------------------------------------------------
 
 export function parseMarkdown(src: string): MarkdownImport {
-  const { data, body } = parseFrontmatter(src || "");
+  // Strip HTML comments (e.g. an author's <!-- SEO notes --> block at the top)
+  // so they never land in the article body.
+  const cleaned = (src || "").replace(/<!--[\s\S]*?-->/g, "");
+  const { data, body } = parseFrontmatter(cleaned);
   let blocks = bodyToBlocks(body);
 
   // FAQ section → FaqItem[], then remove those blocks from the body.
