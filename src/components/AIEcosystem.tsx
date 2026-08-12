@@ -38,8 +38,10 @@ const trustedStrip = [
   { name: "Gemini", logo: geminiLogo },
   { name: "ElevenLabs", logo: elevenlabsLogo },
   { name: "Sarvam", logo: sarvamLogo },
+  { name: "Seedance", logo: seedanceLogo },
   { name: "LangChain", logo: langchainLogo },
   { name: "MCP", logo: mcpLogo },
+  { name: "Obsidian", logo: obsidianLogo },
 ];
 const trustedRow = [...trustedStrip, ...trustedStrip];
 
@@ -101,8 +103,8 @@ export const AIEcosystem = () => {
           ))}
         </div>
 
-        {/* Showcase grid */}
-        <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 mb-16 sm:mb-20">
+        {/* Showcase grid — fit the active category on one row (up to 4 across) */}
+        <motion.div layout className={`grid grid-cols-1 sm:grid-cols-2 ${filtered.length >= 4 ? "lg:grid-cols-4" : "lg:grid-cols-3"} gap-5 sm:gap-6 mb-16 sm:mb-20`}>
           <AnimatePresence mode="popLayout">
             {filtered.map((tool) => (
               <motion.div
