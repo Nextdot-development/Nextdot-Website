@@ -8,7 +8,7 @@ import geminiLogo from "../assets/images/gemini-logo.webp";
 import elevenlabsLogo from "../assets/images/elevenlabs-logo.webp";
 import sarvamLogo from "../assets/images/sarvam-logo.svg";
 import heygenLogo from "../assets/images/heygen-logo.svg";
-import klingLogo from "../assets/images/kling-logo.webp";
+import seedanceLogo from "../assets/images/seedance-logo.jpeg";
 import higgsfieldLogo from "../assets/images/higgsfield-logo.webp";
 import langchainLogo from "../assets/images/langchain-logo.svg";
 import vectordbLogo from "../assets/images/vectordb-logo.webp";
@@ -21,7 +21,7 @@ const tools = [
   { name: "ElevenLabs", category: "Voice", logo: elevenlabsLogo, desc: "Lifelike voice synthesis for conversational and narrative AI experiences." },
   { name: "Sarvam", category: "Voice", logo: sarvamLogo, desc: "Multilingual voice intelligence built for Indian languages and dialects." },
   { name: "HeyGen", category: "Video", logo: heygenLogo, desc: "AI avatars and video generation engineered for enterprise scale." },
-  { name: "Kling AI", category: "Video", logo: klingLogo, desc: "High-fidelity generative video for creative and brand production." },
+  { name: "Seedance", category: "Video", logo: seedanceLogo, desc: "High-fidelity generative video with realistic, multi-shot motion for creative and brand production." },
   { name: "Higgsfield", category: "Video", logo: higgsfieldLogo, desc: "Cinematic AI video generation for premium brand storytelling." },
   { name: "LangChain", category: "Infrastructure", logo: langchainLogo, desc: "Orchestration framework powering multi-step agentic workflows." },
   { name: "Vector Databases", category: "Infrastructure", logo: vectordbLogo, desc: "High-performance retrieval infrastructure for AI memory and context." },
