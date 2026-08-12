@@ -38,5 +38,10 @@ export const logoFiles = [
   "newyukti.png",
   "nh-logo-2.jpg",
   "rr-logo.png",
-  "ss-logo.jpg"
+  "ss-logo.jpg",
+  "centhealth_logo.png",
+  "OTOXX.png",
+  "Wockhardt-logo.png",
+  "MIQNAF_Logo.png",
+  "NCG_logo.png"
 ];
