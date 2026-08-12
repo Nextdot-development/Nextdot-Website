@@ -13,6 +13,7 @@ import higgsfieldLogo from "../assets/images/higgsfield-logo.webp";
 import langchainLogo from "../assets/images/langchain-logo.svg";
 import vectordbLogo from "../assets/images/vectordb-logo.webp";
 import mcpLogo from "../assets/images/mcp-logo.webp";
+import obsidianLogo from "../assets/images/obsidian-logo.jpg";
 
 const tools = [
   { name: "Claude", category: "Reasoning", logo: claudeLogo, desc: "Advanced reasoning and agentic intelligence for complex enterprise workflows." },
@@ -26,6 +27,7 @@ const tools = [
   { name: "LangChain", category: "Infrastructure", logo: langchainLogo, desc: "Orchestration framework powering multi-step agentic workflows." },
   { name: "Vector Databases", category: "Infrastructure", logo: vectordbLogo, desc: "High-performance retrieval infrastructure for AI memory and context." },
   { name: "MCP Ecosystem", category: "Infrastructure", logo: mcpLogo, desc: "Standardised protocol connecting AI models to real enterprise systems." },
+  { name: "Obsidian", category: "Infrastructure", logo: obsidianLogo, desc: "Local-first knowledge base linking notes and context for AI retrieval and memory." },
 ];
 
 const tabs = ["Reasoning", "Voice", "Video", "Infrastructure"];
