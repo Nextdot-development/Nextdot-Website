@@ -377,7 +377,10 @@ export function parseMarkdown(src: string): MarkdownImport {
   const firstP = blocks.find((b) => b.type === "p") as Extract<BlogBlock, { type: "p" }> | undefined;
   const excerpt = fmStr(data, "excerpt", "description", "summary") || (firstP ? plain(firstP.text).slice(0, 220) : undefined);
   const metaDescription = fmStr(data, "metadescription", "meta_description", "seodescription", "seo_description") || excerpt;
-  const seoTitle = fmStr(data, "seotitle", "seo_title", "metatitle", "meta_title") || title;
+  // SEO title comes ONLY from an explicit "SEO title"/meta-title line — take it
+  // exactly as written. Never fall back to the (long) H1, so an empty SEO-title
+  // line leaves the field blank for the author rather than padding it.
+  const seoTitle = fmStr(data, "seotitle", "seo_title", "metatitle", "meta_title");
 
   const tags = fmArr(data, "tags", "keywords");
 
