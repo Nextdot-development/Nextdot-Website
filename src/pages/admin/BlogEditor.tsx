@@ -110,14 +110,15 @@ export default function BlogEditor() {
     return relatedBlogs.map((slug) => ({ slug, title: titleFor.get(slug) ?? slug }));
   }, [relatedBlogs, relatedOptions]);
 
-  // The latest 4 published blogs in the SAME category (newest first, excluding
-  // this one) — used to auto-fill "Related in this series" so a new post links
-  // back to the recent posts of the category it belongs to. Falls back to all
-  // published blogs when no category is chosen yet.
-  const latestPublishedSlugs = useMemo(() => {
+  // The latest 4 published OR scheduled blogs in the SAME category (newest
+  // first, excluding this one) — used to auto-fill "Related in this series" so a
+  // new post links back to the recent posts of its category, including ones
+  // scheduled for the future (a series posted together). Falls back to all
+  // categories when none is chosen yet.
+  const latestCategorySlugs = useMemo(() => {
     const ms = (b: BlogDoc) => b.publishAt?.toMillis() ?? b.publishedAt?.toMillis() ?? b.createdAt?.toMillis() ?? 0;
     return blogs
-      .filter((b) => b.status === "published" && b.slug && b.id !== docId && (!category || b.category === category))
+      .filter((b) => (b.status === "published" || b.status === "scheduled") && b.slug && b.id !== docId && (!category || b.category === category))
       .sort((a, b) => ms(b) - ms(a))
       .slice(0, 4)
       .map((b) => b.slug);
@@ -226,9 +227,9 @@ export default function BlogEditor() {
   // Markdown import). The author can freely change/reorder afterwards, and the
   // "Auto-add latest" button re-applies for the current category on demand.
   useEffect(() => {
-    if (isEdit || relatedBlogs.length || !category || !latestPublishedSlugs.length) return;
-    setRelatedBlogs(latestPublishedSlugs);
-  }, [isEdit, category, relatedBlogs.length, latestPublishedSlugs]);
+    if (isEdit || relatedBlogs.length || !category || !latestCategorySlugs.length) return;
+    setRelatedBlogs(latestCategorySlugs);
+  }, [isEdit, category, relatedBlogs.length, latestCategorySlugs]);
 
   // Tick the "saved Xs ago" label once a minute.
   useEffect(() => {
@@ -484,7 +485,7 @@ export default function BlogEditor() {
                 value={relatedBlogs}
                 onChange={setRelatedBlogs}
                 options={relatedOptions}
-                onAutoFill={latestPublishedSlugs.length ? () => setRelatedBlogs(latestPublishedSlugs) : undefined}
+                onAutoFill={latestCategorySlugs.length ? () => setRelatedBlogs(latestCategorySlugs) : undefined}
               />
             </div>
 
