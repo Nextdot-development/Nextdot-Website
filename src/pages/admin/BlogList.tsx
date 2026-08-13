@@ -78,9 +78,9 @@ export default function BlogList() {
   const toggleSort = (key: SortKey) =>
     setSort((s) => (s.key === key ? { key, dir: s.dir === "asc" ? "desc" : "asc" } : { key, dir: "asc" }));
 
-  const SortHead = ({ label, k, right }: { label: string; k: SortKey; right?: boolean }) => (
-    <th className={`px-4 py-3 font-semibold ${right ? "text-right" : ""}`}>
-      <button onClick={() => toggleSort(k)} className={`inline-flex items-center gap-1 hover:text-ink ${right ? "flex-row-reverse" : ""}`}>
+  const SortHead = ({ label, k, right, cls }: { label: string; k: SortKey; right?: boolean; cls?: string }) => (
+    <th className={`whitespace-nowrap px-4 py-3.5 font-semibold ${right ? "text-right" : ""} ${cls ?? ""}`}>
+      <button onClick={() => toggleSort(k)} className={`inline-flex items-center gap-1 transition-colors hover:text-ink ${right ? "flex-row-reverse" : ""} ${sort.key === k ? "text-ink" : ""}`}>
         {label}
         {sort.key === k ? (sort.dir === "asc" ? <ArrowUp size={12} /> : <ArrowDown size={12} />) : <ArrowUpDown size={12} className="opacity-40" />}
       </button>
@@ -165,17 +165,17 @@ export default function BlogList() {
 
       {/* Table */}
       <div className="overflow-x-auto rounded-2xl border border-line bg-surface">
-        <table className="w-full min-w-[980px] text-left text-sm">
+        <table className="w-full min-w-[640px] text-left text-sm">
           <thead>
-            <tr className="border-b border-line text-xs uppercase tracking-wide text-ink/50">
+            <tr className="border-b border-line bg-paper/40 text-[11px] uppercase tracking-wide text-ink/50">
               <SortHead label="Title" k="title" />
-              <SortHead label="Category" k="category" />
+              <SortHead label="Category" k="category" cls="hidden sm:table-cell" />
               <SortHead label="Status" k="status" />
               <SortHead label="Publish Date" k="publish" />
-              <SortHead label="Last Updated" k="updated" />
-              <SortHead label="Created By" k="createdBy" />
-              <SortHead label="Read Time" k="readTime" />
-              <th className="px-4 py-3 text-right font-semibold">Actions</th>
+              <SortHead label="Updated" k="updated" cls="hidden lg:table-cell" />
+              <SortHead label="Created By" k="createdBy" cls="hidden xl:table-cell" />
+              <SortHead label="Read" k="readTime" cls="hidden md:table-cell" />
+              <th className="whitespace-nowrap px-4 py-3.5 text-right font-semibold">Actions</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-line">
@@ -185,18 +185,18 @@ export default function BlogList() {
               <tr><td colSpan={8} className="px-4 py-10 text-center text-ink/50">{blogs.length === 0 ? "No blogs yet. Create your first one." : "No blogs match your filters."}</td></tr>
             ) : (
               filtered.map((b) => (
-                <tr key={b.id} className="hover:bg-paper/60">
-                  <td className="max-w-xs px-4 py-3">
+                <tr key={b.id} className="transition-colors hover:bg-paper/60">
+                  <td className="max-w-[22rem] px-4 py-3.5">
                     <Link to={`/admin/blogs/${b.id}/edit`} className="block truncate font-medium text-ink hover:text-accent">{b.title || "(untitled)"}</Link>
                     <span className="block truncate text-xs text-ink/40">/{b.slug}</span>
                   </td>
-                  <td className="px-4 py-3 text-ink/70">{b.category || "—"}</td>
-                  <td className="px-4 py-3"><StatusBadge status={b.status} /></td>
-                  <td className="px-4 py-3 text-ink/70">{formatDate(publishTs(b))}</td>
-                  <td className="px-4 py-3 text-ink/70">{formatDate(b.updatedAt)}</td>
-                  <td className="max-w-[10rem] truncate px-4 py-3 text-ink/60" title={b.createdBy}>{b.createdBy || "—"}</td>
-                  <td className="px-4 py-3 text-ink/70">{b.readTime || "—"}</td>
-                  <td className="px-4 py-3">
+                  <td className="hidden whitespace-nowrap px-4 py-3.5 text-ink/70 sm:table-cell">{b.category || "—"}</td>
+                  <td className="px-4 py-3.5"><StatusBadge status={b.status} /></td>
+                  <td className="whitespace-nowrap px-4 py-3.5 text-ink/70">{formatDate(publishTs(b))}</td>
+                  <td className="hidden whitespace-nowrap px-4 py-3.5 text-ink/60 lg:table-cell">{formatDate(b.updatedAt)}</td>
+                  <td className="hidden max-w-[12rem] truncate px-4 py-3.5 text-ink/60 xl:table-cell" title={b.createdBy}>{b.createdBy || "—"}</td>
+                  <td className="hidden whitespace-nowrap px-4 py-3.5 text-ink/60 md:table-cell">{b.readTime || "—"}</td>
+                  <td className="px-4 py-3.5">
                     <div className="flex items-center justify-end gap-0.5">
                       <Link to={`/admin/blogs/${b.id}/edit`} className="inline-flex h-8 w-8 items-center justify-center rounded-lg text-ink/60 hover:bg-accent/10 hover:text-accent" title="Edit"><Pencil size={15} /></Link>
                       <IconBtn title="Duplicate" onClick={() => handleDuplicate(b.id!)} disabled={busyId === b.id}><Copy size={15} /></IconBtn>
