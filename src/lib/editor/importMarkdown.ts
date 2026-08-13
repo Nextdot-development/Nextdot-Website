@@ -300,11 +300,35 @@ function extractRelated(section: BlogBlock[]): string[] {
 // Main
 // ---------------------------------------------------------------------------
 
+/**
+ * Pull `Key: value` lines out of the first HTML comment (authors often keep an
+ * `<!-- SEO title: … -->` notes block at the top). Keys are normalised to the
+ * frontmatter convention (lowercase, spaces/hyphens → "_") so "SEO title" →
+ * `seo_title`, "Meta description" → `meta_description`, etc. — and are then
+ * picked up by the same field lookups as real frontmatter. Unknown keys
+ * (Vertical, Sources used, …) are simply ignored.
+ */
+function parseCommentMeta(src: string): Record<string, string> {
+  const m = src.match(/<!--([\s\S]*?)-->/);
+  if (!m) return {};
+  const out: Record<string, string> = {};
+  for (const line of m[1].split(/\r?\n/)) {
+    const kv = line.match(/^\s*([A-Za-z][A-Za-z0-9 _-]*?)\s*:\s*(.+?)\s*$/);
+    if (!kv) continue;
+    const key = kv[1].trim().toLowerCase().replace(/[\s-]+/g, "_");
+    if (!(key in out)) out[key] = kv[2].trim();
+  }
+  return out;
+}
+
 export function parseMarkdown(src: string): MarkdownImport {
-  // Strip HTML comments (e.g. an author's <!-- SEO notes --> block at the top)
-  // so they never land in the article body.
-  const cleaned = (src || "").replace(/<!--[\s\S]*?-->/g, "");
-  const { data, body } = parseFrontmatter(cleaned);
+  const raw = src || "";
+  // Read metadata from a leading HTML comment, then strip all comments so they
+  // never land in the article body. Real frontmatter (below) overrides these.
+  const commentMeta = parseCommentMeta(raw);
+  const cleaned = raw.replace(/<!--[\s\S]*?-->/g, "");
+  const { data: fmData, body } = parseFrontmatter(cleaned);
+  const data: Record<string, string | string[]> = { ...commentMeta, ...fmData };
   let blocks = bodyToBlocks(body);
 
   // FAQ section → FaqItem[], then remove those blocks from the body.

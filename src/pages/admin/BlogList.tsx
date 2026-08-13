@@ -52,7 +52,9 @@ export default function BlogList() {
   const [search, setSearch] = useState("");
   const [status, setStatus] = useState<"all" | BlogStatus>("all");
   const [category, setCategory] = useState("all");
-  const [sort, setSort] = useState<{ key: SortKey; dir: SortDir }>({ key: "updated", dir: "desc" });
+  // Default to publish-date order (newest first) so the list reads chronologically
+  // and a freshly published/edited post doesn't jump to the top on updated_at.
+  const [sort, setSort] = useState<{ key: SortKey; dir: SortDir }>({ key: "publish", dir: "desc" });
   const [busyId, setBusyId] = useState<string | null>(null);
   const [pending, setPending] = useState<{ kind: PendingKind; blog: BlogDoc } | null>(null);
 

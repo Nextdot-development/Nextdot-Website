@@ -110,17 +110,18 @@ export default function BlogEditor() {
     return relatedBlogs.map((slug) => ({ slug, title: titleFor.get(slug) ?? slug }));
   }, [relatedBlogs, relatedOptions]);
 
-  // The latest 4 published blogs (newest first, excluding this one) — used to
-  // auto-fill "Related in this series" so a new post in a series links back to
-  // the recent ones without manual picking.
+  // The latest 4 published blogs in the SAME category (newest first, excluding
+  // this one) — used to auto-fill "Related in this series" so a new post links
+  // back to the recent posts of the category it belongs to. Falls back to all
+  // published blogs when no category is chosen yet.
   const latestPublishedSlugs = useMemo(() => {
     const ms = (b: BlogDoc) => b.publishAt?.toMillis() ?? b.publishedAt?.toMillis() ?? b.createdAt?.toMillis() ?? 0;
     return blogs
-      .filter((b) => b.status === "published" && b.slug && b.id !== docId)
+      .filter((b) => b.status === "published" && b.slug && b.id !== docId && (!category || b.category === category))
       .sort((a, b) => ms(b) - ms(a))
       .slice(0, 4)
       .map((b) => b.slug);
-  }, [blogs, docId]);
+  }, [blogs, docId, category]);
   const [contentKey, setContentKey] = useState(0); // remounts the editor on load/restore
 
   // Workflow state
@@ -220,15 +221,14 @@ export default function BlogEditor() {
     setReadTime(readTimeFromBlocks(content, excerpt));
   }, [content, excerpt, readTimeTouched]);
 
-  // Auto-fill "Related in this series" with the latest published blogs for a
-  // NEW post (once, only if nothing was set — e.g. by a Markdown import). The
-  // author can freely remove/reorder afterwards.
-  const relatedPrefilled = useRef(false);
+  // Auto-fill "Related in this series" with the chosen category's latest blogs,
+  // for a NEW post, once a category is picked and nothing is set yet (e.g. by a
+  // Markdown import). The author can freely change/reorder afterwards, and the
+  // "Auto-add latest" button re-applies for the current category on demand.
   useEffect(() => {
-    if (isEdit || relatedPrefilled.current || !blogs.length) return;
-    relatedPrefilled.current = true;
-    if (!relatedBlogs.length && latestPublishedSlugs.length) setRelatedBlogs(latestPublishedSlugs);
-  }, [isEdit, blogs.length, latestPublishedSlugs, relatedBlogs.length]);
+    if (isEdit || relatedBlogs.length || !category || !latestPublishedSlugs.length) return;
+    setRelatedBlogs(latestPublishedSlugs);
+  }, [isEdit, category, relatedBlogs.length, latestPublishedSlugs]);
 
   // Tick the "saved Xs ago" label once a minute.
   useEffect(() => {
