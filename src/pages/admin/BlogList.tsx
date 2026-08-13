@@ -8,7 +8,7 @@ import { useBlogs } from "@/hooks/useBlogs";
 import { useCategories } from "@/hooks/useCategories";
 import { useAuth } from "@/hooks/useAuth";
 import { deleteBlog, duplicateBlog, transitionStatus } from "@/services/blogs";
-import { formatDate } from "@/utils/date";
+import { formatDate, formatTime } from "@/utils/date";
 import { blogPublicPath } from "@/utils/slug";
 import type { BlogDoc, BlogStatus } from "@/types/blog";
 
@@ -192,8 +192,14 @@ export default function BlogList() {
                   </td>
                   <td className="hidden whitespace-nowrap px-4 py-3.5 text-ink/70 sm:table-cell">{b.category || "—"}</td>
                   <td className="px-4 py-3.5"><StatusBadge status={b.status} /></td>
-                  <td className="whitespace-nowrap px-4 py-3.5 text-ink/70">{formatDate(publishTs(b))}</td>
-                  <td className="hidden whitespace-nowrap px-4 py-3.5 text-ink/60 lg:table-cell">{formatDate(b.updatedAt)}</td>
+                  <td className="whitespace-nowrap px-4 py-3.5 text-ink/70">
+                    <div>{formatDate(publishTs(b))}</div>
+                    {formatTime(publishTs(b)) && <div className="text-xs text-ink/40">{formatTime(publishTs(b))}</div>}
+                  </td>
+                  <td className="hidden whitespace-nowrap px-4 py-3.5 text-ink/60 lg:table-cell">
+                    <div>{formatDate(b.updatedAt)}</div>
+                    {formatTime(b.updatedAt) && <div className="text-xs text-ink/40">{formatTime(b.updatedAt)}</div>}
+                  </td>
                   <td className="hidden max-w-[12rem] truncate px-4 py-3.5 text-ink/60 xl:table-cell" title={b.createdBy}>{b.createdBy || "—"}</td>
                   <td className="hidden whitespace-nowrap px-4 py-3.5 text-ink/60 md:table-cell">{b.readTime || "—"}</td>
                   <td className="px-4 py-3.5">

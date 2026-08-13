@@ -20,6 +20,12 @@ export function formatDateTime(ts: Timestamp | null | undefined): string {
   });
 }
 
+/** Just the time, e.g. "2:30 PM". Returns "" if null. */
+export function formatTime(ts: Timestamp | null | undefined): string {
+  if (!ts) return "";
+  return ts.toDate().toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" });
+}
+
 /** For a datetime-local input value (yyyy-MM-ddThh:mm) from a Timestamp. */
 export function toDateTimeLocal(ts: Timestamp | null | undefined): string {
   if (!ts) return "";
