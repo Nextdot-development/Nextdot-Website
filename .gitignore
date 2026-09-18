@@ -7,3 +7,6 @@ coverage/
 .env*
 !.env.example
 dist.zip
+
+# Build stamp for scripts/encode-videos.mjs
+.encoded-videos.json

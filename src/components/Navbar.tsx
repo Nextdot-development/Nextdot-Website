@@ -30,7 +30,6 @@ export const Navbar = () => {
     { name: "Home", href: "/" },
     { name: "About Us", href: "/about" },
     { name: "What We Do", href: "/what-we-do" },
-    { name: "AI Film & Motion", href: "/ai-films-and-motion" },
     { name: "Nextdot Creative", href: "/creative" },
     { name: "AI Capability Centre", href: "/ai-capability-centre" },
     { name: "Blogs", href: "/blogs" },

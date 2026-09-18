@@ -1,21 +1,33 @@
 import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import SEO from "@/lib/seo";
-import { publicAsset } from "@/lib/utils";
+import { localVideoAsset, posterAsset, publicAsset, videoAsset } from "@/lib/utils";
 import "./AIFilmmaking.css";
 
-const vid = (name: string) => publicAsset(`ai-films/videos/${name}`);
+const vid = (name: string) => videoAsset(name);
+
+// Storage is the source of truth, but a file that has not been uploaded yet (or
+// a build without Supabase env) must not leave an empty frame — fall back to the
+// copy in public/ the first time the Storage URL fails.
+const onVideoError = (name: string) => (e: React.SyntheticEvent<HTMLVideoElement>) => {
+  const el = e.currentTarget;
+  const local = localVideoAsset(name);
+  if (el.dataset.fellBack === "1" || el.src.endsWith(local)) return;
+  el.dataset.fellBack = "1";
+  el.src = local;
+  el.load();
+};
 
 const Play = () => (
   <span className="play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l13-7.5z" /></svg></span>
 );
 
 const films = [
-  { file: "film-01.mp4", caption: "Selected film 01", meta: "Case film · 16:9" },
-  { file: "film-02.mp4", caption: "Selected film 02", meta: "Case film · 16:9" },
-  { file: "film-03.mp4", caption: "Selected film 03", meta: "Case film · 9:16", cls: "fit" },
-  { file: "film-04.mp4", caption: "Selected film 04", meta: "Case film · 16:9" },
-  { file: "film-05.mp4", caption: "Selected film 05", meta: "Case film · 16:9", cls: "wide" },
+  { file: "film-01.mp4" },
+  { file: "film-02.mp4" },
+  { file: "film-03.mp4", cls: "fit" },
+  { file: "film-04.mp4" },
+  { file: "film-05.mp4", cls: "wide" },
 ];
 
 export default function AIFilmmaking() {
@@ -39,21 +51,49 @@ export default function AIFilmmaking() {
       items.forEach((n) => n.classList.add("in"));
     }
 
-    // Selected work films: click to play, one at a time
+    // Selected work films: hover previews, click plays with controls — one at a time
     const cards = Array.from(el.querySelectorAll<HTMLElement>(".media.film"));
     const handlers: Array<() => void> = [];
     cards.forEach((card) => {
       const video = card.querySelector("video") as HTMLVideoElement | null;
       const overlay = card.querySelector<HTMLElement>(".film-overlay");
       if (!video || !overlay) return;
-      const onClick = () => {
+
+      const pauseOthers = () => {
         cards.forEach((o) => { if (o !== card) o.querySelector("video")?.pause(); });
+      };
+
+      // Muted preview on hover. Browsers only autoplay muted video, so a
+      // rejected play() just leaves the poster frame and overlay in place.
+      const onEnter = () => {
+        if (card.classList.contains("playing")) return;
+        pauseOthers();
+        card.classList.add("previewing");
+        video.muted = true; // the attribute can be cleared by a previous click
+        video.play().catch(() => card.classList.remove("previewing"));
+      };
+      const onLeave = () => {
+        if (card.classList.contains("playing")) return;
+        card.classList.remove("previewing");
+        video.pause();
+        video.load(); // back to the poster still, and drops the buffer
+      };
+      const onClick = () => {
+        pauseOthers();
         video.controls = true;
+        card.classList.remove("previewing");
         card.classList.add("playing");
         void video.play();
       };
+
+      card.addEventListener("pointerenter", onEnter);
+      card.addEventListener("pointerleave", onLeave);
       overlay.addEventListener("click", onClick);
-      handlers.push(() => overlay.removeEventListener("click", onClick));
+      handlers.push(() => {
+        card.removeEventListener("pointerenter", onEnter);
+        card.removeEventListener("pointerleave", onLeave);
+        overlay.removeEventListener("click", onClick);
+      });
     });
 
     return () => { io?.disconnect(); handlers.forEach((off) => off()); };
@@ -80,7 +120,7 @@ export default function AIFilmmaking() {
               <p className="display-body reveal">A decade of film and creative work, re-engineered with AI at the core. We deliver high-volume, high-consistency video for brands and enterprises that publish at the speed of the market, with the craft held to a broadcast standard.</p>
             </div>
             <div className="media lg live reveal">
-              <video src={vid("showreel.mp4")} autoPlay muted loop playsInline preload="auto" aria-label="Nextdot AI film and motion showreel" />
+              <video src={vid("showreel.mp4")} poster={posterAsset("showreel.mp4")} onError={onVideoError("showreel.mp4")} autoPlay muted loop playsInline preload="auto" aria-label="Nextdot AI film and motion showreel" />
             </div>
           </div>
         </section>
@@ -118,10 +158,6 @@ export default function AIFilmmaking() {
                 <div><h3 className="display-card">Deliver</h3><p>Final cut, motion, and localized versions, ready for broadcast, campaign, and daily social at once.</p></div>
               </article>
             </div>
-
-            <div className="media lg live mt-block reveal">
-              <video src={vid("walkthrough.mp4")} autoPlay muted loop playsInline preload="metadata" aria-label="Walkthrough of the Nextdot film production pipeline" />
-            </div>
           </div>
         </section>
 
@@ -135,11 +171,9 @@ export default function AIFilmmaking() {
             <div className="grid grid-2 mt-grid">
               {films.map((f, i) => (
                 <div key={f.file} className={`media live film reveal${f.cls ? ` ${f.cls}` : ""}`}>
-                  <video src={`${vid(f.file)}#t=0.1`} preload="metadata" muted playsInline />
+                  <video src={vid(f.file)} poster={posterAsset(f.file)} onError={onVideoError(f.file)} preload="metadata" muted playsInline />
                   <button className="film-overlay" type="button" aria-label={`Play selected film ${String(i + 1).padStart(2, "0")}`}>
                     <Play />
-                    <span className="caption">{f.caption}</span>
-                    <span className="meta">{f.meta}</span>
                   </button>
                 </div>
               ))}
@@ -203,15 +237,6 @@ export default function AIFilmmaking() {
                   <div className="icon-box"><img src={publicAsset("ai-films/logos/sarvam.svg")} alt="Sarvam AI logo" width={24} height={24} /></div>
                   <div><strong>Sarvam AI</strong><span>Startup Program</span></div>
                 </div>
-              </div>
-            </div>
-
-            <div className="mt-grid">
-              <p className="label reveal">Generative stack</p>
-              <div className="pills reveal">
-                <span className="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 20 12 4l8 16" /><path d="M8 13h8" /></svg>Kling AI</span>
-                <span className="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 4v16M19 4v16M5 12h14" /></svg>HeyGen</span>
-                <span className="pill"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 18c3-8 7-12 16-14-4 3-6 7-7 12-3-1-6 0-9 2z" /></svg>Higgsfield</span>
               </div>
             </div>
           </div>
