@@ -1,7 +1,11 @@
+import { useRef } from "react";
 import { motion } from "motion/react";
 import { Link } from "react-router-dom";
+import PoweredBySarvam from "@/components/PoweredBySarvam";
 
 export const Hero = () => {
+  // The backdrop tracks the pointer across the whole banner, not just its own box.
+  const banner = useRef<HTMLElement>(null);
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -24,8 +28,10 @@ export const Hero = () => {
   };
 
   return (
-    <section className="pt-28 sm:pt-32 md:pt-40 pb-28 sm:pb-32 md:pb-40 relative overflow-hidden bg-paper">
+    <section ref={banner} className="pt-28 sm:pt-32 md:pt-40 pb-28 sm:pb-32 md:pb-40 relative overflow-hidden bg-paper">
+      <PoweredBySarvam variant="backdrop" trackRef={banner} />
       <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="relative">
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -52,6 +58,8 @@ export const Hero = () => {
             );
           })()}
         </motion.div>
+          <PoweredBySarvam variant="portrait" className="hero-side" />
+        </div>
       </div>
     </section>
   );
