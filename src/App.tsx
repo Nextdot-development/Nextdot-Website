@@ -14,6 +14,7 @@ import Home from "./pages/Home";
 const About = lazy(() => import("./pages/About"));
 const WhatWeDo = lazy(() => import("./pages/WhatWeDo"));
 const NextdotCreative = lazy(() => import("./pages/NextdotCreative"));
+const AIFilmmaking = lazy(() => import("./pages/AIFilmmaking"));
 const AICapabilityCentre = lazy(() => import("./pages/AICapabilityCentre"));
 const Blogs = lazy(() => import("./pages/Blogs").then((m) => ({ default: m.default })));
 const BlogPostDetail = lazy(() => import("./pages/Blogs").then((m) => ({ default: m.BlogPostDetail })));
@@ -116,6 +117,7 @@ export default function App() {
             <Route path="/about" element={<About />} />
             <Route path="/what-we-do" element={<WhatWeDo />} />
             <Route path="/creative" element={<NextdotCreative />} />
+            <Route path="/ai-films-and-motion" element={<AIFilmmaking />} />
             <Route path="/ai-capability-centre" element={<AICapabilityCentre />} />
             <Route path="/blogs" element={<Blogs />} />
             <Route path="/blogs/:slug" element={<BlogPostDetail />} />

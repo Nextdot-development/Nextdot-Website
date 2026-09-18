@@ -30,6 +30,7 @@ export const Navbar = () => {
     { name: "Home", href: "/" },
     { name: "About Us", href: "/about" },
     { name: "What We Do", href: "/what-we-do" },
+    { name: "AI Film & Motion", href: "/ai-films-and-motion" },
     { name: "Nextdot Creative", href: "/creative" },
     { name: "AI Capability Centre", href: "/ai-capability-centre" },
     { name: "Blogs", href: "/blogs" },
@@ -52,13 +53,13 @@ export const Navbar = () => {
             <img src={publicAsset("images/logo.png")} alt="Nextdot Logo" className="h-9 sm:h-10 lg:h-11 w-auto max-w-[160px] object-contain transition-transform duration-300 group-hover:scale-105 group-active:scale-105" />
           </Link>
           
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden lg:flex items-center gap-5 xl:gap-6">
             {navLinks.map((link) => (
-              <Link 
-                key={link.name} 
-                to={link.href} 
+              <Link
+                key={link.name}
+                to={link.href}
                 className={cn(
-                  "text-sm font-medium transition-colors",
+                  "whitespace-nowrap text-[13px] xl:text-sm font-medium transition-colors",
                   location.pathname === link.href ? "text-ink" : "text-ink/70 hover:text-ink"
                 )}
               >
@@ -67,7 +68,7 @@ export const Navbar = () => {
             ))}
           </div>
 
-          <button aria-label="Open menu" title="Open menu" className="md:hidden inline-flex h-11 w-11 items-center justify-center rounded-full border border-line bg-white/70 text-ink" onClick={() => setIsOpen(true)}>
+          <button aria-label="Open menu" title="Open menu" className="lg:hidden inline-flex h-11 w-11 items-center justify-center rounded-full border border-line bg-white/70 text-ink" onClick={() => setIsOpen(true)}>
             <Menu size={24} />
           </button>
         </div>

@@ -6,6 +6,7 @@ export const Footer = () => {
   const companyLinks = [
     { label: "About Us", href: "/about" },
     { label: "What We Do", href: "/what-we-do" },
+    { label: "AI Film & Motion", href: "/ai-films-and-motion" },
     { label: "AI Capabilities Center", href: "/ai-capability-centre" },
     { label: "Nextdot Creative", href: "/creative" },
     { label: "Blogs", href: "/blogs" },
