@@ -3316,6 +3316,21 @@ const sortByNewest = (a: BlogPost, b: BlogPost) => {
   return b.id - a.id;
 };
 
+// Cards per page on the blog index. The full list runs long enough that the
+// page was several screens of scrolling; this keeps it to one grid.
+const POSTS_PER_PAGE = 9;
+
+/** Page numbers to render, collapsing long runs to a single gap marker. */
+function pageWindow(current: number, total: number): Array<number | "gap"> {
+  if (total <= 7) return Array.from({ length: total }, (_, i) => i + 1);
+  const wanted = new Set([1, total, current, current - 1, current + 1]);
+  // Keep the row a steady width when the current page sits near either end.
+  if (current <= 3) [2, 3, 4].forEach((n) => wanted.add(n));
+  if (current >= total - 2) [total - 1, total - 2, total - 3].forEach((n) => wanted.add(n));
+  const pages = [...wanted].filter((n) => n >= 1 && n <= total).sort((a, b) => a - b);
+  return pages.flatMap((n, i) => (i > 0 && n - pages[i - 1] > 1 ? ["gap" as const, n] : [n]));
+}
+
 export default function Blogs() {
   const [searchParams, setSearchParams] = useSearchParams();
   const activeSlug = searchParams.get("category") || TAB_ALL;
@@ -3337,8 +3352,30 @@ export default function Blogs() {
   const featuredPost = visiblePosts[0];
   const recentPosts = visiblePosts.slice(1);
 
+  // Paging lives in the URL so a page is linkable and the back button works.
+  const totalPages = Math.max(1, Math.ceil(recentPosts.length / POSTS_PER_PAGE));
+  // Clamp rather than 404: a stale link to page 9 of a category that has shrunk
+  // should still show posts.
+  const currentPage = Math.min(Math.max(1, Number(searchParams.get("page")) || 1), totalPages);
+  const pagedPosts = recentPosts.slice((currentPage - 1) * POSTS_PER_PAGE, currentPage * POSTS_PER_PAGE);
+  const listTop = React.useRef<HTMLDivElement>(null);
+
+  const setParams = (slug: string, page: number) => {
+    const next: Record<string, string> = {};
+    if (slug !== TAB_ALL) next.category = slug;
+    if (page > 1) next.page = String(page);
+    setSearchParams(next);
+  };
+
   const selectCategory = (slug: string) => {
-    setSearchParams(slug === TAB_ALL ? {} : { category: slug });
+    // A new category has its own page count, so always restart at the first.
+    setParams(slug, 1);
+  };
+
+  const goToPage = (page: number) => {
+    if (page === currentPage) return;
+    setParams(activeSlug, page);
+    listTop.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
   const hideOnImageError = (event: React.SyntheticEvent<HTMLImageElement>) => {
@@ -3460,10 +3497,10 @@ export default function Blogs() {
       {recentPosts.length > 0 && (
       <section className="pb-16 md:pb-20">
         <div className="max-w-6xl mx-auto px-6 md:px-8 lg:px-10">
-          <div className="border-t border-line mb-8" />
+          <div ref={listTop} className="border-t border-line mb-8 scroll-mt-28" />
 
           <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-5 md:gap-6">
-            {recentPosts.map((post, idx) => (
+            {pagedPosts.map((post, idx) => (
               <Link to={getBlogLink(post)} key={post.id} className="group block h-full">
                 <motion.article
                   initial={{ opacity: 0, y: 26 }}
@@ -3504,6 +3541,51 @@ export default function Blogs() {
               </Link>
             ))}
           </div>
+
+          {totalPages > 1 && (
+            <nav aria-label="Blog pagination" className="mt-12 flex items-center justify-center gap-1.5 text-sm">
+              <button
+                type="button"
+                onClick={() => goToPage(currentPage - 1)}
+                disabled={currentPage === 1}
+                className="px-3 py-2 rounded-lg text-ink/60 hover:text-ink hover:bg-surface disabled:opacity-30 disabled:pointer-events-none transition-colors"
+              >
+                Previous
+              </button>
+
+              {pageWindow(currentPage, totalPages).map((page, i) =>
+                page === "gap" ? (
+                  <span key={`gap-${i}`} aria-hidden="true" className="px-1.5 text-ink/30">
+                    …
+                  </span>
+                ) : (
+                  <button
+                    key={page}
+                    type="button"
+                    onClick={() => goToPage(page)}
+                    aria-label={`Page ${page}`}
+                    aria-current={page === currentPage ? "page" : undefined}
+                    className={`min-w-9 h-9 px-2 rounded-lg transition-colors ${
+                      page === currentPage
+                        ? "bg-accent text-white font-medium"
+                        : "text-ink/60 hover:text-ink hover:bg-surface"
+                    }`}
+                  >
+                    {page}
+                  </button>
+                ),
+              )}
+
+              <button
+                type="button"
+                onClick={() => goToPage(currentPage + 1)}
+                disabled={currentPage === totalPages}
+                className="px-3 py-2 rounded-lg text-ink/60 hover:text-ink hover:bg-surface disabled:opacity-30 disabled:pointer-events-none transition-colors"
+              >
+                Next
+              </button>
+            </nav>
+          )}
         </div>
       </section>
       )}

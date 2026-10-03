@@ -254,6 +254,16 @@ export default function About() {
                     <div>
                       <h4 className="text-ink font-medium text-xl">Ayush Prashar</h4>
                       <p className="text-accent text-sm tracking-wide uppercase mt-1">Founder & Lead Builder</p>
+                      <a
+                        href="https://www.linkedin.com/in/ayush-prashar-nextdot"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="Ayush Prashar on LinkedIn"
+                        className="inline-flex items-center gap-2 mt-3 text-sm text-ink/50 hover:text-ink active:text-ink transition-colors"
+                      >
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                        <span>LinkedIn</span>
+                      </a>
                     </div>
                     <Quote className="text-accent w-12 h-12 md:w-16 md:h-16 opacity-20" />
                   </div>
