@@ -40,7 +40,10 @@ function setMetaTag(name: string, content: string, attr: 'name' | 'property' = '
 
 export default function SEO({title, description, path='/', image, breadcrumbs, type='website', publishedTime, author, schema, appendSiteName=true}: SEOProps) {
   useEffect(() => {
-    const canonical = `${SITE_URL}${path === '/' ? '' : path}`;
+    // The sitemap lists the home page as https://nextdot.co.in/ and every other
+    // page without a trailing slash. The canonical has to match the sitemap
+    // entry exactly, so the root keeps its slash and nothing else gets one.
+    const canonical = path === '/' ? `${SITE_URL}/` : `${SITE_URL}${path}`;
     document.title = appendSiteName ? `${title} | ${SITE_NAME}` : title;
 
     // canonical link
@@ -78,7 +81,7 @@ export default function SEO({title, description, path='/', image, breadcrumbs, t
       '@type': 'ListItem',
       position: i + 1,
       name: b.name,
-      item: `${SITE_URL}${b.url === '/' ? '' : b.url}`,
+      item: b.url === '/' ? `${SITE_URL}/` : `${SITE_URL}${b.url}`,
     }));
 
     const jsonLd = {

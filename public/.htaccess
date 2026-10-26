@@ -114,14 +114,37 @@
   RewriteRule ^content- - [G,L]
 </IfModule>
 
+# Canonical URLs: no trailing slash (SEO)
+# =======================================
+# Every page is reachable at exactly one URL: the slashless one, which is what
+# the sitemap and the canonical tags use. Without this, /about and /about/ both
+# answered 200 and Google saw two duplicate pages splitting the same signals.
+#
+# DirectorySlash Off is the half that matters. Each route is prerendered to a
+# directory, so mod_dir was issuing its own 301 from /about to /about/ — the
+# exact opposite of the canonical tag — and winning over the rewrite below.
+# Safe here because Options -Indexes is set at the bottom of this file, so a
+# directory with no index file cannot be listed.
+<IfModule mod_dir.c>
+  DirectorySlash Off
+</IfModule>
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # /about/ -> /about, permanently. The root keeps its slash: the pattern needs
+  # at least one character before the slash, and "/" arrives here as empty.
+  RewriteRule ^(.+)/$ /$1 [R=301,L]
+</IfModule>
+
 # Prerendered Route Serving (SEO)
 # ===============================
-# Each route is prerendered to a directory containing index.html. Apache's
-# mod_dir would 301 /about to /about/ before serving it, which contradicts the
-# canonical tags and sitemap entries (both use the non-slash form). Rewriting
-# to the index.html directly serves it with a 200 and no redirect.
-# Must run BEFORE the SPA fallback: that fallback skips real directories, so
-# without this rule mod_dir takes over and issues the redirect.
+# Each route is prerendered to a directory containing index.html. With
+# DirectorySlash Off (above) mod_dir no longer resolves these, so map the
+# slashless URL to its index.html explicitly and serve it with a 200.
+# Must run BEFORE the SPA fallback, whose !-d condition would otherwise skip
+# these directories and leave them unserved.
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /
