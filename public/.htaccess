@@ -10,11 +10,19 @@
   Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
 </IfModule>
 
-# HTTPS Redirect
+# Canonical Host + HTTPS Redirect (SEO)
+# =====================================
+# The one canonical origin is https://nextdot.co.in (non-www). Any request on
+# www (http or https) or on plain http goes there in ONE 301 hop, keeping the
+# exact path; the query string is appended automatically because the target
+# contains no "?". https://nextdot.co.in itself matches neither condition, so
+# there is no loop. Previously this used %{HTTP_HOST}, which kept www and let
+# https://www.nextdot.co.in answer 200, splitting rankings across two hosts.
 <IfModule mod_rewrite.c>
   RewriteEngine On
+  RewriteCond %{HTTP_HOST} ^www\. [NC,OR]
   RewriteCond %{HTTPS} off
-  RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+  RewriteRule ^ https://nextdot.co.in%{REQUEST_URI} [R=301,L]
 </IfModule>
 
 # Compression
